@@ -1,0 +1,151 @@
+﻿@model CrystalSiege.Models.SectionViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-12">Sekcje strony</h4>
+        <dl class="dl-horizontal mt-12">            
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span class="fa fa-desktop" style="font-size:24px"></span> Sekcje strony
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <!-- Sekcje -->
+                        @{
+                            List<List<String[]>> list_subsect = CrystalSiege.Controllers.ManageController.Get_Sections_and_subsections();
+                            List<String[]> list_sect = CrystalSiege.Controllers.ManageController.Get_Sections();
+                            @Html.Raw("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
+                            @Html.Raw("<div class='col-sm-4'>");
+                            @Html.Raw("<table class='table' class='carousel-indicators'>");
+                            @Html.Raw("<thead><tr><th>Nazwa sekcji</th></tr></thead>");
+
+
+                            @Html.Raw("<tbody>");
+                            var i = 0;
+                            var clas = "class='active'";
+                            foreach (String[] str_sect in list_sect)
+                            {
+                                @Html.Raw("<tr data-target='#myCarousel' data-slide-to='"+i+"' "+clas+" >");
+                                //Html.Raw("<td>" + str_sect[0] + "   ");
+                                var gd = Guid.NewGuid();
+                                @Html.Raw("<td><a href='#demo" + gd + "' data-toggle='collapse'>" + str_sect[0] + "</a>");
+                                @Html.Raw("<div id='demo" + gd + "'' class='collapse'><br>");
+                                @Html.Raw("<button onclick='editsection(" + str_sect[1] + ")' class='btn btn-default btn-xs'>Edytuj</button>");
+                                @Html.Raw("<button onclick='deletesection(" + str_sect[1] + ")' class='btn btn-danger btn-xs'>Usuń</button>");
+                                @Html.Raw("</div>");
+                                @Html.Raw("</td>");
+                                @Html.Raw("</tr>");
+                                i++;
+                                clas = "";
+                            }
+                            @Html.Raw("<tr><td>");
+                            @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>Dodaj sekcje</a>");
+                            @Html.Raw("</td></tr>");
+                            @Html.Raw("</tbody></table></div>");
+                            @Html.Raw("<div class='col-sm-4'>");
+                            @Html.Raw("<div class='carousel-inner' role='listbox'>");
+                            //
+                            clas = " active";
+                            var j = 0;
+                            foreach (List<String[]> str_subsect in list_subsect)
+                            {
+                                @Html.Raw("<div class='item"+clas+ "'><table class='table'><thead><tr><th>Nazwa podsekcji</th></tr></thead><tbody>");
+                                //
+                                if (str_subsect[0].Count() != 1)
+                                {
+                                    foreach (String[] str_sect_ in str_subsect)
+                                    {
+                                        @Html.Raw("<tr>");
+                                        var gd = Guid.NewGuid();
+                                        @Html.Raw("<td><a href='#demo" + gd + "' data-toggle='collapse'>" + str_sect_[1] + "</a>");
+                                        @Html.Raw("<div id='demo" + gd + "'' class='collapse'><br>");
+                                        @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3]) + "' class='btn btn-default btn-xs' >Edytuj</a>");
+                                        @Html.Raw("<button onclick='deletesubsection(" + str_sect_[3] + ")' class='btn btn-danger btn-xs'>Usuń</button>");
+                                        @Html.Raw("</div>");
+                                        //    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str_sect_[3], option = "1", obj = "Section" }));
+                                        @Html.Raw("</td>");
+                                        @Html.Raw("</tr>");
+                                    }
+                                }
+                                //href='../Manage/DeleteSubSection?id=" + str_sect_[3] + "'
+                                @Html.Raw("<tr><td>");
+                                String[] s = list_sect[j];
+                                @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>Dodaj podsekcje</a>");
+                                @Html.Raw("</td></tr>");
+                                @Html.Raw("</tbody></table></div>");
+                                clas = "";
+                                j++;
+                            }
+                            @Html.Raw("</div></div>");
+                        }
+                      
+                       
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal_center" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Komunikat</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <center id="btn_center">
+                                        @Html.Raw("<a href='../Manage/DeleteSubSection?id=' class='btn btn-danger'>Tak</a>")
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Nie</button>
+                                    </center>
+                                </div>
+                                <div class="modal-footer">
+                                    <h6><small>Dokonanych zmian nie będzie można przywrócić</small></h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("tr").click(function () {
+            $("tbody").find("tr").removeClass("active");
+            $(this).addClass("active");
+        })
+
+    })
+
+    function editsection(x) {
+        location.replace('../Manage/EditSection?id=' + x);
+    }
+
+    function deletesection(x) {
+        var url = '../Manage/DeleteSection?id='+x;
+        $('#btn_center a:first-child').attr('href', url);
+        $('#myModal_center').modal('toggle');
+    }
+
+    function deletesubsection(x) {
+        var url = '../Manage/DeleteSubSection?id='+x;
+        $('#btn_center a:first-child').attr('href', url);
+        $('#myModal_center').modal('toggle');
+    }
+
+</script>

@@ -1,0 +1,60 @@
+﻿@model CrystalSiege.Models.TranslateViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-12">Zarządzaj tłumaczeniami</h4>
+        <dl class="dl-horizontal mt-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="fa fa-language" style="font-size:24px"></span> Tłumaczenia
+                </div>
+                <div class="panel-body">
+                    <h2>Wersje językowe</h2>
+
+                    @using (Html.BeginForm("UpdateTranslate", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Wersja polska</th>
+                                    <th>Wersja angielska</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.Collection.Count(); ++i)
+                                {
+                                    @Html.HiddenFor(model => model.Collection[i].Name_Oryginal)
+                                    <tr>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.Collection[i].Name_ang, new { @class = "form-control" })
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.Collection[i].Name_pl, new { @class = "form-control" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                            @Html.ActionLink("Anuluj", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>

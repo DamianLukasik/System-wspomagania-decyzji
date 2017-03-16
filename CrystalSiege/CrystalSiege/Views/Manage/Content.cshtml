@@ -1,0 +1,80 @@
+﻿@model CrystalSiege.Models.IndexViewModel
+@{    
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")  
+    <hr>
+    <div>
+        <h4 class="dl-horizontal mt-12">Zawartość strony</h4>
+        <dl class="dl-horizontal mt-12">
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-blackboard" style="font-size:24px"></span> Karuzela 
+                </div>
+                <div class="panel-body">
+                    <div class="container">               
+                        @Html.ActionLink("Dodaj slajd", "AddSlide", "Manage", new { area = "" }, new { @class = "btn btn-success" })                        
+                        @Html.ActionLink("Wyświetl slajdy", "ViewSlide", "Manage", new { area = "" }, new { @class = "btn btn-default" })     
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Aktualności 
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        @Html.ActionLink("Dodaj wiadomość", "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Wyświetl wiadomości", "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span class="fa fa-desktop" style="font-size:24px"></span> Sekcje strony 
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        @Html.ActionLink("Dodaj sekcje", "AddSection", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Zarządzaj sekcjami", "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="fa fa-picture-o" style="font-size:24px"></span> Obrazki
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                        @Html.ActionLink("Dodaj obrazek", "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Wyświetl wszystkie obrazki", "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="fa fa-language" style="font-size:24px"></span> Tłumaczenia
+                </div>
+                <div class="panel-body">
+                    <div class="container">
+                     <!--
+                         @Html.ActionLink("Zarządzaj tłumaczeniami", "ViewTranslate", "Manage", new { area = "" }, new { @class = "btn btn-default" })    
+                     
+                         -->      
+                        W planach            
+                    </div>
+                </div>
+            </div>
+
+        </dl>
+    </div>
+</div>

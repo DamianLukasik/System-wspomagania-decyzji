@@ -1,0 +1,43 @@
+﻿@model CrystalSiege.Models.SlideViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-3">Wyślij obrazek na stronę</h4>
+        <dl class="dl-horizontal">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="fa fa-home" style="font-size:24px"></span> Obrazki
+                </div>
+                <div class="panel-body container">
+                    <h2>Załącz obrazek</h2>
+                    @using (Html.BeginForm("AddImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <label for="file">Załaduj obrazek:</label>
+                        <input type="file" name="file" id="file" /><br><br>
+                        <input type="submit" value="Załaduj" />
+                        <br><br>
+                        @ViewBag.Message
+                    }
+                </div>
+
+
+
+            </div>
+
+
+
+        </dl>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/block.js")

@@ -1,0 +1,337 @@
+﻿@model CrystalSiege.Models.NewsViewModel
+@{    
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-3"></h4>
+        <dl class="dl-horizontal">
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Edytuj wiadomość
+                </div>
+                <div class="panel-body container">
+                    @using (Html.BeginForm("EditNews", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group" style="visibility: hidden; height: 0px">
+                            <label class="control-label col-md-2" for="id" style="height: 0px">idek</label>
+                            <div class="col-md-10" style="height: 0px">
+                                @Html.TextBoxFor(m => m.Id, new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "idek slajdu",
+                                    @Value = "" + ViewBag.Message[4]
+                                })
+                                <a id="Tags_base">
+                                    @{
+                                    List<String[]> _tab = CrystalSiege.Controllers.ManageController.Get_TagsList();
+                                    string _str_ = "";
+                                    foreach (String[] t in _tab)
+                                    {
+                                        _str_ += t[0] + "?" + t[1] + "|";
+                                    }
+                                    @Html.Raw(_str_);
+                                }
+                                </a>
+                            </div>
+                        </div>
+                        <div class="form-group" style="visibility: hidden; height: 0px">
+                            <label class="control-label col-md-2" for="id" style="height: 0px">idek</label>
+                            <div class="col-md-10" style="height: 0px">
+                                <input type="text" class="form-control" id="_Descript_get" value="@ViewBag.Message[1]">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--  Title send  -->
+                            <label class="control-label col-md-2" for="comment">Tytuł wiadomości</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Title, new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "Tytuł wiadomości",
+                                    @Id = "_Title",
+                                    @Value = "" + ViewBag.Message[0]
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!--  Descript send  -->
+                            <label class="control-label col-md-2" for="id">Treść wiadomości</label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(model => model.Description, new { @Id = "_Descript", @cols = 80, @rows = 25 })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- moduł zmiany/dodawania obrazka -->
+                            @{                                
+                                Html.RenderPartial("Module_ChangeImage", Model, new ViewDataDictionary { { "option", "edit" }, { "img", ViewBag.Message[3] } });
+                            }
+                        </div>
+                        <!--  Tags  -->
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="comment">Tagi</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.Tags, new
+                                   {
+                                       @class = "form-control",
+                                       @placeholder = "Tagi wiadomości",
+                                       @Id = "Tags_",
+                                       @list = "productName",
+                                       @Name = "productName",
+                                   })
+                                        <datalist id="productName">
+                                            @{
+                                                List<String[]> tab = CrystalSiege.Controllers.ManageController.Get_TagsList();
+                                                string str_ = "";
+
+                                                string str_tags_ = ViewBag.Message[5];
+                                                String[] str_tags = str_tags_.Split('|');
+                                                var str_span = "";
+                                                var log = true;
+                                                foreach (String[] t in tab)
+                                                {
+                                                    log = true;
+                                                    foreach (String str_t in str_tags)
+                                                    {
+                                                        if (t[0] == str_t.Split('?')[0])
+                                                        {
+                                                            log = false;
+                                                            break;
+                                                        }
+                                                    }
+                                                    if (log)
+                                                    {
+                                                        str_ += "<option id='" + t[0].Replace(" ", "Q") + "' value='" + t[0] + "'>" + t[0] + "</option>";
+                                                    }
+                                                }
+                                                @Html.Raw(str_);
+                                                @Html.Raw("</datalist><div id='tags_list' class='container'>");
+                                                                                                                  
+                                                foreach (String str_t in str_tags)
+                                                {
+                                                    if (str_t == "") { break; }
+                                                    str_span += "  <span id='_" + str_t.Split('?')[0].Replace(' ', 'Q').Replace("\n","");
+                                                    str_span += "' class='label label-success' style='background-color: " + str_t.Split('?')[1] +"";
+                                                    str_span += "'>" + str_t.Split('?')[0] + "<span id='" + str_t.Split('?')[0] + "' class='glyphicon glyphicon-remove'></span></span>";
+                                                }
+                                                @Html.Raw(str_span);
+                                            }                                            
+                                        </div>
+                                    </div>
+                               
+                                <div class="form-group" style="visibility: hidden; height: 0px">
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.Tags, new
+                                        {
+                                            @Id = "Tags_send",
+                                        })
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button id="_submit" type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                                    @Html.ActionLink("Anuluj", "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                                
+                                    @{Html.RenderPartial(
+                                            "Module_Delete",
+                                            new ViewDataDictionary(new { id = ViewBag.Message[4], option = "0", obj = "News" }));
+                                    }
+                                </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </dl>
+    </div>
+</div>
+
+<!--  -->
+<!-- TinyMCE Script Reference -->
+@Scripts.Render("~/Scripts/block.js")
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+<!-- Script to wire up your TinyMCE editor -->
+<script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+    $(document).ready(function () {
+        tinymce.init({
+            selector: "textarea",
+            theme: "modern",
+            paste_data_images: true,
+            plugins: [
+              "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+              "searchreplace wordcount visualblocks visualchars code fullscreen",
+              "insertdatetime media nonbreaking save table contextmenu directionality",
+              "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            file_picker_callback: function (callback, value, meta) {
+                if (meta.filetype == 'image') {
+                    $('#upload').trigger('click');
+                    $('#upload').on('change', function () {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            callback(e.target.result, {
+                                alt: ''
+                            });
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            },
+            templates: [{
+                title: 'Test template 1',
+                content: 'Test 1'
+            }, {
+                title: 'Test template 2',
+                content: 'Test 2'
+            }]
+        });
+
+        var txt_get = $("#_Descript_get").val();
+        $("#_Descript").val(txt_get);
+        
+        var tags_base = $("#Tags_base").html().split("|");
+
+        $('#_submit').click(function () {
+            var str = "";
+            var len = tags_send.length;
+            for (var i = 0; i < len; i++)
+            {
+                str += ""+tags_send[i].split(">")[1].split("<")[0]+"|";
+            }
+            $("#Tags_send").val(str);
+        });
+
+        $('#Tags_').bind("keyup", function(e) {
+            if (e.which <= 90 && e.which >= 48) {
+
+                var ln = tags_base.length-1;
+               // alert(tags_base[0]);
+                var str = $(this).val();
+                var tab = str.split(" ");
+                var len = tab.length;
+                for (var i = 0; i < len; i++)
+                {
+                    //   alert(" "+tab[i]);
+                    for (var j = 0; j < ln; j++) {
+                    //    alert("\n nazwa = " + tags_base[j].split("?")[0] + "\n kolor = " + tags_base[j].split("?")[1]);
+                     //   alert(" " + tab[i]);
+                        if(tab[i] == tags_base[j].split("?")[0])
+                        {
+                        //    alert("\n nazwa = " + tags_base[j].split("?")[0] + "\n kolor = " + tags_base[j].split("?")[1]);
+
+                        }
+                    }
+                }
+            }
+        });
+
+        var hexDigits = new Array
+        ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f");
+
+        function rgb2hex(rgb) {
+            rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        }
+
+        function hex(x) {
+            return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+        }
+
+        var tags_send = [];
+        var pp = $("#tags_list").children();       
+        for (var p_ = 0; p_ < pp.length; p_++)
+        {
+            var txt_rgb = pp[p_].style.backgroundColor + "";
+            txt_rgb =  rgb2hex(txt_rgb);
+            pp_str = "  <span id='" + pp[p_].id + "' class='label label-success' style='background-color: " + txt_rgb + "'>" + pp[p_].innerHTML + "</span>";
+            tags_send.push(pp_str);
+        }               
+
+        $("input[name=productName]").bind("keyup", function (e) {
+            var code = e.which;
+         //   if (code == 13) e.preventDefault();
+            if (code == 32 || code == 13 || code == 188 || code == 186) {
+
+                var ln = tags_base.length - 1;
+              //  alert(ln);
+                var sp;
+                for (var j = 0; j < ln; j++) {
+                 //   alert($(this).val() + "  " + tags_base[j].split("?")[0]+"\n\n"+$(this).val() == tags_base[j].split("?")[0]);
+                    if ($(this).val() == tags_base[j].split("?")[0] || $(this).val() == tags_base[j].split("?")[0]+" ")
+                    {
+                   //     alert("\n nazwa = " + tags_base[j].split("?")[0] + "\n kolor = " + tags_base[j].split("?")[1]);
+                        sp = "  <span id='_" + tags_base[j].split("?")[0].replace(" ", "Q") + "' class='label label-success' style='background-color: " + tags_base[j].split("?")[1] + "'>" + tags_base[j].split("?")[0] + "<span id='" + tags_base[j].split("?")[0] + "' class='glyphicon glyphicon-remove'></span></span>";
+                        var len_tags_send = tags_send.length;
+                        var log = true;
+                        for (var t = 0; t < len_tags_send; t++)
+                        {
+                            if(tags_send[t] == sp)
+                            {
+                                log = false;
+                            }
+                        }
+                        if (log)
+                        {
+                            tags_send.push(sp);
+                            $("#productName option[value='" + tags_base[j].split("?")[0] + "']").remove();
+                        }
+                    }
+                }
+                // var sp = "<span class="label label-success" style="background-color: #2db300">"+$(this).val()+"</span>";"
+                //   alert(sp);
+                $("#tags_list").html("");
+                var len = tags_send.length;
+                for (var j = 0; j < len; j++) {
+                    $("#tags_list").append(tags_send[j]);
+                }
+                $(this).val("");
+            }
+        });
+
+        $(document).on('click', '.glyphicon-remove', function () {
+            // your function here
+            var id = $(this).attr("id");
+         //   alert(id);
+            $("#productName").append("<option value='" + id + "'>" + id + "</option>");
+            //  $(this).remove();
+            id = id.replace(" ", "Q");
+          //  alert(id);
+            $("#_" + id).remove();
+            var len_tags_send = tags_send.length;
+            var tags_send_ = [];
+            var tags_send_log = [];
+            for (var t = 0; t < len_tags_send; t++) {
+                if (tags_send[t].split("'")[1] == "_" + id) {
+                    tags_send_log.push(true);
+                }
+                else
+                {
+                    tags_send_log.push(false);
+                }
+            }
+            var len_tags_send_log = tags_send_log.length;
+            tags_send_ = [];
+            for (var t = 0; t < len_tags_send_log; t++) {
+                if (!tags_send_log[t]) {
+                    tags_send_.push(tags_send[t]);
+                }
+            }
+            tags_send = tags_send_;
+        });
+
+    })
+</script>

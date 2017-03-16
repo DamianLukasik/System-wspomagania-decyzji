@@ -1,0 +1,62 @@
+﻿<!--  Delete This Slide -->
+<!-- Trigger the modal with a button -->
+@{
+    String str = "";
+    if (ViewData.Eval("option").Equals("1"))
+    {
+        str = "<button type='button' class='btn btn-danger btn-xs' data-toggle='modal' data-target='#myModalDelete_" + ViewData.Eval("id").GetHashCode().ToString() + "' role='dialog'>Usuń</button>";
+    }
+    else
+    {
+        str = "<button type='button' class='btn btn-danger' data-toggle='modal' data-target='#myModalDelete_" + ViewData.Eval("id").GetHashCode().ToString() + "' role='dialog'>Usuń</button>";
+    }
+} 
+@Html.Raw(str)
+<!-- Modal -->
+@Html.Raw("<div class='modal fade' id='myModalDelete_" + ViewData.Eval("id").GetHashCode().ToString() + "' role='dialog'>")
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Komunikat</h4>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <h5>Czy na pewno chcesz usunąć?</h5>
+                    @{
+                        string idx = ViewData.Eval("id").ToString();
+                        if (ViewData.Eval("obj").Equals("Slide"))
+                        {
+                            //  @Html.ActionLink("Tak", "DeleteSlide", "Manage", new { id = ViewData.Eval("id") }, new { @class = "btn btn-danger" })
+                            @Html.Raw("<a href='" + @Url.Content("~/Manage/DeleteSlide/" + ViewData.Eval("id")) + "' class='btn btn-danger' >Tak</a>")
+                        }
+                        if (ViewData.Eval("obj").Equals("News"))
+                        {
+                            // @Html.ActionLink("Tak", "DeleteNews", "Manage", new { id = ViewData.Eval("id") }, new { @class = "btn btn-danger" })
+                            @Html.Raw("<a href='" + @Url.Content("~/Manage/DeleteNews/" + ViewData.Eval("id")) + "' class='btn btn-danger' >Tak</a>")
+                        }
+                        if (ViewData.Eval("obj").Equals("Section"))
+                        {
+                            //  @Html.ActionLink("Tak", "DeleteSection", "Manage", new { id = ViewData.Eval("id").ToString() }, new { @class = "btn btn-danger" })
+                            @Html.Raw("<a href='" + @Url.Content("~/Manage/DeleteSection/" + ViewData.Eval("id")) + "' class='btn btn-danger' >Tak</a>")
+                        }
+                        if (ViewData.Eval("obj").Equals("SubSection"))
+                        {
+                            //     @Html.ActionLink("Tak", "DeleteSubSection", "Manage", new { id = ViewData.Eval("id").ToString() }, new { @class = "btn btn-danger" })
+                            @Html.Raw("<a href='" + @Url.Content("~/Manage/DeleteSubSection/" + ViewData.Eval("id")) + "' class='btn btn-danger' >Tak</a>")
+                        }
+                        if (ViewData.Eval("obj").Equals("Image"))
+                        {
+                            @Html.ActionLink("Tak", "DeleteImage", "Manage", new { name = ViewData.Eval("id").ToString() }, new { @class = "btn btn-danger" });
+                         //   @Html.Raw("<a href='" + @Url.Content("~/Manage/DeleteImage/" + ViewData.Eval("id")) + "' class='btn btn-danger' >Tak</a>")
+                        }
+                    }
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Nie</button>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <h6><small>Dokonanych zmian nie będzie można przywrócić</small></h6>
+            </div>
+        </div>
+    </div>
+</div>

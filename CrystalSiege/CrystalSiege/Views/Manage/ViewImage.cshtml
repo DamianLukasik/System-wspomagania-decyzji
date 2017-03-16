@@ -1,0 +1,79 @@
+﻿@model CrystalSiege.Models.IndexViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-12">Wszystkie grafiki w serwisie</h4>
+        <dl class="dl-horizontal mt-12">            
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <span class="fa fa-picture-o" style="font-size:24px"></span> Obrazki
+                </div>
+                <div class="panel-body">
+
+                    @{
+                        List<String> dane = ViewBag.Message;
+                        int i = 0;
+                        int id = 0;
+                        @Html.Raw("<div class='row'>");
+                        foreach (String str in dane)
+                        {
+                            if (i == 4)
+                            {
+                                @Html.Raw("</div><div class='row'>");
+                                i = 0;
+                            }
+
+                            @Html.Raw("<div class='col-sm-3'>");
+                            @Html.Raw("<div class='thumbnail'>");//"../Contents/News?news="+idek;
+
+                            //@Html.Raw("<button type='button' >");
+                            @Html.Raw("<img data-toggle='modal' data-target='#img_" + id + "'' class='img-rounded media-object' src='" + @Url.Content("~/Resources/Image/" + str) + "' width='100%' ><br>");
+                            //@Html.Raw("</button>");
+                        //    @Html.ActionLink("Usuń", "DeleteImage", "Manage", new { name = str }, new { @class = "btn btn-danger" });
+                            Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str.ToString(), option = "0", obj = "Image" }));
+                            //@Html.Raw("");
+                            @Html.Raw("</div></div>");
+                           //
+                            @Html.Raw("<div class='modal fade' id='img_"+id+"' role='dialog'>");
+                            @Html.Raw("<div class='modal-dialog modal-lg'>");
+                            @Html.Raw("<div class='modal-content' style='max-width: 70%'>");
+                            @Html.Raw("<div class='modal-header'>");
+                            @Html.Raw("<button type='button' class='close' data-dismiss='modal'>&times;</button></div>");
+                            @Html.Raw("<div class='modal-body'>");
+                            @Html.Raw("<img src='" + @Url.Content("~/Resources/Image/" + str) + "' class='img-rounded' style='max-width: 100%'>");
+                            @Html.Raw("</div>");
+                            @Html.Raw("</div>");
+                            @Html.Raw("</div>");
+                            @Html.Raw("</div>");
+
+                            i++;
+                            id++;
+                        }
+                        if (i <= 4)
+                        {
+                                    @Html.Raw("</div>");
+                                    i = 0;
+                                }
+                            }
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class='thumbnail'>
+                                @Html.ActionLink("Dodaj obrazek", "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+
+                    </dl>
+                    </div>
+                    </div>

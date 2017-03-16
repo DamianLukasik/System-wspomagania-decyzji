@@ -1,0 +1,65 @@
+﻿@model CrystalSiege.Models.IndexViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-12">Wszystkie wiadomości</h4>
+        <dl class="dl-horizontal mt-12">            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Aktualności 
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Wiadomość</th>
+                                <th>Akcje</th>
+                                <th>Obrazek</th>
+                                <th>Data publikacji</th>
+                                <th>Autor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{
+                                List<String[]> dane = CrystalSiege.Controllers.ManageController.Get_NewsList();//get all njus
+                                foreach (String[] s in dane)
+                                {
+                                    @Html.Raw("<tr>");
+                                    @Html.Raw("<td>" + s[0] + "</td>");
+
+                                    @Html.Raw("<td><div class='btn-group'>");
+                                    @Html.Raw("<a href='" + @Url.Content("~/Manage/EditNews/" + s[4]) + "' class='btn btn-default btn-xs' >Edytuj</a>");
+                                    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = s[4], option = "1", obj = "News" }));
+                                    @Html.Raw("</div></td>");
+                                    //do poprawy usuwa się pierwszy njus, nie id njus
+                                    @Html.Raw("<td><img src='" + @Url.Content("~/Resources/Image/" + s[1]) + "' class='img-rounded' width='30' height='30'></td>");
+                                    @Html.Raw("<td>" + s[2] + "</td>");
+                                    @Html.Raw("<td>" + s[3] + "</td>");
+                                    @Html.Raw("</tr>");
+                                }
+                            }
+                            </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class='thumbnail'>
+                                        @Html.ActionLink("Dodaj Newsa", "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+
+        </dl>
+    </div>
+</div>

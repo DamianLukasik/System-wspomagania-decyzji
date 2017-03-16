@@ -1,0 +1,228 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!-- Styles -->
+<style>
+.carousel-inner>.item>img {
+ /*   height: auto;*/
+    max-width: 100%;
+
+    background-attachment: scroll;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+}
+
+.carousel-inner, .item{
+  width:100%;
+  max-height: 550px !important;
+}
+</style><!-- Nie mam pojęcia jak przeskalowywać-->
+<!---->
+<div id="mycarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators
+    <ol class="carousel-indicators">
+        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mycarousel" data-slide-to="1"></li>
+        <li data-target="#mycarousel" data-slide-to="2"></li>
+    </ol>-->
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox" >  
+        @{
+            List<String[]> CarouselInfo = new CrystalSiege.Controllers.ContentsController().ReadCarouselInfo();
+
+            if (CarouselInfo.Count != 0)
+            {
+                Boolean log = true;
+                foreach (String[] wart in CarouselInfo)
+                {
+                    String[] str = wart;
+                    if (log)
+                    {
+                        @Html.Raw("<div class='item active' >");
+                        log = false;
+                    }
+                    else
+                    {
+                        @Html.Raw("<div class='item' >");
+                    }
+                    @Html.Raw("<img src='" + @Url.Content("~/Resources/Image/" + str[2]) + "' data-color='firebrick'>");
+                    @Html.Raw("<div class='carousel-caption'>");
+                    @Html.Raw("<h3>" + str[0] + "</h3>");
+                    @Html.Raw("<span>" + str[1] + "</span>");
+                    @Html.Raw("</div></div>");
+                }
+            }
+        }
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<!-- Test otwierania nowej karty
+@{ 
+    /*
+    Char[] input = "Xblow2@#".ToCharArray();
+    System.Security.SecureString SecurePassword = new System.Security.SecureString();
+
+    for (int idx = 0; idx < input.Length; idx++)
+    {
+        SecurePassword.AppendChar(input[idx]);
+
+    }
+    System.Security.SecureString secure = SecurePassword;
+    string FileName = @"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+    System.Diagnostics.Process.Start(FileName, "pAlan", secure, "");
+    //
+    System.Diagnostics.ProcessStartInfo processStartInfo = new System.Diagnostics.ProcessStartInfo();
+    processStartInfo.UserName = "Spidi";
+    processStartInfo.Password = secure;
+    processStartInfo.Verb = "runas";
+    processStartInfo.Domain = @"http://localhost:62074/Shared/_LoginPartial";
+    //  System.Diagnostics.Process.Start(processStartInfo);
+    /*
+        System.Management.ConnectionOptions;
+        ConnectionOptions connectoptions = new ConnectionOptions();
+        connectoptions.Username = "username";
+        connectoptions.Password = "password";
+        connectoptions.EnablePrivileges = true;
+        ManagementScope scope = new ManagementScope(@"\\" + "machinename" + @"\root\cimv2", connectoptions);
+        scope.Connect();
+
+
+
+
+         string user = "uuuuuuu";
+         System.Security.SecureString pass = new System.Security.SecureString();
+         string str_ = "ppp";
+         char[] password = str_.ToCharArray();
+         // if (((int)password.Length) >= 65 && ((int)password.Length <= 90))
+         if(password.Length != 0)
+         {
+             for (int x = 0; x < password.Length; x++)
+             {
+                 pass.AppendChar(password[x]);
+             }
+             pass.MakeReadOnly();
+         }
+
+
+         System.Diagnostics.Process.Start("chrome", user, pass, @"http://localhost:62074/Shared/_LoginPartial");
+         */
+
+    // System.Diagnostics.ProcessStartInfo info = 
+    //      new System.Diagnostics.ProcessStartInfo(@"C:\Program Files\Internet Explorer\iexplore.exe");
+
+    /*
+    System.Diagnostics.Process proc = new System.Diagnostics.Process();
+    System.Security.SecureString ssPwd = new System.Security.SecureString();
+    proc.StartInfo.UseShellExecute = false;
+    proc.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+    proc.StartInfo.Arguments = "args...";
+    proc.StartInfo.Domain = @"http://localhost:62074/Shared/_LoginPartial";
+    proc.StartInfo.UserName = user;
+    proc.StartInfo.Password = pass;*/
+    //  proc.Start();
+    /* 
+ //
+ System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
+ psi.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+ // psi.Arguments = "arg1 arg2";
+ psi.UseShellExecute = false;
+
+ psi.Domain = @"http://localhost:62074/Shared/_LoginPartial";
+ psi.UserName = user;
+ psi.Password = pass;
+
+ System.Diagnostics.Process process = new System.Diagnostics.Process();
+ process.StartInfo = psi;
+ process.Start();
+
+ string authHdr = "Authorization: Basic " + 
+      Convert.ToBase64String(Encoding.ASCII.GetBytes(user + ":" + pass)) + "\r\n";*/
+
+    // webBrowserCtl.Navigate("http://example.com", null, null, authHdr);
+    //System.Diagnostics.Process.Start("chrome", user, pass, @"http://localhost:62074/Shared/_LoginPartial");
+    //System.Diagnostics.Process.Start("chrome.exe", user, pass, "http://localhost:62074/Home/");
+}
+
+<!-- Sekcja njusów-->
+
+<script>
+    function ReadMore(idek) {
+        //  alert(idek);
+        location.href = "../Contents/News?news="+idek;
+        //javascript: location.href = "~/Views/Contents/News";      
+      //  Html.ActionLink("", "Index", "Home", new { area = "" }, new { class = "navbar-brand" })
+        return false;
+    }
+</script>
+
+<div class="container body-content">
+    <!-- News -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="col-sm-12">
+                    <h4><small>Aktualności</small></h4>
+                    <hr>
+                    @{
+                        List<String[]> News = new CrystalSiege.Controllers.ContentsController().ReadAllNews();
+                        if (News != null)
+                        {
+                            foreach (String[] njus in News)
+                            {
+                                @Html.Raw("<div class='media'>");
+                                @Html.Raw("<h2>" + njus[0] + "</h2>");
+                                @Html.Raw("<h5><span class='glyphicon glyphicon-time'></span> Opublikowany przez " + njus[3] + " " + njus[2] + "</h5>");
+                                @Html.Raw("<h5>" + njus[4] + "</h5><br>");
+                                @Html.Raw("<div class='pull-left'>");
+                                @Html.Raw("<img class='media-object img-thumbnail' src='" + @Url.Content("~/Resources/Image/" + njus[5]) + "' width='150px' height='150px'></div><div class='media-body'>");
+                                @Html.Raw("<div class='zwijaj'>" + njus[1] + "</div><br><br></div>");
+                                @Html.Raw("<a href='../Contents/News?news=" + njus[6] + "' type='button' class='btn btn-default'>Czytaj</a>");
+                                @Html.Raw("</div><br>");
+                                // @Html.Raw("<button onclick='ReadMore(" + njus[6] + ")' type='button' class='btn btn - default'>Czytaj</button>");
+                            }
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-sm-3 container btn-group-vertical">
+                <h4>Archiwum według miesięcy</h4>
+                <hr>
+                <div class="list-group">
+                    @{
+                        Dictionary<String, int> MonthsNews = new CrystalSiege.Controllers.ContentsController().ReadAllMonthsNews();
+                        if (MonthsNews != null)
+                        {
+                            foreach (KeyValuePair<String, int> months in MonthsNews)
+                            {// 
+                                @Html.Raw("<a href='"+ @Url.Content("~/Contents/NewsList?month=" + months.Key)
+                            + "' class='list-group-item'>"
+                            + months.Key + " <span class='badge'>"
+                            + months.Value + "</span></a>");
+                                        }
+                                    }
+                                }
+                </div>
+            </div>
+            </div>
+      </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- Script to wire up your TinyMCE editor -->
+<script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+    $(document).ready(function () {
+        $(".zwijaj").height(120);
+    })
+</script>

@@ -1,0 +1,645 @@
+body {
+    background-color: black;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    height: 100%;
+    width:  100%;
+}
+
+textarea.obszar_tekstowy-przeslij:focus {
+    background-color: yellow;
+    border: 5px solid yellow;
+    font-size: 20px;
+}
+
+#upload-file-container {
+   background: url("/grafika/upload_a_2.gif") no-repeat;
+}
+
+#upload-file-container input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+   height: 50px;
+   width:  140px;
+}
+
+li, h1, h2, h4 {
+    color: yellow;
+}
+
+div.wiadomosc {
+    background-color: black; 
+    color: yellow;
+    padding: 32px;
+    margin: 10px 10% 10px 10%; 
+    text-align: left;
+    text-justify: inter-word;
+}
+
+a {
+    margin: 15px;
+    color: yellow;
+}
+
+a:focus {
+	border: 5px solid yellow;
+	text-transform: uppercase;
+}
+
+input[type=submit]:focus {
+    border: 6px solid yellow;
+    text-transform: uppercase;
+}
+
+input[type=button]:focus {
+    border: 6px solid yellow;
+    text-transform: uppercase;
+}
+
+input[type=password]:focus {
+    background-color: yellow;
+    border: 5px solid yellow;
+    font-size: 20px;
+}
+
+input[type=text]:focus {
+    background-color: yellow;
+    border: 4px solid yellow;
+    font-size: 20px;
+}
+
+input[type=date]:focus {
+    background-color: yellow;
+    border: 4px solid yellow;
+    font-size: 20px;
+}
+
+input[type=image]:focus {
+    background-color: yellow;
+    border: 5px solid yellow;
+    font-size: 20px;
+}
+
+select:focus {
+    background-color: yellow;
+    border: 4px solid yellow;
+    font-size: 20px;     
+}
+
+input.obraz_kategori {
+	width: 400px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-color: black;
+	font-size: 300%;
+	font-weight: bold;
+	vertical-align: bottom;
+	text-align: center;
+	color: yellow;
+	border: 1px solid yellow;
+}
+
+#przycisk_1 {	
+	color: yellow;	
+	border: 4px solid yellow;
+}
+
+#przycisk_2 {
+	color: yellow;
+	border: 4px solid yellow;
+}
+
+#przycisk_3 {
+	color: yellow;
+	border: 4px solid yellow;
+}
+
+div.obsluga {
+	font-family: Arial, Arial, Sans-serif;  
+    font-size: 26px;
+	padding: 20px 20px 20px 20px;
+    margin: 35px 35px 35px 35px;
+	font-weight: bold;
+    color: yellow;
+	background: black;
+	border: 2px solid yellow;
+	text-align: center;
+}
+
+div.chmurka {
+    border: 2px solid yellow;
+    display: none;
+    position: absolute;   
+    background: black;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 21px;
+    color: yellow;
+    font-weight: bold;
+}
+
+#widok {
+    overflow: scroll;
+    height: 100%;
+    border: 0px solid black;        
+}
+
+#galeria-zdjecia::-webkit-scrollbar
+{ 
+    visibility: hidden;
+}
+
+span.komunikat_błąd {
+    color: #E21E130;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+div.galeria {
+    height: 100%;
+    width:  100%;
+    overflow: auto;
+    border: 1px solid yellow;
+}
+
+div.cookies {
+    padding: 10px 0% 10px 0%;
+    margin: 0% 0% 0% 0%;
+    text-align: right;
+    display: block;
+    position: absolute;  
+    left: 0px;
+    top: 90%;
+    height: 5%;
+    width:  100%;
+    background-color: black;
+    font-family: Arial, Arial, Sans-serif;  
+    color: yellow;
+    border: 1px solid yellow;
+}
+
+table.tabela {
+    border:2px solid yellow;
+    background-color: black;
+}
+
+td.tabela {
+    border:1px solid yellow;
+    background-color: black;
+}
+
+table.panel_użytkownika {
+    width:  100%;
+    background-color: black;
+    visibility: visible;
+    padding: 4px 4px 4px -4px;
+    margin: 0px 0px 0px 0px;
+    display: inline-block;
+	border: 1px solid yellow;
+}
+
+table.formularz_przesyłania {
+    height: 45px;
+    width:  45%;
+    background-color: black;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 105px 115px 105px 115px;
+	border: 2px solid yellow;
+}
+
+table.formularz_przesyłania-mini {
+    height: 30px;
+    width:  37%;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 0px 10px 0px 110px;
+	border: 2px solid yellow;
+}
+
+table.profl_standard {
+    height: 45px;
+    width:  60%;
+    background-color: black;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 105px 115px 105px 115px;  
+	border: 1px solid yellow;	
+}
+
+table.galeria {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: yellow;
+    height: 100%;
+    width:  100%;
+    text-align: center;
+    overflow: scroll;
+}
+
+table.kafelek-standard {
+    background: black;
+    width: 100%;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 21px;
+    color: black;
+    padding: 5px auto 5px auto;
+    margin: 5px auto 5px auto;
+    display: block;
+    text-align: center;
+    font-weight: bolder;
+    border: 1px solid yellow;
+}
+
+table.kafelek-powiekszony {
+    background: black;
+    font-family: Arial, Arial, Sans-serif;  
+    color: black;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 0px 0px 0px;
+    text-align: left;
+    border: 1px solid yellow;
+}
+
+label.tytul_zdjecia {
+    font-size: 37px;
+    padding: 0px 15px 5px 5px;
+	color: yellow;
+}
+
+label.autor_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 20px 5px 0px;
+	color: yellow;
+}
+
+label.data_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 20px 5px 0px;
+	color: yellow;
+}
+
+label.lokalizacja_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 0px 5px 0px;
+	color: yellow;
+}
+
+label.opis_zdjecia {
+    font-size: 16px;
+    padding: 5px 0px 5px 0px;
+	color: yellow;
+}
+
+label.urzadzenie_zdjecia {
+    font-size: 14px;
+    padding: 15px 0px 5px 0px;    
+	color: yellow;
+}
+
+td.komórka-siła {
+    padding: 1px 0px 1px 0px;
+    margin: 0px 0px 0px 0px;
+    border: 2px solid yellow;
+    width:  20%;
+	color: yellow;
+}
+
+td.kolumna-dane {
+    height: 25px;
+    width:  250px;
+    border: 2px solid yellow;
+    background-color:black;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;   
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-pole {
+    height: 25px;
+    width:  120px;
+    border: 2px solid yellow;
+    background-color:black;
+    color:  yellow;  
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-znak {
+    height: 25px;
+    width:  25px;
+    border: 2px solid yellow;
+    background-color:black;
+    color:  yellow;  
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-opis {
+    height: 18px;
+    width:  110px;
+    border: 2px solid yellow;
+    background-color:black;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 12px;
+}
+
+td.opis {
+    height: 18px;
+    width:  70px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 16px;
+	color: yellow;
+}
+
+td.opis-dluzsze {
+    height: 16px;
+    width:  100%;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 16px;
+	color: yellow;
+}
+
+td.tekst-zwykly {
+    height: 18px;
+    width:  350px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 18px;
+}
+
+td.kolumna-przycisk {
+    height: 60px;
+    border: 2px solid yellow;
+    background-color:black;
+    color:  yellow;  
+}
+
+#katalogi {
+    width: 300px;
+}
+
+#katalog_lokalizacja {
+    background:url(/grafika/lokalizacja.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+#katalog_urzadzenie {
+    background:url(/grafika/urzadzenie.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+#katalog_okres_historyczny {
+    background:url(/grafika/data.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+table.strzalka {
+    height: "10%";
+    width:  "10%";
+}
+
+input.przycisk-standard {
+    height: 35px;
+    width:  160px;
+	letter-spacing: -1px;
+	text-align: center;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    font-weight: bold;
+    padding: 1px 1px 1px 1px;
+    margin:  5px 7px 4px 7px;
+}
+
+input.przycisk-ikona {
+    height: 30px;
+    width:  30px;
+    font-weight: bold;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    float: left;
+}
+
+input.przycisk-ikona-dluzszy {
+    height: 30px;
+    width:  70px;
+    font-weight: bold;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    float: left;
+}
+
+input.przycisk-ikona-zmien {
+    height: 30px;
+    width:  85px;
+    font-weight: bold;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    display: inline-table;
+}
+
+input.przycisk-ikona-usun {
+    height: 30px;
+    width:  70px;
+    font-weight: bold;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    display: inline-table;
+}
+
+input.przycisk-dluzszy {
+    height: 30px;
+    width:  225px;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    text-align: left;
+    float: left;
+}
+
+input.text-standard {
+    height: 20px;
+    width:  140px;
+    background-color: black;
+	color: yellow;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 2px solid yellow;  
+}
+
+input.text-standard-mini {
+    height: 30px;
+    width:  100%;
+    background-color: black;
+	color: yellow;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 2px solid yellow;  
+}
+
+label.text-standard {
+    height: 20px;
+    width:  140px;
+    color:  yellow;   
+    border: 2px solid yellow; 
+    padding: 1px 1px 1px 1px;
+    margin:  0px 0px 0px 0px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 14px;
+    text-align: center;
+}
+
+label.text-nagłówek1 {
+    height: 12px;
+    width:  140px;
+    color:  yellow;   
+    border: 2px solid yellow; 
+    padding: 1px 1px 1px 1px;
+    margin:  0px 0px 0px 0px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 26px;
+    text-align: center;
+}
+
+.tekst-zwykly {
+    height: 18px;
+    width:  350px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 18px;
+    display: inline-bloc;
+}
+
+label.powitanie {
+    height: 45px;
+    width:  350px;
+    padding: 20px 1px 20px 1px;
+    margin:  20px 5px 20px 5px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 120%;
+}
+
+label.napis {
+    height: 20px;
+    width:  350px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+}
+
+label.napis2 {
+    height: 20px;
+    width:  350px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 105%;
+}
+
+label.napis3 {
+    height: 30px;
+    width:  350px;
+    color:  yellow;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 110%;
+}
+
+select.text-standard-przeslij {
+    height: 30px;
+    width:  290px;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;  
+    color: yellow;	
+    border: 2px solid yellow;  
+}
+
+select.text-standard-mini {
+    height: 30px;
+    width:  105px;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;   
+	color: yellow;
+    border: 2px solid yellow;  
+}
+
+input.przycisk-standard-mini {
+    height: 26px;
+    width:  85px;
+    background-color: black;
+    color:  yellow;   
+    border: 1px solid yellow; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+}
+
+input.text-standard-przeslij {
+    height: 30px;
+    width:  290px;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto; 
+	color: yellow;	
+    border: 2px solid yellow;  
+}
+
+input.data-standard-przeslij {
+    height: 25px;
+    width:  100%;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;   
+	color: yellow;
+    border: 2px solid yellow;  
+}
+
+textarea.obszar_tekstowy-przeslij {
+    resize: none;
+    width:  286px;
+    background-color: black;
+    margin-left: auto;
+    margin-right: auto;   
+    color: yellow;
+    border: 2px solid yellow;  
+}
+
+input.checkbox-standard {
+    display:inline-block;
+    height: 20px;
+    width:  20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input.ukryty {
+    visibility: hidden;
+    width:  0px;
+    height: 0px;
+}

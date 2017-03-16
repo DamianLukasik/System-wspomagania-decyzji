@@ -1,0 +1,616 @@
+body {
+    background-color: #B7D0DB;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    height: 100%;
+    width:  100%;
+}
+
+textarea.obszar_tekstowy-przeslij:focus {
+    background-color: yellow;
+    border: 5px solid #D41B56;
+    font-size: 20px;
+}
+
+#upload-file-container {
+   background: url("/grafika/upload_a_2.gif") no-repeat;
+}
+
+#upload-file-container input {
+   filter: alpha(opacity=0);
+   opacity: 0;
+   height: 50px;
+   width:  140px;
+}
+
+li, h1, h2, h4 {
+    color: black;
+    font-family: Arial;
+}
+
+div.wiadomosc {
+    background-color: white; 
+    color: black;
+    padding: 32px;
+    margin: 10px 10% 10px 10%; 
+    text-align: left;
+    text-justify: inter-word;
+}
+
+a {
+    margin: 15px;
+    color: white;   
+}
+
+a:focus {
+    border: 5px solid #D41B56;
+    text-transform: uppercase;        
+}
+
+input[type=submit]:focus {
+    border: 6px solid #D41B56;
+    text-transform: uppercase;
+}
+
+input[type=button]:focus {
+    border: 6px solid #D41B56;
+    text-transform: uppercase;
+}
+
+input[type=password]:focus {
+    background-color: yellow;
+    border: 5px solid #D41B56;
+    font-size: 20px;
+}
+
+input[type=text]:focus {
+    background-color: yellow;
+    border: 4px solid #D41B56;
+    font-size: 20px;
+}
+
+input[type=date]:focus {
+    background-color: yellow;
+    border: 4px solid #D41B56;
+    font-size: 20px;
+}
+
+input[type=image]:focus {
+    background-color: #D41B56;
+    border: 5px solid #D41B56;
+    font-size: 20px;
+}
+
+select:focus {
+    background-color: yellow;
+    border: 4px solid #D41B56;
+    font-size: 20px; 
+}
+
+input.obraz_kategori {
+	width: 400px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-color: #B7D0DB;
+	font-size: 300%;
+	font-weight: bold;
+	vertical-align: bottom;
+	text-align: center;
+	color: black;
+	border: 1px solid;
+}
+
+#przycisk_1 {	
+    background-image: url('/grafika/lokalizacja.gif');    
+}
+
+#przycisk_2 {
+    background-image: url('/grafika/data.gif');  
+}
+
+#przycisk_3 {
+    background-image: url('/grafika/urzadzenie.gif');
+}
+
+div.obsluga {
+	font-family: Arial, Arial, Sans-serif;  
+    font-size: 26px;
+	padding: 20px 20px 20px 20px;
+    margin: 35px 35px 35px 35px;
+	font-weight: bold;
+    color: #FF0080;
+	background: #BCE27F;
+	border: 2px solid #ffffff;
+	text-align: center;
+}
+
+div.chmurka {
+    border: 2px solid #ffffff;
+    display: none;
+    position: absolute;   
+    background: white;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 21px;
+    color: black;
+    font-weight: bold;
+}
+
+#widok {
+    overflow: scroll;
+    height: 100%;
+    border: 0px solid black;
+}
+
+#widok::-webkit-scrollbar
+{
+    visibility: hidden;
+}
+
+span.komunikat_błąd {
+    color: #E21E13;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 15px;
+    font-weight: bolder;
+}
+
+div.galeria {
+    height: 100%;
+    width:  100%;
+    overflow: auto;
+}
+
+div.cookies {
+    padding: 10px 0% 10px 0%;
+    margin: 0% 0% 0% 0%;
+    text-align: right;
+    display: block;
+	position: absolute;  
+	left: 0px;
+    top: 90%;
+    height: 5%;
+    width:  100%;
+    background-color: whitesmoke;
+    font-family: Arial, Arial, Sans-serif;  
+    color: black;
+    border: 0px solid black;
+}
+
+table.tabela {
+    border:2px solid black;
+    background-color: #9FBEC8;
+}
+
+td.tabela {
+    border:1px solid black;
+    background-color: #D5E9EB;
+}
+
+table.panel_użytkownika {
+    width:  100%;
+    background-color: #6FAEC8;
+    visibility: visible;
+    padding: 4px 4px 4px -4px;
+    margin: 0px 0px 0px 0px;
+    display: inline-block;
+}
+
+table.formularz_przesyłania {
+    height: 45px;
+    width:  45%;
+    background-color: #C7E0EB;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 105px 115px 105px 115px;
+}
+
+table.formularz_przesyłania-mini {
+    height: 30px;
+    width:  37%;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 0px 10px 0px 110px;
+}
+
+table.profl_standard {
+    height: 45px;
+    width:  60%;
+    background-color: #3063CA;
+    visibility: visible;
+    padding: 14px 24px 14px 24px;
+    margin: 105px 115px 105px 115px;   
+}
+
+table.galeria {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    border: none;
+    height: 100%;
+    width:  100%;
+    text-align: center;
+    overflow: scroll;
+}
+
+table.kafelek-standard {
+    background: white;
+    width: 100%;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 21px;
+    color: black;
+    padding: 5px auto 5px auto;
+    margin: 5px auto 5px auto;
+    display: block;
+    text-align: center;
+    font-weight: bolder;
+}
+
+table.kafelek-powiekszony {
+    background: white;
+    font-family: Arial, Arial, Sans-serif;  
+    color: black;
+    padding: 5px 10px 5px 10px;
+    margin: 0px 0px 0px 0px;
+    text-align: left;
+}
+
+label.tytul_zdjecia {
+    font-size: 37px;
+    padding: 0px 15px 5px 5px;
+}
+
+label.autor_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 20px 5px 0px;
+}
+
+label.data_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 20px 5px 0px;
+}
+
+label.lokalizacja_zdjecia {
+    display: inline;
+    font-size: 18px;
+    padding: 0px 0px 5px 0px;
+}
+
+label.opis_zdjecia {
+    font-size: 16px;
+    padding: 5px 0px 5px 0px;
+}
+
+label.urzadzenie_zdjecia {
+    font-size: 14px;
+    padding: 15px 0px 5px 0px;    
+}
+
+td.komórka-siła {
+    padding: 1px 0px 1px 0px;
+    margin: 0px 0px 0px 0px;
+    border: none;
+    width:  20%;
+}
+
+td.kolumna-dane {
+    height: 25px;
+    width:  250px;
+    border: 0px solid white;
+    background-color:#9CC7D9;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;   
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-pole {
+    height: 25px;
+    width:  120px;
+    border: 0px solid white;
+    background-color:#9CC7D9;
+    color:  white;  
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-znak {
+    height: 25px;
+    width:  25px;
+    border: 0px solid white;
+    background-color:#9CC7D9;
+    color:  white;  
+    padding: 0px 0px 0px 0px;
+    margin:  0px 0px 0px 0px;
+}
+
+td.kolumna-opis {
+    height: 18px;
+    width:  110px;
+    border: 0px solid white;
+    background-color:#9CC7D9;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 12px;
+}
+
+td.opis {
+    height: 18px;
+    width:  70px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 16px;
+}
+
+td.opis-dluzsze {
+    height: 16px;
+    width:  100%;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 16px;
+}
+
+td.tekst-zwykly {
+    height: 18px;
+    width:  350px;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 18px;
+}
+
+td.kolumna-przycisk {
+    height: 60px;
+    border: 0px solid white;
+    background-color:#9CC7D9;
+    color:  white;  
+}
+
+#katalog_lokalizacja {
+    background:url(/grafika/lokalizacja.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+#katalog_urzadzenie {
+    background:url(/grafika/urzadzenie.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+#katalog_okres_historyczny {
+    background:url(/grafika/data.gif) no-repeat;
+    height: "100%";
+    width:  "100%";
+}
+
+table.strzalka {
+    height: "10%";
+    width:  "10%";
+}
+
+input.przycisk-standard {
+    height: 35px;
+    width:  160px;
+	letter-spacing: -1px;
+	text-align: center;
+    background-color: #84BAD0;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    font-weight: bold;
+    padding: 1px 1px 1px 1px;
+    margin:  5px 7px 4px 7px;
+}
+
+input.przycisk-ikona {
+    height: 30px;
+    width:  30px;
+    font-weight: bold;
+    background-color: #84BAD0;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    float: left;
+}
+
+input.przycisk-ikona-dluzszy {
+    height: 30px;
+    width:  70px;
+    font-weight: bold;
+    background-color: #84BAD0;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    float: left;
+}
+
+input.przycisk-ikona-zmien {
+    height: 30px;
+    width:  85px;
+    font-weight: bold;
+    background-color: #6FAEC8;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    display: inline-table;
+}
+
+input.przycisk-ikona-usun {
+    height: 30px;
+    width:  70px;
+    font-weight: bold;
+    background-color: #c86f82;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 75%;
+    display: inline-table;
+}
+
+input.przycisk-dluzszy {
+    height: 30px;
+    width:  225px;
+    background-color: #84BAD0;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+    text-align: left;
+    float: left;
+}
+
+input.text-standard {
+    height: 20px;
+    width:  140px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+input.text-standard-mini {
+    height: 30px;
+    width:  100%;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+label.text-standard {
+    height: 20px;
+    width:  140px;
+    color:  white;   
+    border: 0px solid white; 
+    padding: 1px 1px 1px 1px;
+    margin:  0px 0px 0px 0px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 14px;
+    text-align: center;
+}
+
+label.text-nagłówek1 {
+    height: 12px;
+    width:  140px;
+    color:  white;   
+    border: 0px solid white; 
+    padding: 1px 1px 1px 1px;
+    margin:  0px 0px 0px 0px;
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 26px;
+    text-align: center;
+}
+
+.tekst-zwykly {
+    height: 18px;
+    width:  350px;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 18px;
+    display: inline-bloc;
+}
+
+label.powitanie {
+    height: 45px;
+    width:  350px;
+    padding: 20px 1px 20px 1px;
+    margin:  20px 5px 20px 5px;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 120%;
+}
+
+label.napis {
+    height: 20px;
+    width:  350px;
+    color:  black;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+}
+
+label.napis2 {
+    height: 20px;
+    width:  350px;
+    color:  black;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 105%;
+}
+
+label.napis3 {
+    height: 30px;
+    width:  350px;
+    color:  white;  
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 110%;
+}
+
+select.text-standard-przeslij {
+    height: 30px;
+    width:  290px;
+    background-color: #F5F9FB;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;      
+}
+
+select.text-standard-mini {
+    height: 30px;
+    width:  105px;
+    background-color: #F5F9FB;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+input.przycisk-standard-mini {
+    height: 26px;
+    width:  85px;
+    background-color: #84BAD0;
+    color:  white;   
+    border: 1px solid white; 
+    font-family: Arial, Arial, Sans-serif;  
+    font-size: 100%;
+}
+
+input.text-standard-przeslij {
+    height: 30px;
+    width:  290px;
+    background-color: #F5F9FB;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+input.data-standard-przeslij {
+    height: 25px;
+    width:  100%;
+    background-color: #F5F9FB;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+textarea.obszar_tekstowy-przeslij {
+    resize: none;
+    width:  286px;
+    background-color: #F5F9FB;
+    margin-left: auto;
+    margin-right: auto;   
+    border: 0px solid white;  
+}
+
+input.checkbox-standard {
+    display:inline-block;
+    height: 20px;
+    width:  20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input.ukryty {
+    visibility: hidden;
+    width:  0px;
+    height: 0px;
+}

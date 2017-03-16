@@ -1,0 +1,114 @@
+﻿@model CrystalSiege.Models.SubSectionViewModel
+@{
+    ViewBag.Title = "Zarządzaj treścią ";
+}
+@using Microsoft.AspNet.Identity
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title</h2>
+    @Html.Partial("Module_Profil")    
+    <hr>
+    <div>
+        @Html.ActionLink("Cofnij", "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        <br />
+        <h4 class="dl-horizontal mt-3"></h4>
+        <dl class="dl-horizontal">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <span class="fa fa-desktop" style="font-size:24px"></span> Dodaj nową podsekcje
+                </div>
+                <div class="panel-body container">
+
+                    @using (Html.BeginForm("AddSubSection", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group" style="visibility: hidden; height: 0px">
+                            <label class="control-label col-md-3" for="id">idek</label>
+                            <div class="col-md-9">
+                                @Html.TextBoxFor(m => m.Id, new
+                                {
+                                    @class = "form-control",
+                                    @placeholder = "idek slajdu",
+                                    @Value = "" + ViewBag.Message
+                                })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="usr">Tytuł</label>
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.title, new
+                           {
+                               @class = "form-control",
+                               @placeholder = "Tytuł sekcji"
+                           })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="id">Treść</label>
+                            <div class="col-md-9">
+                                @Html.TextAreaFor(m => m.HtmlContent, new { @cols = 80, @rows = 25 })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button id="_submit" type="submit" class="btn btn-primary">Zapisz zmiany</button>
+                                @Html.ActionLink("Anuluj", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+        </dl>
+    </div>
+</div>
+
+<!--  -->
+@Scripts.Render("~/Scripts/block.js")
+<!-- TinyMCE Script Reference -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="~/scripts/tinymce/tinymce.min.js"></script>
+<!-- Script to wire up your TinyMCE editor -->
+<script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+    $(document).ready(function () {
+        tinymce.init({
+            selector: "textarea",
+            theme: "modern",
+            paste_data_images: true,
+            plugins: [
+              "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+              "searchreplace wordcount visualblocks visualchars code fullscreen",
+              "insertdatetime media nonbreaking save table contextmenu directionality",
+              "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            toolbar2: "print preview media | forecolor backcolor emoticons",
+            image_advtab: true,
+            file_picker_callback: function (callback, value, meta) {
+                if (meta.filetype == 'image') {
+                    $('#upload').trigger('click');
+                    $('#upload').on('change', function () {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            callback(e.target.result, {
+                                alt: ''
+                            });
+                        };
+                        reader.readAsDataURL(file);
+                    });
+                }
+            },
+            templates: [{
+                title: 'Test template 1',
+                content: 'Test 1'
+            }, {
+                title: 'Test template 2',
+                content: 'Test 2'
+            }]
+        });
+    })
+</script>

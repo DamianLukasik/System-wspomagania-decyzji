@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+<br />
+
+<div class="container body-content">
+
+    <br>
+    <div class="container">
+        <h3>@Html.Raw(ViewBag.Message[0])</h3>
+        <h5><span class='glyphicon glyphicon-time'></span> Opublikowany przez @Html.Raw(ViewBag.Message[2]) @Html.Raw(ViewBag.Message[3])</h5>
+        <h5>@Html.Raw(ViewBag.Message[5])</h5><br>
+        <div class="media">
+            <div class='media-left media-top'>
+                <img class='media-object img-thumbnail' src='@Url.Content("~/Resources/Image/" + ViewBag.Message[4])' width='240px' height='240px'>
+            </div>
+            <div class='media-body'>          
+                @Html.Raw("<p>" + @ViewBag.Message[1] + "</p>")
+                <br><!-- Poprawić design strony z njusami -->
+            </div>
+        </div>
+    </div>
+</div>
+
