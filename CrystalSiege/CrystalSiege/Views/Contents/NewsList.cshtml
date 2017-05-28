@@ -10,14 +10,14 @@
         foreach (String[] d in dane)
         {
             @Html.Raw("<div class='row'><div class='container'><h3>" + d[0]+"</h3>");
-            @Html.Raw("<h5><span class='glyphicon glyphicon-time'></span> Opublikowany przez "+d[3]+" "+d[2]+"</h5>");
+            @Html.Raw("<h5><span class='glyphicon glyphicon-time'></span> " + @CrystalSiege.Resources.HomeTexts.published_by + " "+d[3]+" "+d[2]+"</h5>");
             @Html.Raw("<h5>"+d[4]+"</h5><br>");
             @Html.Raw("<div class='media'>");
             @Html.Raw("<div class='media-left media-top'>");
             @Html.Raw("<img class='media-object img-thumbnail' src='"+@Url.Content("~/Resources/Image/"+d[5])+"' width='240px' height='240px'>");
             @Html.Raw("</div>");//połowa tekstu?
             @Html.Raw("<div class='media-body'><div class='zwijaj'>" + d[1]+ "</div><br><br></div>");
-            @Html.Raw("<a href='../Contents/News?news=" + d[6] + "' type='button' class='btn btn-default'>Czytaj</a>");
+            @Html.Raw("<a href='../Contents/News?news=" + d[6] + "' type='button' class='btn btn-default'>" + @CrystalSiege.Resources.HomeTexts.Read + "</a>");
             @Html.Raw("</div></div></div><br>");
         }
     }    

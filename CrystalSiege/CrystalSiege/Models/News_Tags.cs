@@ -19,6 +19,6 @@ namespace CrystalSiege.Models
         public string TagsID { get; set; }
     
         public virtual News News { get; set; }
-        public virtual Tags Tags { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }

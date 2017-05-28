@@ -146,7 +146,7 @@
  System.Diagnostics.Process process = new System.Diagnostics.Process();
  process.StartInfo = psi;
  process.Start();
-
+ //
  string authHdr = "Authorization: Basic " + 
       Convert.ToBase64String(Encoding.ASCII.GetBytes(user + ":" + pass)) + "\r\n";*/
 
@@ -173,7 +173,7 @@
         <div class="row">
             <div class="col-sm-9">
                 <div class="col-sm-12">
-                    <h4><small>Aktualności</small></h4>
+                    <h4><small>@CrystalSiege.Resources.HomeTexts.News</small></h4>
                     <hr>
                     @{
                         List<String[]> News = new CrystalSiege.Controllers.ContentsController().ReadAllNews();
@@ -183,12 +183,12 @@
                             {
                                 @Html.Raw("<div class='media'>");
                                 @Html.Raw("<h2>" + njus[0] + "</h2>");
-                                @Html.Raw("<h5><span class='glyphicon glyphicon-time'></span> Opublikowany przez " + njus[3] + " " + njus[2] + "</h5>");
+                                @Html.Raw("<h5><span class='glyphicon glyphicon-time'></span> " + @CrystalSiege.Resources.HomeTexts.published_by + " " + njus[3] + " " + njus[2] + "</h5>");
                                 @Html.Raw("<h5>" + njus[4] + "</h5><br>");
                                 @Html.Raw("<div class='pull-left'>");
                                 @Html.Raw("<img class='media-object img-thumbnail' src='" + @Url.Content("~/Resources/Image/" + njus[5]) + "' width='150px' height='150px'></div><div class='media-body'>");
                                 @Html.Raw("<div class='zwijaj'>" + njus[1] + "</div><br><br></div>");
-                                @Html.Raw("<a href='../Contents/News?news=" + njus[6] + "' type='button' class='btn btn-default'>Czytaj</a>");
+                                @Html.Raw("<a href='../Contents/News?news=" + njus[6] + "' type='button' class='btn btn-default'>" + @CrystalSiege.Resources.HomeTexts.Read + "</a>");
                                 @Html.Raw("</div><br>");
                                 // @Html.Raw("<button onclick='ReadMore(" + njus[6] + ")' type='button' class='btn btn - default'>Czytaj</button>");
                             }
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="col-sm-3 container btn-group-vertical">
-                <h4>Archiwum według miesięcy</h4>
+                <h4>@CrystalSiege.Resources.HomeTexts.Archive_by_month</h4>
                 <hr>
                 <div class="list-group">
                     @{

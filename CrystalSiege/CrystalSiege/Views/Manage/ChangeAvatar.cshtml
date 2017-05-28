@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.ChangeAvatarViewModel
 @{
-    ViewBag.Title = "Zmiana adresu e-mail";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.ChangeAvatar;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,11 +9,11 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "Index", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         @using (Html.BeginForm("ChangeAvatar", "Manage", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
-        {
+        {//wprowadzić tłumaczenia
             @Html.AntiForgeryToken()
-            <h4>Formularz zmiany adresu e-mail</h4>
+            <h4>@CrystalSiege.Resources.HomeTexts.FormChangeAvatar</h4>
             <hr />
             @Html.ValidationSummary("", new { @class = "text-danger" })        
             <div class="form-group">

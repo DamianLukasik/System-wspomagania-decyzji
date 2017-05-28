@@ -13,7 +13,7 @@ namespace CrystalSiegeEntry
         {
             if (password == null)
                 throw new ArgumentNullException("password");
-
+            
             unsafe
             {
                 fixed (char* passwordChars = password)

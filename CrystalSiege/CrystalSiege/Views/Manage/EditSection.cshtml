@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.SectionViewModel
 @{    
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,14 +9,14 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
         <h4 class="dl-horizontal mt-12"></h4>
         <dl class="dl-horizontal">
             
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <span class="fa fa-desktop" style="font-size:24px"></span> Edytuj sekcje
+                    <span class="fa fa-desktop" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.EditSection
                 </div>
                 <div class="panel-body container">
                     @using (Html.BeginForm("EditSection", "Manage", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
@@ -33,20 +33,24 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="usr">Tytuł</label>
+                            <label class="control-label col-md-2" for="usr">@CrystalSiege.Resources.HomeTexts.Title</label>
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.title, new
                                 {
                                     @class = "form-control",
-                                    @placeholder = "Tytuł sekcji",
+                                    @placeholder = CrystalSiege.Resources.HomeTexts.TitleSection,
                                     @Value = "" + ViewBag.Message[1]
                                 })
                             </div>
                         </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
-                                    @Html.ActionLink("Anuluj", "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                                    <button type="submit" class="btn btn-primary">@CrystalSiege.Resources.HomeTexts.SaveChanges</button>
+                                    @{
+                                        string lang_txt = ViewBag.Message[2];
+                                        @Html.Raw("<input style='visibility:hidden;width:0px;padding:0px;margin:0px' type='text' name='lang' value='" + lang_txt + "' />");
+                                    }
+                                    @Html.ActionLink(CrystalSiege.Resources.HomeTexts.Cancel, "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                                     @{ 
                                         Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = ViewBag.Message[0], option = "0", obj = "Section" }));
                                     }

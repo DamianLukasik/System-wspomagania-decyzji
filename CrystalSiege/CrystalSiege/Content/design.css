@@ -1,13 +1,22 @@
-﻿@font-face {
-    font-family: Deutsch;
-    src: url(Deutsch.ttf);
-}
-
-.font_military {
-    font-family: Deutsch;
-}
-
-.inscription {
+﻿.inscription {
     color: #9d9d9d;
     padding: 15px 15px 15px 15px;
 }
+
+small, h1, h2, h3, h4, h5, h6 {
+    font-family: 'vinque';
+}
+
+.font_military {
+    font-family: 'vinque';
+}
+
+@font-face {
+    font-family: 'vinque'; 
+    src: url('vinque.ttf');
+}
+
+.blood-backgorund {
+    background-image: url("blood.png");
+}
+

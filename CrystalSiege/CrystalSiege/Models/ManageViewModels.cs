@@ -6,10 +6,59 @@ using System.Web.Mvc;
 
 namespace CrystalSiege.Models
 {
+    //
+    public class LocalizedDisplayNameAttribute : System.ComponentModel.DisplayNameAttribute
+    {
+        public LocalizedDisplayNameAttribute(string resourceId)
+            : base(GetMessageFromResource(resourceId))
+        {   }
+
+        private static string GetMessageFromResource(string resourceId)
+        {
+            string str = "";
+            switch (resourceId)
+            {
+                case "SelectGraphic":
+                    str = Resources.HomeTexts.SelectGraphic;
+                    break;
+                case "NewPassword":
+                    str = Resources.HomeTexts.NewPassword;
+                    break;
+                case "ConfirmNewPassword":
+                    str = Resources.HomeTexts.ConfirmNewPassword;
+                    break;
+                case "NewLogin":
+                    str = Resources.HomeTexts.NewLogin;
+                    break;
+                case "NewEmail":
+                    str = Resources.HomeTexts.NewEmail;
+                    break;
+                case "ActualPassword":
+                    str = Resources.HomeTexts.ActualPassword;
+                    break;
+                case "Code":
+                    str = Resources.HomeTexts.Code;
+                    break;
+                case "PhoneNumber":
+                    str = Resources.HomeTexts.PhoneNumber;
+                    break;
+            }
+            return str;
+        }
+    }
+    //
+    public class FileUploadModel
+    {
+        [DataType(DataType.Upload)]
+        [Display(Name = "~/Resources/Image")]
+        [Required(ErrorMessage = "Please choose file to upload.")]
+        public string file { get; set; }
+    }
     public class BaseModel
     {
-        [Display(Name = "Wybierz grafikę")]
-        public string img { get; set; }
+        [Required]
+        [LocalizedDisplayName("SelectGraphic")]
+        public string img { get; set; }        
     }
     public class ChangeAvatarViewModel : BaseModel
     {
@@ -81,11 +130,11 @@ namespace CrystalSiege.Models
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi zawierać conajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nowe hasło")]
+        [LocalizedDisplayName("NewPassword")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwierdź nowe hasło")]
+        [LocalizedDisplayName("ConfirmNewPassword")]
         [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "Hasła muszą być takie same")]
         public string ConfirmPassword { get; set; }
     }
@@ -94,14 +143,14 @@ namespace CrystalSiege.Models
     {
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Nowy login")]
-        public string NewLogin { get; set; }        
+        [LocalizedDisplayName("NewLogin")]
+        public string NewLogin { get; set; }     
     }
     public class ChangeEmailViewModel
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Nowy Adres E-mail")]
+        [LocalizedDisplayName("NewEmail")]
         public string NewEmail { get; set; }
     }
 
@@ -109,17 +158,17 @@ namespace CrystalSiege.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Aktualne hasło")]
+        [LocalizedDisplayName("ActualPassword")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi zawierać conajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nowe hasło")]
+        [LocalizedDisplayName("NewPassword")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwierdź nowe hasło")]
+        [LocalizedDisplayName("ConfirmNewPassword")]
         [System.Web.Mvc.Compare("NewPassword", ErrorMessage = "Hasła muszą być takie same")]
         public string ConfirmPassword { get; set; }
     }
@@ -128,19 +177,19 @@ namespace CrystalSiege.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [LocalizedDisplayName("PhoneNumber")]
         public string Number { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
     {
         [Required]
-        [Display(Name = "Code")]
+        [LocalizedDisplayName("Code")]
         public string Code { get; set; }
 
         [Required]
         [Phone]
-        [Display(Name = "Phone Number")]
+        [LocalizedDisplayName("PhoneNumber")]
         public string PhoneNumber { get; set; }
     }
 

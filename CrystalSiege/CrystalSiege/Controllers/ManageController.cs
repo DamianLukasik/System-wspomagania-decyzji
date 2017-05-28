@@ -18,10 +18,11 @@ using System.Collections;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using System.Data.SqlClient;
 
 namespace CrystalSiege.Controllers
 {
-    [Authorize]
+  //  [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -64,25 +65,31 @@ namespace CrystalSiege.Controllers
         //News
         public ActionResult DeleteNews(int id)
         {
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                News news = contents.News.Where(u => u.Id == id).First();
-                List<News_Tags> newsList = contents.News_Tags.Where(u => u.NewsID == news.Id).ToList();
-                foreach (News_Tags n in newsList)
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
-                    contents.News_Tags.Remove(n);
-                }   
+                    News news = contents.News.Where(u => u.Id == id).First();
+                    List<News_Tags> newsList = contents.News_Tags.Where(u => u.NewsID == news.Id).ToList();
+                    foreach (News_Tags n in newsList)
+                    {
+                        contents.News_Tags.Remove(n);
+                    }
 
-                contents.News.Remove(news);
-                contents.SaveChanges();
+                    contents.News.Remove(news);
+                    contents.SaveChanges();
+                }
+                ViewNews();
+                return View("ViewNews");
             }
-            ViewNews();
-            return View("ViewNews");
+            return View("../Home/Index");
         }
         public ActionResult ViewNews()
         {
-            List<String[]> dane = new List<String[]>();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
+            {
+                List<String[]> dane = new List<String[]>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 List<News> news = contents.News.OrderByDescending(s => s.date).ToList();
                 foreach (News wart in news)
@@ -91,7 +98,7 @@ namespace CrystalSiege.Controllers
                     String tagi = "";
                     foreach (News_Tags nt in news_tags)
                     {
-                        tagi += " <span class='label label-success' style='background-color: " + nt.Tags.color + "'>" + nt.Tags.tags_pl + "</span> ";
+                        tagi += " <span class='label label-success' style='background-color: " + nt.Tag.color + "'>" + nt.Tag.tags_pl + "</span> ";
                     }
                     String absolutePath = FileIsExists(wart.image);
 
@@ -108,6 +115,8 @@ namespace CrystalSiege.Controllers
             }
             ViewBag.Message = dane;
             return View();
+            }
+            return View("../Home/Index");
         }
 
         public String FileIsExists(string img)
@@ -126,22 +135,29 @@ namespace CrystalSiege.Controllers
 
         public ActionResult AddNews()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+           return View("../Home/Index");
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddNews(NewsViewModel model, string returnUrl, HttpPostedFileBase file)
         {
-            string filename = UploadImage(file, model.img);
+            if (Request.Cookies["Session"] != null)
+            {
+                string filename = UploadImage(file, model.img);
             //
             if (model != null)//Walidacja && ModelState.IsValid)
             {
                 int id = 0;
 
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
-                    var user = UserManager.FindById(User.Identity.GetUserId());
+                    string id_ = Request.Cookies["Session"].Value;
+                    Person user = contents.People.Where(u => u.Id == id_).FirstOrDefault();
                     //
                     int idx = 1;                    
                     if (contents.News.ToList().Count != 0)
@@ -186,7 +202,7 @@ namespace CrystalSiege.Controllers
                             description = CoderUTF8.Encode(model.Description),
                             image = filename,//zrobić wybór, albo upload obrazka
                             date = DateTime.Now,
-                            author = user.UserName,
+                            author = user.username,
                             News_Tags = news_tags
                         });
                     }
@@ -201,7 +217,7 @@ namespace CrystalSiege.Controllers
                             description = CoderUTF8.Encode(model.Description),
                             image = filename,//zrobić wybór, albo upload obrazka
                             date = DateTime.Now,
-                            author = user.UserName,
+                            author = user.username,
                         });
                     }
                     
@@ -230,12 +246,16 @@ namespace CrystalSiege.Controllers
                 }
             }
             return View("Content");
+            }
+            return View("../Home/Index");
         }
         [HttpPost] // this action takes the viewModel from the modal
-        public ActionResult EditNews(NewsViewModel viewModel)
+        public ActionResult EditNews(NewsViewModel viewModel, string lang)
         {
-            News news;
-            using (var ctx = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
+            {
+                News news;
+            using (var ctx = new damianlukasik3612_crystalsiegeEntities())
             {
                 news = ctx.News.Where(s => s.Id == viewModel.Id).FirstOrDefault<News>();
 
@@ -271,22 +291,40 @@ namespace CrystalSiege.Controllers
                     i_++;
                 }
                 //
-                if (news != null)
+                switch (lang)
                 {
-                    news.title = CoderUTF8.Encode(viewModel.Title);
-                    news.description = CoderUTF8.Encode(viewModel.Description);
-                    news.image = FileIsExists(viewModel.img);
-                    news.News_Tags = news_tags;
-                }
+                    case "pl":
+                        if (news != null)
+                        {
+                            news.title = CoderUTF8.Encode(viewModel.Title);
+                            news.description = CoderUTF8.Encode(viewModel.Description);
+                            news.image = FileIsExists(viewModel.img);
+                            news.News_Tags = news_tags;
+                        }
+                        break;
+                    case "en":
+                        if (news != null)
+                        {
+                            news.title_eng = CoderUTF8.Encode(viewModel.Title);
+                            news.description_eng = CoderUTF8.Encode(viewModel.Description);
+                            news.image = FileIsExists(viewModel.img);
+                            news.News_Tags = news_tags;
+                        }
+                        break;
+                }                
                 ctx.Entry(news).State = System.Data.Entity.EntityState.Modified;
                 ctx.SaveChanges();
             }
             ViewNews();
             return View("ViewNews");
+            }
+            return View("../Home/Index");
         }
-        public ActionResult EditNews(int id)
+        public ActionResult EditNews(int id, string lang)
         {
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
+            {
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 News news = contents.News
                          .Where(u => u.Id == id)
@@ -295,28 +333,53 @@ namespace CrystalSiege.Controllers
                 List<News_Tags> news_tags = news.News_Tags.ToList();
                 foreach (News_Tags nt in news_tags)
                 {
-                    tags += nt.Tags.tags_pl+"?"+nt.Tags.color+"|";
+                    tags += nt.Tag.tags_pl+"?"+nt.Tag.color+"|";
                 }
 
-                String[] dane = {
-                    CoderUTF8.Decode(news.title),//[0]
-                    CoderUTF8.Decode(news.description),//[1]
-                    new ContentsController().DecodeDate(news.date.Value.ToString("G",
-                        System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),//[2]
-                    news.image,//[3]
-                    news.Id.ToString(),//[4]
-                    tags//[5]
-                };
+                String[] dane = { };
+                switch (lang)
+                {
+                    case "pl":
+                        String[] dane1 = {
+                            CoderUTF8.Decode(news.title),//[0]
+                            CoderUTF8.Decode(news.description),//[1]
+                            new ContentsController().DecodeDate(news.date.Value.ToString("G",
+                                System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),//[2]
+                            news.image,//[3]
+                            news.Id.ToString(),//[4]
+                            tags,//[5]
+                            "pl"//[6]
+                        };
+                        dane = dane1;
+                        break;
+                    case "en":
+                        String[] dane2 = {
+                            CoderUTF8.Decode(news.title_eng),//[0]
+                            CoderUTF8.Decode(news.description_eng),//[1]
+                            new ContentsController().DecodeDate(news.date.Value.ToString("G",
+                                System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),//[2]
+                            news.image,//[3]
+                            news.Id.ToString(),//[4]
+                            tags,//[5]
+                            "en"//[6]
+                        };
+                        dane = dane2;
+                        break;
+                }              
                 ViewBag.Message = dane;
             }
             return View();
+            }
+            return View("../Home/Index");
         }
         
         //
         //Translate Manager
         public ActionResult ViewTranslate()
         {
-            TranslateViewModel model = new TranslateViewModel();
+            if (Request.Cookies["Session"] != null)
+            {
+                TranslateViewModel model = new TranslateViewModel();
             model.Collection = new List<RawTranslateViewModel>();
 
             List<String> en = LoadAllResources("en");
@@ -334,28 +397,32 @@ namespace CrystalSiege.Controllers
             ///
 
             return View(model);
+            }
+            return View("../Home/Index");
         }
         public ActionResult UpdateTranslate(TranslateViewModel model)
         {
-            var ctr = model.Collection.Count(x => x.Name_Oryginal != null);
+            if (Request.Cookies["Session"] != null)
+            {
+                var ctr = model.Collection.Count(x => x.Name_Oryginal != null);
 
-            var fullPath = Path.Combine(Server.MapPath("~/Resources"), "ContentTexts.resx");
+            var fullPath = Path.Combine(Server.MapPath("~/Resources"), "HomeTexts.resx");
 
-            XmlDocument doc = new XmlDocument();
+            XmlDocument doc = new XmlDocument();//przerobić
             doc.Load(fullPath);
 
             // XmlNamespaceManager manager = new XmlNamespaceManager(navigator.NameTable);
             // manager.AddNamespace("bk", "http://www.contoso.com/books");
 
             XmlNodeList aNodes = doc.SelectNodes("/root/data");
-
+            model.Collection.Reverse();
             for (int i = 0; i < model.Collection.Count; i++)
             {
                 XmlNode Node = aNodes[i].SelectSingleNode("value");
                 Node.InnerText = model.Collection[i].Name_ang;
             }
 
-
+            //dokończyć
             /*
                         if (System.IO.File.Exists(fullPath))
                         {
@@ -420,13 +487,15 @@ namespace CrystalSiege.Controllers
                         */
 
             return View("Content");
+            }
+            return View("../Home/Index");
         }
         private List<String> LoadAllResources(string lang)
         {
-            ResourceSet resx_ = CrystalSiege.Resources.ContentTexts.ResourceManager.GetResourceSet(
+            ResourceSet resx_ = Resources.HomeTexts.ResourceManager.GetResourceSet(
                 System.Globalization.CultureInfo.CreateSpecificCulture(lang), true, true);
             List<String> dane = new List<String>();
-            foreach (System.Collections.DictionaryEntry entry in resx_)
+            foreach (DictionaryEntry entry in resx_)
             {
                 string resourceKey = entry.Key.ToString();
                 object resource = entry.Value;
@@ -439,8 +508,10 @@ namespace CrystalSiege.Controllers
         //Image from site
         public ActionResult ViewImage()
         {
-            List<String> dane = new List<String>();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
+            {
+                List<String> dane = new List<String>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {//pobierz obrazki z Resources
                 string directory = AppDomain.CurrentDomain.BaseDirectory+"\\Resources\\Image";
                 IEnumerable<string> filenames = System.IO.Directory.EnumerateFiles(directory, "*.*");
@@ -459,10 +530,14 @@ namespace CrystalSiege.Controllers
                 ViewBag.Message = dane;
             }
             return View();
+            }
+            return View("../Home/Index");
         }
         public ActionResult DeleteImage(string name)
         {
-            ViewBag.deleteSuccess = "false";
+            if (Request.Cookies["Session"] != null)
+            {
+                ViewBag.deleteSuccess = "false";
             var photoName = "";
             photoName = name;
             var fullPath = Path.Combine(Server.MapPath("~/Resources/Image"), photoName);
@@ -474,49 +549,70 @@ namespace CrystalSiege.Controllers
             ViewImage();
             return View("ViewImage");
         }
+           return View("../Home/Index");
+    }
+
+
         [HttpPost]
         public ActionResult AddImage(HttpPostedFileBase file)
         {
-            if (file != null && file.ContentLength > 0)
-                try
-                {
-                    string path = Path.Combine(Server.MapPath("~/Resources/Image"),
-                                               Path.GetFileName(file.FileName));
-                    file.SaveAs(path);
-                    ViewBag.Message = "Plik został pomyślnie załadowany";
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "Błąd:" + ex.Message.ToString();
-                }
-            else
+            if (Request.Cookies["Session"] != null)
             {
-                ViewBag.Message = "Nie wybrano pliku.";
+                // Verify that the user selected a file
+                if (file != null && file.ContentLength > 0)
+                {
+                    try
+                    {
+                        // extract only the filename
+                        var fileName = Path.GetFileName(file.FileName);
+                        // store the file inside ~/App_Data/uploads folder
+                        var path = Path.Combine(Server.MapPath("~/Resources/Image"), fileName);
+                        file.SaveAs(path);
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "Błąd: " + ex.Message.ToString();
+                    }
+                }
+                else
+                {
+                    ViewBag.Message = "Nie wybrano pliku.";
+                }
+                // redirect back to the index action to show the form once again
+                return View();
             }
-            return View();
+            return View("../Home/Index");
         }
         public ActionResult AddImage()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+               return View("../Home/Index");
         }
         //
         //Slide from Carousel
         public ActionResult DeleteSlide(int id)
         {
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                var slide = contents.CarouselInfo.Where(u => u.Id == id).First();
-                contents.CarouselInfo.Remove(slide);
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                var slide = contents.CarouselInfoes.Where(u => u.Id == id).First();
+                contents.CarouselInfoes.Remove(slide);
                 contents.SaveChanges();
             }
             ViewSlide();
             return View("ViewSlide");
         }
+           return View("../Home/Index");
+    }
 
         public string UploadImage(HttpPostedFileBase file, string img)
         {
-            //Upload Image
-            if (file != null && file.ContentLength > 0)
+                //Upload Image
+                if (file != null && file.ContentLength > 0)
                 try
                 {
                     string path = Path.Combine(Server.MapPath("~/Resources/Image"),
@@ -554,20 +650,22 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddSlide(SlideViewModel model, string returnUrl, HttpPostedFileBase file)
         {
-            string filename = UploadImage(file,model.img);
+            if (Request.Cookies["Session"] != null)
+            {
+                string filename = UploadImage(file,model.img);
             
             //
             if (model != null)//Walidacja && ModelState.IsValid)
             {
                 int id = 0;
 
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
                     //int idx = contents.CarouselInfo.Count() + 1;
                     int idx = 1;
-                    if (contents.CarouselInfo.ToList().Count != 0)
+                    if (contents.CarouselInfoes.ToList().Count != 0)
                     {
-                        idx = Convert.ToInt32(contents.CarouselInfo.ToList().LastOrDefault().Id + 1);
+                        idx = Convert.ToInt32(contents.CarouselInfoes.ToList().LastOrDefault().Id + 1);
                     }
                     var customers = contents.Set<CarouselInfo>();
                     customers.Add(new CarouselInfo {
@@ -583,107 +681,185 @@ namespace CrystalSiege.Controllers
                 }
             }
             return View("Content");
+            }
+            return View("../Home/Index");
         }        
         public ActionResult AddSlide()
         {
-            ViewImage();
+            if (Request.Cookies["Session"] != null)
+            {
+                ViewImage();
             return View();
+            }
+            return View("../Home/Index");
         }
         [HttpPost] // this action takes the viewModel from the modal
-        public ActionResult EditSlide(SlideViewModel viewModel, HttpPostedFileBase file)
+        public ActionResult EditSlide(SlideViewModel viewModel, HttpPostedFileBase file, string lang)
         {
-            CarouselInfo slide;
-            string filename = UploadImage(file, viewModel.img);
-            using (var ctx = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                slide = ctx.CarouselInfo.Where(s => s.Id == viewModel.Id).FirstOrDefault<CarouselInfo>();
+                CarouselInfo slide;
+            string filename = UploadImage(file, viewModel.img);
+            using (var ctx = new damianlukasik3612_crystalsiegeEntities())
+            {
+                slide = ctx.CarouselInfoes.Where(s => s.Id == viewModel.Id).FirstOrDefault<CarouselInfo>();
             }
             //problem z kodowaniem
             //
             
             if (slide != null)
             {
-                slide.Title = CoderUTF8.Encode(viewModel.Title);
-                slide.Description = CoderUTF8.Encode(viewModel.Description);
-
+                switch (lang)
+                {
+                    case "pl":
+                        slide.Title = CoderUTF8.Encode(viewModel.Title);
+                        slide.Description = CoderUTF8.Encode(viewModel.Description);
+                        break;
+                    case "eng":
+                        slide.Title_ang = CoderUTF8.Encode(viewModel.Title);
+                        slide.Description_ang = CoderUTF8.Encode(viewModel.Description);
+                        break;
+                }
                 slide.image = filename;
             }
 
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 contents.Entry(slide).State = System.Data.Entity.EntityState.Modified;
                 contents.SaveChanges();
             }
             ViewSlide();
             return View("ViewSlide");
+            }
+            return View("../Home/Index");
         }
-        public ActionResult EditSlide(int id)
-        {            
-            using (ContentsEntities contents = new ContentsEntities())
+        public ActionResult EditSlide(int id, string lang)
+        {
+            if (Request.Cookies["Session"] != null)
             {
-                CarouselInfo slide = contents.CarouselInfo
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                CarouselInfo slide = contents.CarouselInfoes
                          .Where(u => u.Id == id)
                          .FirstOrDefault();
-                String[] dane = {
-                    CoderUTF8.Decode(slide.Title),
-                    CoderUTF8.Decode(slide.Description),
-                    slide.Link,//[2]
-                    slide.image,//[3]
-                    slide.Id.ToString()//[4]
-                };
-                ViewBag.Message = dane;
+                switch (lang)
+                {
+                    case "pl":
+                        String[] dane1 = {
+                            CoderUTF8.Decode(slide.Title),
+                            CoderUTF8.Decode(slide.Description),
+                            slide.Link,//[2]
+                            slide.image,//[3]
+                            slide.Id.ToString(),//[4]
+                            lang,//[5]
+                        };
+                        ViewBag.Message = dane1;
+                        break;
+                    case "eng":
+                        String[] dane2 = {
+                            CoderUTF8.Decode(slide.Title_ang),
+                            CoderUTF8.Decode(slide.Description_ang),
+                            slide.Link,//[2]
+                            slide.image,//[3]
+                            slide.Id.ToString(),//[4]
+                            lang,//[5]
+                        };
+                        ViewBag.Message = dane2;
+                        break;
+                }
             }
             return View();
+            }
+            return View("../Home/Index");
         }
         public ActionResult ViewSlide()
         {
-            List<String[]> dane = new List<String[]>();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                List<CarouselInfo> slider = contents.CarouselInfo.ToList();               
-                foreach (CarouselInfo slide in slider)
+                List<List<String[]>> dane_ = new List<List<String[]>>();
+            List<String[]> dane = new List<String[]>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                List<CarouselInfo> slider = contents.CarouselInfoes.ToList();
+                string[] lang_tab = { "pl", "ang"};
+                foreach(string lang in lang_tab)
                 {
-                    var url_img = FileIsExists(slide.image);
-                    String[] str = {
-                        url_img,
-                        CoderUTF8.Decode(slide.Title),
-                        slide.Id.ToString()
-                    };
-                    dane.Add(str);
-                }
-                ViewBag.Message = dane;
+                    foreach (CarouselInfo slide in slider)
+                    {
+                        var url_img = FileIsExists(slide.image);
+                        switch (lang)
+                        {
+                            case "pl":
+                                String[] str1 = {
+                                    url_img,
+                                    CoderUTF8.Decode(slide.Title),
+                                    slide.Id.ToString()
+                                };
+                                dane.Add(str1);
+                                break;
+                            case "ang":
+                                String[] str2 = {
+                                    url_img,
+                                    CoderUTF8.Decode(slide.Title_ang),
+                                    slide.Id.ToString()
+                                };
+                                dane.Add(str2);
+                                break;
+                        }
+                    }
+                    dane_.Add(dane);
+                    dane = new List<String[]>();
+                }   
+                ViewBag.Message = dane_;
             }
             return View();
         }
+           return View("../Home/Index");
+    }
         //
         //Sections
         public ActionResult AddSection()
         {
-            //ViewSection();
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                //ViewSection();
+                return View();
+            }
+            return View("../Home/Index");
         }
         public ActionResult AddSubSection(string id)
         {
-            //ViewSection();
-            ViewBag.Message = id;
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                //ViewSection();
+                ViewBag.Message = id;
+                return View();
+            }
+               return View("../Home/Index");
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddSection(SectionViewModel model, string returnUrl)
-        {            
-            //
-            if (model != null)//Walidacja && ModelState.IsValid)
+        {
+            if (Request.Cookies["Session"] != null)
+            {
+                //
+                if (model != null)//Walidacja && ModelState.IsValid)
             {
                 int id = 0;
 
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
                     int idx = 1;
                     if (contents.Sections.ToList().Count != 0)
                     {
                         idx = Convert.ToInt32(contents.Sections.ToList().LastOrDefault().Id + 1);
+                    }
+                    int idx_ = 1;
+                    if (contents.Subsections.ToList().Count != 0)
+                    {
+                        idx_ = Convert.ToInt32(contents.Subsections.ToList().LastOrDefault().Id + 1);
                     }
                     String str_nazwa = "brak nazwy";
                     if (model.title != null)
@@ -691,11 +867,22 @@ namespace CrystalSiege.Controllers
                         str_nazwa = model.title;
                     }
                     //   string idx = (contents.Sections.Count()+1)+""+Guid.NewGuid().GetHashCode().ToString();
-                    var customers = contents.Set<Sections>();
-                    customers.Add(new Sections
+                    var customers = contents.Set<Section>();
+                    customers.Add(new Section
                     {
                         Id = idx,
                         title = CoderUTF8.Encode(str_nazwa),
+                        title_ang = CoderUTF8.Encode(str_nazwa)
+                    });
+                    var customers_ = contents.Set<Subsection>();
+                    customers_.Add(new Subsection
+                    {
+                        Id = idx_,
+                        SectionsId = idx,
+                        title = CoderUTF8.Encode("nowa podsekcja"),
+                        title_ang = CoderUTF8.Encode("new subsection"),
+                        content = CoderUTF8.Encode(" "),
+                        content_ang = CoderUTF8.Encode(" ")
                     });
                     contents.SaveChanges();
                     ViewSection();
@@ -703,6 +890,8 @@ namespace CrystalSiege.Controllers
                 }
             }
             return View("Content");
+            }
+            return View("../Home/Index");
         }
 
         [HttpPost]
@@ -710,12 +899,14 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddSubSection(SubSectionViewModel model, string returnUrl, HttpPostedFileBase file)
         {
-            //
-            if (model != null)//Walidacja && ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
+            {
+                //
+                if (model != null)//Walidacja && ModelState.IsValid)
             {
                 int id = 0;
 
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
                     int idx = 1;
                     if (contents.Subsections.ToList().Count != 0)
@@ -727,13 +918,15 @@ namespace CrystalSiege.Controllers
                     {
                         str_nazwa = model.title;
                     }
-                    var customers = contents.Set<Subsections>();
-                    customers.Add(new Subsections
+                    var customers = contents.Set<Subsection>();
+                    customers.Add(new Subsection
                     {
                         Id = idx,
                         SectionsId = model.Id,
-                        title = CoderUTF8.Encode(str_nazwa),
+                        title = CoderUTF8.Encode(model.title),
+                        title_ang = CoderUTF8.Encode(model.title),
                         content = CoderUTF8.Encode(model.HtmlContent),
+                        content_ang = CoderUTF8.Encode(model.HtmlContent),
                     });
                     contents.SaveChanges();
                     ViewSection();
@@ -741,94 +934,164 @@ namespace CrystalSiege.Controllers
                 }
             }
             return View("Content");
+            }
+           return View("../Home/Index");
         }
         public ActionResult ViewSection()
         {
-            //ViewSection();
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                //ViewSection();
+                return View();
+            }
+            return View("../Home/Index");
         }
         [HttpPost] // this action takes the viewModel from the modal
-        public ActionResult EditSection(SectionViewModel viewModel)
+        public ActionResult EditSection(SectionViewModel viewModel, string lang)
         {
-            Sections sec;
-            using (var ctx = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                sec = ctx.Sections.Where(s => s.Id == viewModel.Id).FirstOrDefault<Sections>();
+                Section sec;
+            using (var ctx = new damianlukasik3612_crystalsiegeEntities())
+            {
+                sec = ctx.Sections.Where(s => s.Id == viewModel.Id).FirstOrDefault<Section>();
             }
             if (sec != null)
             {
-                sec.title = CoderUTF8.Encode(viewModel.title);
+                switch (lang)
+                {
+                    case "pl":
+                        sec.title = CoderUTF8.Encode(viewModel.title);
+                        break;
+                    case "en":
+                        sec.title_ang = CoderUTF8.Encode(viewModel.title);
+                        break;
+                }                
             }
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 contents.Entry(sec).State = System.Data.Entity.EntityState.Modified;
                 contents.SaveChanges();
             }
             ViewSection();
             return View("ViewSection");
+            }
+            return View("../Home/Index");
         }        
         [HttpPost] // this action takes the viewModel from the modal
-        public ActionResult EditSubSection(SubSectionViewModel viewModel)
+        public ActionResult EditSubSection(SubSectionViewModel viewModel, string lang)
         {
-            Subsections sec;
-            using (var ctx = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                sec = ctx.Subsections.Where(s => s.Id == viewModel.Id).FirstOrDefault<Subsections>();
+                Subsection sec;
+            using (var ctx = new damianlukasik3612_crystalsiegeEntities())
+            {
+                sec = ctx.Subsections.Where(s => s.Id == viewModel.Id).FirstOrDefault<Subsection>();
             }
             if (sec != null)
             {
-                sec.title = CoderUTF8.Encode(viewModel.title);
-                sec.content = CoderUTF8.Encode(viewModel.HtmlContent);
+                switch (lang)
+                {
+                    case "pl":
+                        sec.title = CoderUTF8.Encode(viewModel.title);
+                        sec.content = CoderUTF8.Encode(viewModel.HtmlContent);
+                        break;
+                    case "en":
+                        sec.title_ang = CoderUTF8.Encode(viewModel.title);
+                        sec.content_ang = CoderUTF8.Encode(viewModel.HtmlContent);
+                        break;
+                }
             }
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 contents.Entry(sec).State = System.Data.Entity.EntityState.Modified;
                 contents.SaveChanges();
             }
             ViewSection();
             return View("ViewSection");
+            }
+            return View("../Home/Index");
         }
-        public ActionResult EditSection(int id)
+        public ActionResult EditSection(int id, string lang)
         {
-            //ViewSection();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                Sections sec = contents.Sections
+                //ViewSection();
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                Section sec = contents.Sections
                          .Where(u => u.Id == id)
                          .FirstOrDefault();
-                String[] dane = {
-                    sec.Id.ToString(),
-                    CoderUTF8.Decode(sec.title)
-                };
-                ViewBag.Message = dane;
+                switch (lang)
+                {
+                    case "pl":
+                        String[] dane1 = {
+                            sec.Id.ToString(),
+                            CoderUTF8.Decode(sec.title),
+                            "pl"
+                        };
+                        ViewBag.Message = dane1;
+                        break;
+                    case "en":
+                        String[] dane2 = {
+                            sec.Id.ToString(),//[0]
+                            CoderUTF8.Decode(sec.title_ang),//[1]
+                            "en"//[2]
+                        };
+                        ViewBag.Message = dane2;
+                        break;
+                }                
             }
             return View();
+            }
+            return View("../Home/Index");
         }
-        public ActionResult EditSubSection(int id)
+        public ActionResult EditSubSection(int id, string lang)
         {
-            //ViewSection();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                Subsections sec = contents.Subsections
+                //ViewSection();
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                Subsection sec = contents.Subsections
                          .Where(u => u.Id == id)
                          .FirstOrDefault();
-                String[] dane = {
-                    sec.Id.ToString(),
-                    CoderUTF8.Decode(sec.title),
-                    CoderUTF8.Decode(sec.content)
-                };
-                ViewBag.Message = dane;
+                switch (lang)
+                {
+                    case "pl":
+                        String[] dane1 = {
+                            sec.Id.ToString(),
+                            CoderUTF8.Decode(sec.title),
+                            CoderUTF8.Decode(sec.content),
+                            "pl"
+                        };
+                        ViewBag.Message = dane1;
+                        break;
+                    case "en":
+                        String[] dane2 = {
+                            sec.Id.ToString(),//[0]
+                            CoderUTF8.Decode(sec.title_ang),//[1]
+                            CoderUTF8.Decode(sec.content_ang),//[2]
+                            "en"//[3]
+                        };
+                        ViewBag.Message = dane2;
+                        break;
+                }
             }
             return View();
+            }
+            return View("../Home/Index");
         }        
         public ActionResult DeleteSection(int id)
         {
-            //ViewSection();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                Sections sec = contents.Sections.Where(u => u.Id == id).First();
-                List<Subsections> subsectionList = contents.Subsections.Where(u => u.SectionsId == sec.Id).ToList();
-                foreach (Subsections s in subsectionList)
+                //ViewSection();
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                Section sec = contents.Sections.Where(u => u.Id == id).First();
+                List<Subsection> subsectionList = contents.Subsections.Where(u => u.SectionsId == sec.Id).ToList();
+                foreach (Subsection s in subsectionList)
                 {
                     contents.Subsections.Remove(s);
                 }
@@ -837,53 +1100,73 @@ namespace CrystalSiege.Controllers
             }
             ViewSection();
             return View("ViewSection");
+            }
+            return View("../Home/Index");
         }
         //Subsection
         public ActionResult DeleteSubSection(int id)
         {
-            //ViewSection();
-            using (ContentsEntities contents = new ContentsEntities())
+            if (Request.Cookies["Session"] != null)
             {
-                Subsections sec = contents.Subsections.Where(u => u.Id == id).First();                
+                //ViewSection();
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                Subsection sec = contents.Subsections.Where(u => u.Id == id).First();                
                 contents.Subsections.Remove(sec);
                 contents.SaveChanges();
             }
             ViewSection();
             return View("ViewSection");
+            }
+            return View("../Home/Index");
         }
                 
         ////////////////
         public ActionResult ChangeLogin()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+            return View("../Home/Index");
         }
         public ActionResult ChangeEmail()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+            return View("../Home/Index");
         }
         public ActionResult ChangeAvatar()
         {
-            ViewImage();
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                ViewImage();
+                return View();
+            }
+            return View("../Home/Index");
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ChangeAvatar(ChangeAvatarViewModel model, string returnUrl, HttpPostedFileBase file)
         {
-            string filename = UploadImage(file, model.img);
+            if (Request.Cookies["Session"] != null)
+            {
+                string filename = UploadImage(file, model.img);
 
             //
             if (model != null)//Walidacja && ModelState.IsValid)
             {
                 int id = 0;
 
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
+                    var idek = Request.Cookies["Session"].Value;
                     //
-
-                    string user = UserManager.FindById(User.Identity.GetUserId()).UserName;
-                    Person per = contents.Person.Where(u => u.username == user).FirstOrDefault<Person>();
+                    // string user = contents.People.Where(u => u.Id == Request.Cookies["Session"].Value).FirstOrDefault().username;
+                    Person per = contents.People.Where(u => u.Id == idek).FirstOrDefault<Person>();
 
                     per.awatar = filename;
                     
@@ -893,16 +1176,18 @@ namespace CrystalSiege.Controllers
             }
             ViewImage();
             return View();
+            }
+            return View("../Home/Index");
         }
         //
         //Get Image Awatar
         public static string Get_Awatar(string n)
         {
             string awatar = "";
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 string idek = n;
-                awatar = contents.Person.Where(x => x.Id == idek).FirstOrDefault().awatar;
+                awatar = contents.People.Where(x => x.Id == idek).FirstOrDefault().awatar;
             }
             return awatar;
         }
@@ -911,10 +1196,10 @@ namespace CrystalSiege.Controllers
         public static string Get_Username(string n)
         {
             string name = "";
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 string idek = n;
-                name = contents.Person.Where(x => x.Id == idek).FirstOrDefault().username;
+                name = contents.People.Where(x => x.Id == idek).FirstOrDefault().username;
             }
             return name;
         }
@@ -923,7 +1208,7 @@ namespace CrystalSiege.Controllers
         public static List<String> Get_ImagesList()
         {
             List<String> dane = new List<String>();
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {//pobierz obrazki z Resources
                 string directory = AppDomain.CurrentDomain.BaseDirectory + "\\Resources\\Image";
                 IEnumerable<string> filenames = System.IO.Directory.EnumerateFiles(directory, "*.*");
@@ -943,11 +1228,11 @@ namespace CrystalSiege.Controllers
         public static List<String[]> Get_TagsList()
         {
             List<String[]> dane = new List<String[]>();
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {//pobierz obrazki z Resources
-                List<Tags> tagi = contents.Tags.ToList();
+                List<Tag> tagi = contents.Tags.ToList();
 
-                foreach (Tags tag in tagi)
+                foreach (Tag tag in tagi)
                 {
                     String[] s = { tag.tags_pl , tag.color };
                     dane.Add(s);
@@ -957,103 +1242,204 @@ namespace CrystalSiege.Controllers
         }
         //
         //Get Tags
-        public static List<String[]> Get_NewsList()
+        public static List<List<String[]>> Get_NewsList()
         {
-            List<String[]> dane = new List<String[]>();
-            using (ContentsEntities contents = new ContentsEntities())
+            List<List<String[]>> dane = new List<List<String[]>>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
                 List<News> news = contents.News.OrderByDescending(s => s.date).ToList();
-
-                foreach (News wart in news)
+                                
+                String[] lang_tab = { "pl", "en" };                
+                foreach (String lang in lang_tab)
                 {
-                    List<News_Tags> news_tags = wart.News_Tags.ToList();
-                    String tagi = "";
-                    foreach (News_Tags nt in news_tags)
+                    List<String[]> dane_ = new List<String[]>();
+                    foreach (News wart in news)
                     {
-                        tagi += " <span class='label label-success' style='background-color: " + nt.Tags.color + "'>" + nt.Tags.tags_pl + "</span> ";
+                        List<News_Tags> news_tags = wart.News_Tags.ToList();
+                        String tagi = "";
+                        foreach (News_Tags nt in news_tags)
+                        {
+                            tagi += " <span class='label label-success' style='background-color: " + nt.Tag.color + "'>" + nt.Tag.tags_pl + "</span> ";
+                        }
+                        //  String url_ = //metoda statyczna sprawdzająca czy plik istnieje
+                        switch (lang)
+                        {
+                            case "pl":
+                                String[] str1 = {
+                                    CoderUTF8.Decode(wart.title),
+                                    wart.image,
+                                    new ContentsController().DecodeDate(wart.date.Value.ToString("G",
+                                    System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),
+                                    wart.author,
+                                    wart.Id.ToString(),
+                                    "pl"
+                                };
+                                dane_.Add(str1);
+                                break;
+                            case "en":
+                                String[] str2 = {
+                                    CoderUTF8.Decode(wart.title_eng),
+                                    wart.image,
+                                    new ContentsController().DecodeDate(wart.date.Value.ToString("G",
+                                    System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),
+                                    wart.author,
+                                    wart.Id.ToString(),
+                                    "en"
+                                };
+                                dane_.Add(str2);
+                                break;
+                        }                         
                     }
-
-                  //  String url_ = //metoda statyczna sprawdzająca czy plik istnieje
-
-                    String[] str = {
-                        CoderUTF8.Decode(wart.title),
-                        wart.image,
-                        new ContentsController().DecodeDate(wart.date.Value.ToString("G",
-                        System.Globalization.CultureInfo.CreateSpecificCulture("en-US"))),
-                        wart.author,
-                        wart.Id.ToString()
-                    };
-                    dane.Add(str);
+                    dane.Add(dane_);
                 }
             }
             return dane;
         }
         //
         //Get Sections and subsections
-        public static List<List<String[]>> Get_Sections_and_subsections()
+        public static List<List<List<String[]>>> Get_Sections_and_subsections()
         {
-            List<List<String[]>> dane = new List<List<String[]>>();
-            using (ContentsEntities contents = new ContentsEntities())
+            List<List<List<String[]>>> dane__ = new List<List<List<String[]>>>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
-                List<Sections> sect_list = contents.Sections.ToList();                
-                foreach (Sections sect in sect_list)
-                {
-                    List<String[]> dane_ = new List<String[]>();
-                    if (sect.Subsections.Count != 0)
+                string[] lang_tab = { "pl", "en" };
+                foreach (string lang in lang_tab)
+                { 
+                    List<List<String[]>> dane = new List<List<String[]>>();
+                    List<Section> sect_list = contents.Sections.ToList();
+                    foreach (Section sect in sect_list)
                     {
-                        List<Subsections> subsect_list = sect.Subsections.ToList();                        
-                        foreach (Subsections subsect in subsect_list)
+                        List<String[]> dane_ = new List<String[]>();
+                        if (sect.Subsections.Count != 0)
                         {
-                            String[] str = {
-                                CoderUTF8.Decode(sect.title),//[0]
-                                CoderUTF8.Decode(subsect.title),//[1]
-                                CoderUTF8.Decode(subsect.content),//[2]
-                                subsect.Id.ToString(),//[3]
-                                subsect.SectionsId.ToString()//[4]
-                            };
-                            dane_.Add(str);
+                            List<Subsection> subsect_list = sect.Subsections.ToList();
+                            foreach (Subsection subsect in subsect_list)
+                            {
+                                switch (lang)
+                                {
+                                    case "pl":
+                                        String[] str1 = {
+                                            CoderUTF8.Decode(sect.title),//[0]
+                                            CoderUTF8.Decode(subsect.title),//[1]
+                                            CoderUTF8.Decode(subsect.content),//[2]
+                                            subsect.Id.ToString(),//[3]
+                                            subsect.SectionsId.ToString(),//[4]
+                                            lang,//[5]
+                                            sect.Id.ToString(),//[6]
+                                            subsect.Id.ToString()//[7]
+                                        };
+                                        dane_.Add(str1);
+                                        break;
+                                    case "en":
+                                        String[] str2 = {
+                                            CoderUTF8.Decode(sect.title_ang),//[0]
+                                            CoderUTF8.Decode(subsect.title_ang),//[1]
+                                            CoderUTF8.Decode(subsect.content_ang),//[2]
+                                            subsect.Id.ToString(),//[3]
+                                            subsect.SectionsId.ToString(),//[4]
+                                            lang,//[5]
+                                            sect.Id.ToString(),//[6]
+                                            subsect.Id.ToString()//[7]
+                                        };
+                                        dane_.Add(str2);
+                                        break;
+                                }                                
+                            }
+                        }
+                        else
+                        {
+                            switch (lang)
+                            {
+                                case "pl":
+                                    String[] str3 = {
+                                        CoderUTF8.Decode(sect.title),//[0]
+                                        lang,//[1]
+                                        sect.Id.ToString()//[2]
+                                    };
+                                    dane_.Add(str3);
+                                    break;
+                                case "en":
+                                    String[] str4 = {
+                                        CoderUTF8.Decode(sect.title_ang),//[0]
+                                        lang,//[1]
+                                        sect.Id.ToString()//[2]
+                                    };
+                                    dane_.Add(str4);
+                                    break;
+                            }           
+                        }
+                        dane.Add(dane_);
+                    }
+                    dane__.Add(dane);
+                }
+            }
+            return dane__;
+        }
+        public static List<List<String[]>> Get_Sections()
+        {
+            string[] lang_tab = { "pl", "en" };
+            List<List<String[]>> dane_ = new List<List<String[]>>();
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
+            {
+                List<Section> sect_list = contents.Sections.ToList();
+                foreach (string lang in lang_tab)
+                {
+                    List<String[]> dane = new List<String[]>();
+                    foreach (Section sect in sect_list)
+                    {
+                        switch (lang)
+                        {
+                            case "pl":
+                                String[] str1 = {
+                                    CoderUTF8.Decode(sect.title),//[0]
+                                    sect.Id.ToString(),//[1]
+                                    lang,//[2]
+                                    sect.Id.ToString()//[3]
+                                };
+                                dane.Add(str1);
+                                break;
+                            case "en":
+                                String[] str2 = {
+                                    CoderUTF8.Decode(sect.title_ang),//[0]
+                                    sect.Id.ToString(),//[1]
+                                    lang,//[2]
+                                    sect.Id.ToString()//[3]
+                                };
+                                dane.Add(str2);
+                                break;
                         }
                     }
-                    else
-                    {
-                        String[] str = {
-                                CoderUTF8.Decode(sect.title),//[0]
-                            };
-                        dane_.Add(str);
-                    }                    
-                    dane.Add(dane_);           
+                    dane_.Add(dane);
                 }
             }
-            return dane;
-        }
-        public static List<String[]> Get_Sections()
-        {
-            List<String[]> dane = new List<String[]>();
-            using (ContentsEntities contents = new ContentsEntities())
-            {
-                List<Sections> sect_list = contents.Sections.ToList();
-                foreach (Sections sect in sect_list)
-                {
-                    String[] str = {
-                        CoderUTF8.Decode(sect.title),//[0]
-                        sect.Id.ToString()//[1]
-                    };
-                    dane.Add(str);
-                }
-            }
-            return dane;
+            return dane_;
         }
         //
         public ActionResult Content()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+               return View("../Home/Index");
+        }
+
+        //
+        public static ResourceManager Get_Resources()
+        {
+            ResourceManager rm = new ResourceManager("CrystalSiege.Resources.HomeTexts",
+                Assembly.GetExecutingAssembly());
+         //   ResourceSet temp = rm.GetResourceSet(new System.Globalization.CultureInfo(lang), true, false);
+            return rm;
         }
 
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            if (Request.Cookies["Session"] != null)
+            {
+                ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
@@ -1061,17 +1447,34 @@ namespace CrystalSiege.Controllers
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
+                /*
+                var userId = User.Identity.GetUserId();
+                var model = new IndexViewModel
+                {
+                    HasPassword = HasPassword(),
+                    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                    Logins = await UserManager.GetLoginsAsync(userId),
+                    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                };*/
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
-            };
-            return View(model);
+                var model = new IndexViewModel
+                {
+                    HasPassword = HasPassword()
+                };
+
+                switch (Resources.HomeTexts.lang_set)
+                {
+                    case "pl":
+                        ViewBag.Title = "Profil";
+                        break;
+                    case "en":
+                        ViewBag.Title = "Profile";
+                        break;
+                }               
+                return View(model);
+            }
+            return View("../Home/Index");
         }
 
         //
@@ -1080,29 +1483,37 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
-            ManageMessageId? message;
-            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
-            if (result.Succeeded)
+            if (Request.Cookies["Session"] != null)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
+                ManageMessageId? message;
+                var result = await UserManager.RemoveLoginAsync(Request.Cookies["Session"].Value, new UserLoginInfo(loginProvider, providerKey));
+                if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
+                    message = ManageMessageId.RemoveLoginSuccess;
                 }
-                message = ManageMessageId.RemoveLoginSuccess;
-            }
-            else
-            {
-                message = ManageMessageId.Error;
-            }
-            return RedirectToAction("ManageLogins", new { Message = message });
+                else
+                {
+                    message = ManageMessageId.Error;
+                }
+                return RedirectToAction("ManageLogins", new { Message = message });
+                }
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
-        {
-            return View();
+        {           
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+            return View("../Home/Index");
         }
 
         //
@@ -1111,12 +1522,14 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
+            {
+                if (!ModelState.IsValid)
             {
                 return View(model);
             }
             // Generate the token and send it
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(Request.Cookies["Session"].Value, model.Number);
             if (UserManager.SmsService != null)
             {
                 var message = new IdentityMessage
@@ -1127,6 +1540,8 @@ namespace CrystalSiege.Controllers
                 await UserManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+            }
+            return View("../Home/Index");
         }
 
         //
@@ -1135,13 +1550,17 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user != null)
+            if (Request.Cookies["Session"] != null)
             {
-                await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                await UserManager.SetTwoFactorEnabledAsync(Request.Cookies["Session"].Value, true);
+                var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", "Manage");
             }
-            return RedirectToAction("Index", "Manage");
+            return View("../Home/Index");
         }
 
         //
@@ -1150,22 +1569,30 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (Request.Cookies["Session"] != null)
+            {
+                await UserManager.SetTwoFactorEnabledAsync(Request.Cookies["Session"].Value, false);
+            var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", "Manage");
+            }
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/VerifyPhoneNumber
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
-            // Send an SMS through the SMS provider to verify the phone number
-            return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            if (Request.Cookies["Session"] != null)
+            {
+                var code = await UserManager.GenerateChangePhoneNumberTokenAsync(Request.Cookies["Session"].Value, phoneNumber);
+                // Send an SMS through the SMS provider to verify the phone number
+                return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
+            }
+            return View("../Home/Index");
         }
 
         //
@@ -1174,23 +1601,27 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var result = await UserManager.ChangePhoneNumberAsync(Request.Cookies["Session"].Value,model.PhoneNumber, model.Code);
+                if (result.Succeeded)
+                {
+                    var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
+                    if (user != null)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
+                    return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+                }
+                // If we got this far, something failed, redisplay form
+                ModelState.AddModelError("", "Failed to verify phone");
                 return View(model);
             }
-            var result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
-            }
-            // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
-            return View(model);
+           return View("../Home/Index");
         }
 
         //
@@ -1199,82 +1630,114 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
         {
-            var result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
+            if (Request.Cookies["Session"] != null)
+            {
+                var result = await UserManager.SetPhoneNumberAsync(Request.Cookies["Session"].Value, null);
             if (!result.Succeeded)
             {
                 return RedirectToAction("Index", new { Message = ManageMessageId.Error });
             }
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
             if (user != null)
             {
                 await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
             }
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
+            }
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+               return View("../Home/Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                /*
+                var user = UserManager.FindById(Request.Cookies["Session"].Value);
+                user.Email = model.NewEmail;
+                var updateResult = await UserManager.UpdateAsync(user);
+                if (updateResult.Succeeded)
+                {
+                    ViewBag.Message = "Adres e-mail został zmieniony";
+                }
+                else
+                {
+                    ViewBag.Message = "Adres e-mail nie został zmieniony";
+                    return View();
+                }*/
+                using (var ctx = new damianlukasik3612_crystalsiegeEntities())
+                {
+                    var idek = Request.Cookies["Session"].Value;
+                   // var user = UserManager.FindById(idek);
+                    Person per = ctx.People.Where(s => s.Id == idek).FirstOrDefault<Person>();
+                    if (per != null)
+                    {
+                        per.email = model.NewEmail;
+                        ViewBag.Message = "Adres e-mail został zmieniony";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Adres e-mail nie został zmieniony";
+                    }
+                    ctx.Entry(per).State = System.Data.Entity.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
                 return View(model);
             }
-
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            user.Email = model.NewEmail;
-            var updateResult = await UserManager.UpdateAsync(user);
-            if (updateResult.Succeeded)
-            {
-                ViewBag.Message = "Adres e-mail został zmieniony";
-            }
-            else
-            {
-                ViewBag.Message = "Adres e-mail nie został zmieniony";
-                return View();
-            }
-            return View(model);
+            return View("../Home/Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangeLogin(ChangeLoginViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
             {
-                return View(model);
-            }
-            string idek = User.Identity.GetUserId();
-            var user = UserManager.FindById(idek);
-            user.UserName = model.NewLogin;
-            var updateResult = await UserManager.UpdateAsync(user);
-            if (updateResult.Succeeded)
-            {
-                using (var ctx = new ContentsEntities())
+                if (!ModelState.IsValid)
                 {
-                    Person per = ctx.Person.Where(s => s.Id == idek ).FirstOrDefault<Person>();                
+                    return View(model);
+                }
+                string idek = Request.Cookies["Session"].Value;
+                using (damianlukasik3612_crystalsiegeEntities ctx = new damianlukasik3612_crystalsiegeEntities())
+                {
+                    Person per = ctx.People.Where(s => s.Id == idek).FirstOrDefault<Person>();
                     if (per != null)
                     {
+                        List<News> nes = ctx.News.Where(s => s.author == per.username).ToList();
                         per.username = model.NewLogin;
-                    }                
+                        foreach (News ne in nes)
+                        {
+                            ne.author = per.username;
+                            ViewBag.Message = "Login został zmieniony";
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Login nie został zmieniony";
+                        return View();
+                    }
                     ctx.Entry(per).State = System.Data.Entity.EntityState.Modified;
-                    ctx.SaveChanges();
-                }
-                ViewBag.Message = "Login został zmieniony";
+                    ctx.SaveChanges();                    
+                    return View(model);                         
+                }                
             }
-            else
-            {
-                ViewBag.Message = "Login nie został zmieniony";
-                return View();
-            }
-            return View(model);
+            return View("../Home/Index");
         }
 
         //
@@ -1283,43 +1746,45 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
         {
-           // model.OldPassword = AccountController.Decrypt(model.OldPassword);
-
-            if (!ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
             {
+                // model.OldPassword = AccountController.Decrypt(model.OldPassword);
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }               
+                using (var ctx = new damianlukasik3612_crystalsiegeEntities())
+                {
+                    var idek = Request.Cookies["Session"].Value;
+                   // var user = UserManager.FindById(idek);
+                    Person per = ctx.People.Where(s => s.Id == idek).FirstOrDefault<Person>();
+                    if (per != null)
+                    {
+                        per.password = model.ConfirmPassword;
+                        ViewBag.Message = "Hasło zostało zmienione";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Hasło nie zostało zmienione";
+                    }
+                    ctx.Entry(per).State = System.Data.Entity.EntityState.Modified;
+                    ctx.SaveChanges();
+                }
+              //  AddErrors(result);
                 return View(model);
             }
-            var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-            if (result.Succeeded)
-            {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                if (user != null)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
-            }
-            using (var ctx = new ContentsEntities())
-            {
-                var idek = User.Identity.GetUserId();
-                var user = UserManager.FindById(idek);
-                Person per = ctx.Person.Where(s => s.Id == idek).FirstOrDefault<Person>();
-                if (per != null)
-                {
-                    per.password = model.ConfirmPassword;
-                }
-                ctx.Entry(per).State = System.Data.Entity.EntityState.Modified;
-                ctx.SaveChanges();
-            }
-            AddErrors(result);
-            return View(model);
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/SetPassword
         public ActionResult SetPassword()
         {
-            return View();
+            if (Request.Cookies["Session"] != null)
+            {
+                return View();
+            }
+               return View("../Home/Index");
         }
 
         //
@@ -1328,46 +1793,54 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            if (Request.Cookies["Session"] != null)
             {
-                var result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                    if (user != null)
-                    {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                   /* var result = await UserManager.AddPasswordAsync(Request.Cookies["Session"].Value, model.NewPassword);
+                    if (result.Succeeded)
+                    {*/
+                        var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
+                        if (user != null)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        }
+                        return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                  //  }
+                  //  AddErrors(result);
                 }
-                AddErrors(result);
+                // If we got this far, something failed, redisplay form
+                return View(model);
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/ManageLogins
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (user == null)
+
+            if (Request.Cookies["Session"] != null)
             {
-                return View("Error");
+                ViewBag.StatusMessage =
+                    message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                    : message == ManageMessageId.Error ? "An error has occurred."
+                    : "";
+                var user = await UserManager.FindByIdAsync(Request.Cookies["Session"].Value);
+                if (user == null)
+                {
+                    return View("Error");
+                }
+                var userLogins = await UserManager.GetLoginsAsync(Request.Cookies["Session"].Value);
+                var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
+                ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
+                return View(new ManageLoginsViewModel
+                {
+                    CurrentLogins = userLogins,
+                    OtherLogins = otherLogins
+                });
             }
-            var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
-            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
-            ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
-            return View(new ManageLoginsViewModel
-            {
-                CurrentLogins = userLogins,
-                OtherLogins = otherLogins
-            });
+            return View("../Home/Index");
         }
 
         //
@@ -1376,21 +1849,30 @@ namespace CrystalSiege.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
-            // Request a redirect to the external login provider to link a login for the current user
-            return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
+
+            if (Request.Cookies["Session"] != null)
+            {
+                // Request a redirect to the external login provider to link a login for the current user
+                return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), Request.Cookies["Session"].Value);
+            }
+            return View("../Home/Index");
         }
 
         //
         // GET: /Manage/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
-            if (loginInfo == null)
+            if (Request.Cookies["Session"] != null)
             {
-                return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+                var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, Request.Cookies["Session"].Value);
+                if (loginInfo == null)
+                {
+                    return RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+                }
+                var result = await UserManager.AddLoginAsync(Request.Cookies["Session"].Value, loginInfo.Login);
+                return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
             }
-            var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
-            return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+            return View("../Home/Index");
         }
 
         protected override void Dispose(bool disposing)
@@ -1402,7 +1884,7 @@ namespace CrystalSiege.Controllers
             }
 
             base.Dispose(disposing);
-           // View("~/Shared/Error");
+           // View("../Shared/Error");
         }
 
 #region Helpers
@@ -1427,17 +1909,30 @@ namespace CrystalSiege.Controllers
 
         private bool HasPassword()
         {
+            /*
             var user = UserManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 return user.PasswordHash != null;
+            }*/
+            if (Request.Cookies["Session"] != null)
+            {
+                string id = Request.Cookies["Session"].Value;
+                using (damianlukasik3612_crystalsiegeEntities content = new damianlukasik3612_crystalsiegeEntities())
+                {
+                    Person per = content.People.Where(u => u.Id == id).FirstOrDefault<Person>();
+                    if (per != null)
+                    {
+                        return true;
+                    }
+                }
             }
             return false;
         }
 
         private bool HasPhoneNumber()
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
+            var user = UserManager.FindById(Request.Cookies["Session"].Value);
             if (user != null)
             {
                 return user.PhoneNumber != null;

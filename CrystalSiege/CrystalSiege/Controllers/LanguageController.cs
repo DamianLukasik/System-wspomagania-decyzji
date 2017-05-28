@@ -15,6 +15,7 @@ namespace CrystalSiege.Controllers
         {
             return View();
         }
+        
         public ActionResult Change(String LanguageAbbrevation)
         {
             if (LanguageAbbrevation != null)
@@ -25,9 +26,29 @@ namespace CrystalSiege.Controllers
 
             HttpCookie cookie = new HttpCookie("Language");
             cookie.Value = LanguageAbbrevation;
-            Response.Cookies.Add(cookie);
+            cookie.Expires = DateTime.Now.AddDays(2d);
+            Response.SetCookie(cookie);
+            //    Response.Redirect(Request.RawUrl);
+
+            //   string a = Thread.CurrentThread.CurrentCulture.Name.Substring(0,2);
+
+
+        //    Models.ChangeLoginViewModel.SetLogin(); na później
+
+/*
+            Models.BaseModel.img = Resources.HomeTexts.SelectGraphic;
+            Models.SetPasswordViewModel.ConfirmPassword = Resources.HomeTexts.ConfirmNewPassword;
+            Models.SetPasswordViewModel.NewPassword = Resources.HomeTexts.NewPassword;
+            Models.ChangeLoginViewModel.NewLogin = Resources.HomeTexts.NewLogin;
+            Models.ChangeEmailViewModel.NewEmail = Resources.HomeTexts.NewEmail;
+            Models.ChangePasswordViewModel.NewPassword = Resources.HomeTexts.NewPassword;
+            Models.ChangePasswordViewModel.ConfirmPassword = Resources.HomeTexts.ConfirmNewPassword;
+            Models.ChangePasswordViewModel.OldPassword = Resources.HomeTexts.ActualPassword;
+            Models.AddPhoneNumberViewModel.Number = Resources.HomeTexts.PhoneNumber;
+            Models.VerifyPhoneNumberViewModel.PhoneNumber = Resources.HomeTexts.PhoneNumber;
+            Models.VerifyPhoneNumberViewModel.Code = Resources.HomeTexts.Code;*/
 
             return View("~/Views/Home/Index.cshtml");
-        }
+        }        
     }
 }

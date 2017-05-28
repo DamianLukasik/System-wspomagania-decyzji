@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.SlideViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,9 +9,9 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "ViewSlide", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "ViewSlide", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br>
-        <h4 class="dl-horizontal mt-3">Zawartość strony</h4>
+        <h4 class="dl-horizontal mt-3">@CrystalSiege.Resources.HomeTexts.PageContent</h4>
         <dl class="dl-horizontal">
             
             <div class="panel panel-warning">
@@ -33,23 +33,23 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="usr">Tytuł slajdu:</label>
+                            <label class="control-label col-md-2" for="usr">@CrystalSiege.Resources.HomeTexts.TitleSlide</label>
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.Title, new
                            {
                                @class = "form-control",
-                               @placeholder = "Tytuł slajdu"
+                               @placeholder = CrystalSiege.Resources.HomeTexts.TitleSlide
                            })
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="comment">Treść slajdu:</label>
+                            <label class="control-label col-md-2" for="comment">@CrystalSiege.Resources.HomeTexts.ContentSlide</label>
                             <div class="col-md-10">
                                 @Html.TextArea("Description", "", new
                                {
                                    @class = "form-control",
                                    @rows = 5,
-                                   @placeholder = "Treść slajdu"
+                                   @placeholder = CrystalSiege.Resources.HomeTexts.ContentSlide
                                })
                             </div>
                         </div>
@@ -61,8 +61,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
-                                @Html.ActionLink("Anuluj", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                                <button id="_submit" type="submit" class="btn btn-primary">@CrystalSiege.Resources.HomeTexts.SaveChanges</button>
+                                @Html.ActionLink(CrystalSiege.Resources.HomeTexts.Cancel, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                             </div>
                         </div>
                     }

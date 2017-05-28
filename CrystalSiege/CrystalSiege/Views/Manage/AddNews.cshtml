@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.NewsViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,14 +9,14 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
         <h4 class="dl-horizontal mt-3"></h4>
         <dl class="dl-horizontal">
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Napisz wiadomość 
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.WriteMessage 
                 </div>
                 <div class="panel-body container">
 
@@ -41,19 +41,19 @@
                     <br>
                         <div class="form-group">
                             <!--  Title send  -->
-                            <label class="control-label col-md-2" for="comment">Tytuł wiadomości</label>
+                            <label class="control-label col-md-2" for="comment">@CrystalSiege.Resources.HomeTexts.TitleMessage</label>
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.Title, new
                                 {
                                     @class = "form-control",
-                                    @placeholder = "Tytuł wiadomości",
+                                    @placeholder = CrystalSiege.Resources.HomeTexts.TitleMessage,
                                     @Id = "_Title"
                                 })
                             </div>
                         </div>
                         <div class="form-group">
                             <!--  Descript send  -->
-                            <label class="control-label col-md-2" for="id">Treść wiadomości</label>
+                            <label class="control-label col-md-2" for="id">@CrystalSiege.Resources.HomeTexts.MessageContent</label>
                             <div class="col-md-9">
                                 @Html.TextAreaFor(model => model.Description, new { @Id = "_Descript", @cols = 80, @rows = 20 })
                             </div>
@@ -66,12 +66,12 @@
                         </div>
                         <!--  Tags  -->
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="comment">Tagi</label>
+                            <label class="control-label col-md-2" for="comment">@CrystalSiege.Resources.HomeTexts.tags</label>
                             <div class="col-md-10">
                                 @Html.TextBoxFor(m => m.Tags, new
                                 {
                                     @class = "form-control",
-                                    @placeholder = "Tagi wiadomości",
+                                    @placeholder = CrystalSiege.Resources.HomeTexts.TagsMessage,
                                     @Id = "Tags_",
                                     @list = "productName",
                                     @Name = "productName"
@@ -100,8 +100,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button id="_submit" type="submit" class="btn btn-primary">Zapisz zmiany</button>
-                                @Html.ActionLink("Anuluj", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                                <button id="_submit" type="submit" class="btn btn-primary">@CrystalSiege.Resources.HomeTexts.SaveChanges</button>
+                                @Html.ActionLink(CrystalSiege.Resources.HomeTexts.Cancel, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                             </div>
                         </div>
                     }

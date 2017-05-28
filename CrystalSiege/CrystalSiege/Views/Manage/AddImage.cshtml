@@ -1,7 +1,9 @@
-﻿@model CrystalSiege.Models.SlideViewModel
+﻿@model CrystalSiege.Models.FileUploadModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
+
+
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
     <br>
@@ -9,32 +11,51 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
-        <h4 class="dl-horizontal mt-3">Wyślij obrazek na stronę</h4>
+        <h4 class="dl-horizontal mt-3">@CrystalSiege.Resources.HomeTexts.YouSendImage</h4>
         <dl class="dl-horizontal">
 
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <span class="fa fa-home" style="font-size:24px"></span> Obrazki
+                    <span class="fa fa-home" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Images
                 </div>
                 <div class="panel-body container">
-                    <h2>Załącz obrazek</h2>
+                    <h2>@CrystalSiege.Resources.HomeTexts.Attach_a_picture</h2>                                  
                     @using (Html.BeginForm("AddImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
-                        <label for="file">Załaduj obrazek:</label>
+                        /*
+                        <div class="form-group">
+                            <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
+                            @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+                                <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
+                            </div>
+                        </div>*/
+                        @Html.AntiForgeryToken()
+                        <h2>Upload file</h2>                      
+                        {
+                            <div class="form-group">
+                                <input type="file" name="file" id="file" /><br><br>
+                                <input type="submit" value="Upload file" />
+                                <br><br>
+                                @ViewBag.Message
+                            </div>
+                        }
+                                                
+                        /*
+                        <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
                         <input type="file" name="file" id="file" /><br><br>
-                        <input type="submit" value="Załaduj" />
+                        <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
                         <br><br>
                         @ViewBag.Message
+                    */
                     }
+              
                 </div>
-
-
-
             </div>
-
-
 
         </dl>
     </div>

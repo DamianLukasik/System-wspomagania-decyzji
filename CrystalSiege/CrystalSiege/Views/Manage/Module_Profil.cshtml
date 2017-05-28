@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
 <div class="media">
-    <div class='pull-left'>
-        <img class='media-object img-circle' src='@Url.Content("~/Resources/Image/"+CrystalSiege.Controllers.ManageController.Get_Awatar(User.Identity.GetUserId()))' width='30px' height='30px'>
+@{ string UserGUID = Request.Cookies["Session"].Value;
+    <div class='pull-left'>       
+        <img class='media-object img-circle' src='@Url.Content("~/Resources/Image/" + CrystalSiege.Controllers.ManageController.Get_Awatar(UserGUID))' width='30px' height='30px'>
     </div>
     <div class="media-body">
-        <h5>@CrystalSiege.Controllers.ManageController.Get_Username(User.Identity.GetUserId())</h5>
+        <h5>@CrystalSiege.Controllers.ManageController.Get_Username(UserGUID)</h5>
     </div>
+    }
 </div>

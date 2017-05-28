@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.SectionViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,24 +9,141 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
-        <h4 class="dl-horizontal mt-12">Sekcje strony</h4>
+        <h4 class="dl-horizontal mt-12">@CrystalSiege.Resources.HomeTexts.SectionOfTheSite</h4>
         <dl class="dl-horizontal mt-12">            
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <span class="fa fa-desktop" style="font-size:24px"></span> Sekcje strony
+                    <span class="fa fa-desktop" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.SectionOfTheSite
                 </div>
                 <div class="panel-body">
+                    <!-- Button select language -->
+                    @Html.Partial("Module_Change_Language")
+                    <!-- Carousel  -->
                     <div class="row">
-                        <!-- Sekcje -->
-                        @{
-                            List<List<String[]>> list_subsect = CrystalSiege.Controllers.ManageController.Get_Sections_and_subsections();
-                            List<String[]> list_sect = CrystalSiege.Controllers.ManageController.Get_Sections();
-                            @Html.Raw("<div id='myCarousel' class='carousel slide' data-ride='carousel'>");
+                        <div id='myCarousel' class='carousel slide' data-ride='carousel'>
+                            <div class='col-sm-8'>
+                                <div class='carousel-inner' role='listbox'>
+                                    @{
+                                        String[] lang_tab = { "pl", "en" };
+                                        String active = " active";
+                                        List<List<List<String[]>>> list_subsect_ = CrystalSiege.Controllers.ManageController.Get_Sections_and_subsections();
+                                        List<List<String[]>> list_sect_ = CrystalSiege.Controllers.ManageController.Get_Sections();
+                                        int idx = 0;
+                                        foreach (String lang_ in lang_tab)
+                                        {
+                                            @Html.Raw("<div class='item" + active + "'>");
+                                            active = "";                                         
+                                            @Html.Raw("<div class='col-sm-12'>");
+                                            @Html.Raw("<table class='table' class='carousel-indicators'>");
+                                            @Html.Raw("<thead><tr><th>" + @CrystalSiege.Resources.HomeTexts.NameOfTheSection + "</th></tr></thead>");
+                                            @Html.Raw("<tbody>");
+                                            var i = 0;
+                                            foreach (String[] str_sect in list_sect_[idx])
+                                            {
+                                                @Html.Raw("<tr>");
+                                                //Html.Raw("<td>" + str_sect[0] + "   ");
+                                                var gd1 = Guid.NewGuid();
+                                                @Html.Raw("<td><a href='#demo" + gd1 + "' data-toggle='collapse'>" + str_sect[0] + "</a>");
+                                                @Html.Raw("<div id='demo" + gd1 + "'' class='collapse'><br>");
+                                                //   @Html.Raw("<button onclick='editsection(" + str_sect[1] + "," + idx + ")' class='btn btn-default btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Edit + "</button>");
+                                                @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSection/" + str_sect[1] + "?lang=" + lang_) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+                                                @Html.Raw("<button onclick='deletesection(" + str_sect[1]+")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
+
+                                                //
+                                                  @Html.Raw("<hr>");
+                                                //
+                                                var j = 0;
+                                                //   foreach (List<String[]> str_subsect in list_subsect_[idx])
+                                                //   {
+                                                //    if (str_subsect)
+                                                //   {
+
+                                                //    }
+                                                /*   if ((idx+1) <= list_subsect_.Count)
+                                                   {
+                                                       @Html.Raw(list_subsect_.Count+"</div>");
+                                                       @Html.Raw(idx+"</td>");
+                                                       @Html.Raw("</tr>");
+                                                   }*/
+                                                //  else
+                                                //  {
+                                                //                                             
+                                                    List<List<String[]>> tab_tmp = list_subsect_[idx];
+                                                    List<String[]> str_subsect__ = tab_tmp[i];
+                                                    //int test = str_subsect__[0].Count();
+                                                    @Html.Raw("<div><table class='table'><thead><tr><th>" + @CrystalSiege.Resources.HomeTexts.NameOfTheSubsection + "</th></tr></thead><tbody>");
+                                                //
+                                                //  if (str_sect[0] != null)
+                                                //  {
+                                                foreach (String[] str_sect_ in str_subsect__)
+                                                {
+                                                    try
+                                                    {
+                                                        if (str_sect_[1] != lang_)
+                                                        {
+                                                            @Html.Raw("<tr>");
+                                                            var gd2 = Guid.NewGuid();
+                                                            @Html.Raw("<td><a href='#demo" + gd2 + "' data-toggle='collapse'>" + str_sect_[1] + "</a>");
+                                                            @Html.Raw("<div id='demo" + gd2 + "'' class='collapse'><br>");
+                                                            @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3] + "?lang=" + lang_) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+                                                            @Html.Raw("<button onclick='deletesubsection(" + str_sect_[3] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
+                                                            @Html.Raw("</div>");
+                                                            //    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str_sect_[3], option = "1", obj = "Section" }));
+                                                            @Html.Raw("</td>");
+                                                            @Html.Raw("</tr>");
+                                                        }
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+
+                                                    }
+                                                }
+                                                //  }
+                                                //href='../Manage/DeleteSubSection?id=" + str_sect_[3] + "'
+                                                    @Html.Raw("<tr><td>");
+                                              //  List<String[]> _s = list_sect_[idx];
+                                                    String[] s = str_sect;// _s[j];
+                                                    @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSubsection + "</a>");
+                                                    @Html.Raw("</td></tr>");
+                                                    @Html.Raw("</tbody></table></div>");
+                                                    j++;
+                                                    //   }
+                                                @Html.Raw("</div>");
+                                                @Html.Raw("</td>");
+                                                    //  @Html.Raw("</td>");
+                                                    //
+                                                @Html.Raw("</tr>");
+                                                    i++;
+                                                    //   }
+                                                                          
+                                            }
+                                            idx++;
+                                            @Html.Raw("<tr><td>");
+                                            @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSection + "</a>");
+                                            @Html.Raw("</td></tr>");
+                                            @Html.Raw("</tbody></table></div>");                                           
+                                            @Html.Raw("</div>");
+                                        }                                        
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--
+                    <div class="row">
+                        <!-- Sekcje --
+                        @{/*
+                            List<List<List<String[]>>> list_subsect = CrystalSiege.Controllers.ManageController.Get_Sections_and_subsections();
+                            List<List<String[]>> list_sect = CrystalSiege.Controllers.ManageController.Get_Sections();
+                            @Html.Raw("<div id='myCarousel_' class='carousel slide' data-ride='carousel'>");
                             @Html.Raw("<div class='col-sm-4'>");
                             @Html.Raw("<table class='table' class='carousel-indicators'>");
-                            @Html.Raw("<thead><tr><th>Nazwa sekcji</th></tr></thead>");
+                            @Html.Raw("<thead><tr><th>" + @CrystalSiege.Resources.HomeTexts.NameOfTheSection + "</th></tr></thead>");
 
 
                             @Html.Raw("<tbody>");
@@ -34,13 +151,13 @@
                             var clas = "class='active'";
                             foreach (String[] str_sect in list_sect)
                             {
-                                @Html.Raw("<tr data-target='#myCarousel' data-slide-to='"+i+"' "+clas+" >");
+                                @Html.Raw("<tr data-target='#myCarousel_' data-slide-to='"+i+"' "+clas+" >");
                                 //Html.Raw("<td>" + str_sect[0] + "   ");
                                 var gd = Guid.NewGuid();
                                 @Html.Raw("<td><a href='#demo" + gd + "' data-toggle='collapse'>" + str_sect[0] + "</a>");
                                 @Html.Raw("<div id='demo" + gd + "'' class='collapse'><br>");
-                                @Html.Raw("<button onclick='editsection(" + str_sect[1] + ")' class='btn btn-default btn-xs'>Edytuj</button>");
-                                @Html.Raw("<button onclick='deletesection(" + str_sect[1] + ")' class='btn btn-danger btn-xs'>Usuń</button>");
+                                @Html.Raw("<button onclick='editsection(" + str_sect[1] + ")' class='btn btn-default btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Edit + "</button>");
+                                @Html.Raw("<button onclick='deletesection(" + str_sect[1] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
                                 @Html.Raw("</div>");
                                 @Html.Raw("</td>");
                                 @Html.Raw("</tr>");
@@ -48,7 +165,7 @@
                                 clas = "";
                             }
                             @Html.Raw("<tr><td>");
-                            @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>Dodaj sekcje</a>");
+                            @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSection + "</a>");
                             @Html.Raw("</td></tr>");
                             @Html.Raw("</tbody></table></div>");
                             @Html.Raw("<div class='col-sm-4'>");
@@ -58,7 +175,7 @@
                             var j = 0;
                             foreach (List<String[]> str_subsect in list_subsect)
                             {
-                                @Html.Raw("<div class='item"+clas+ "'><table class='table'><thead><tr><th>Nazwa podsekcji</th></tr></thead><tbody>");
+                                @Html.Raw("<div class='item"+clas+ "'><table class='table'><thead><tr><th>"+@CrystalSiege.Resources.HomeTexts.NameOfTheSubsection+"</th></tr></thead><tbody>");
                                 //
                                 if (str_subsect[0].Count() != 1)
                                 {
@@ -68,8 +185,8 @@
                                         var gd = Guid.NewGuid();
                                         @Html.Raw("<td><a href='#demo" + gd + "' data-toggle='collapse'>" + str_sect_[1] + "</a>");
                                         @Html.Raw("<div id='demo" + gd + "'' class='collapse'><br>");
-                                        @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3]) + "' class='btn btn-default btn-xs' >Edytuj</a>");
-                                        @Html.Raw("<button onclick='deletesubsection(" + str_sect_[3] + ")' class='btn btn-danger btn-xs'>Usuń</button>");
+                                        @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3]) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+                                        @Html.Raw("<button onclick='deletesubsection(" + str_sect_[3] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
                                         @Html.Raw("</div>");
                                         //    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str_sect_[3], option = "1", obj = "Section" }));
                                         @Html.Raw("</td>");
@@ -79,17 +196,17 @@
                                 //href='../Manage/DeleteSubSection?id=" + str_sect_[3] + "'
                                 @Html.Raw("<tr><td>");
                                 String[] s = list_sect[j];
-                                @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>Dodaj podsekcje</a>");
+                                @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>"+ @CrystalSiege.Resources.HomeTexts.AddTheSubsection + "</a>");
                                 @Html.Raw("</td></tr>");
                                 @Html.Raw("</tbody></table></div>");
                                 clas = "";
                                 j++;
                             }
-                            @Html.Raw("</div></div>");
+                            @Html.Raw("</div></div>");*/
                         }
                       
                        
-                    </div>
+                    </div>-->
 
                     <!-- Modal -->
                     <div class="modal fade" id="myModal_center" role="dialog">
@@ -99,16 +216,16 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Komunikat</h4>
+                                    <h4 class="modal-title">@CrystalSiege.Resources.HomeTexts.communicate</h4>
                                 </div>
                                 <div class="modal-body">
                                     <center id="btn_center">
-                                        @Html.Raw("<a href='../Manage/DeleteSubSection?id=' class='btn btn-danger'>Tak</a>")
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Nie</button>
+                                        @Html.Raw("<a href='../Manage/DeleteSubSection?id=' class='btn btn-danger'>"+@CrystalSiege.Resources.HomeTexts.Yes+"</a>")
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">@CrystalSiege.Resources.HomeTexts.No</button>
                                     </center>
                                 </div>
                                 <div class="modal-footer">
-                                    <h6><small>Dokonanych zmian nie będzie można przywrócić</small></h6>
+                                    <h6><small>@CrystalSiege.Resources.HomeTexts.DeleteComunicate</small></h6>
                                 </div>
                             </div>
 
@@ -127,13 +244,21 @@
 
         $("tr").click(function () {
             $("tbody").find("tr").removeClass("active");
-            $(this).addClass("active");
+            $(this).addClass("active");//nie może być karuzela w karuzeli
         })
 
+        $("#lang_pl").click(function () {
+            $(".pl_class div:first").addClass("active");
+        })
+        $("#lang_en").click(function () {
+            $(".en_class div:first").addClass("active");
+        })
     })
 
-    function editsection(x) {
-        location.replace('../Manage/EditSection?id=' + x);
+    function editsection(x, l) {
+        lang = "pl";
+        if (l == 1) { lang = "en"; }
+        location.replace('../Manage/EditSection?id=' + x+"?lang="+lang);
     }
 
     function deletesection(x) {

@@ -11,13 +11,16 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace CrystalSiegeEntry
 {
     public partial class Form1 : Form
     {
-        private static String url_main = "http://localhost:62074";
-
+      //   private static String url_main = "http://localhost:62074";
+        private static String url_main = "http://crystalsiege.eu";
         public Form1()
         {
             
@@ -46,24 +49,53 @@ namespace CrystalSiegeEntry
                 }
             }
 
-            this.Grafika.BackgroundImage = destImage;           
+            this.Grafika.BackgroundImage = destImage;
+            //Test connect
+
+            if (TestConnection())
+            {
+                Label_connect.Text = "Connected";
+            }
+            else
+            {
+                Label_connect.Text = "Not connected";
+            }
+        }
+
+        public bool TestConnection()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings["CrystalSiegeEntry.Properties.Settings.Connection"].ConnectionString;          
+            try
+            {
+                SqlDataAdapter da;
+                using (da = new SqlDataAdapter("select * from Person", connectionString))
+                {
+                    DataSet ds = new DataSet();
+                    da.Fill(ds);
+                    return ds.Tables[0] != null ? true : false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             String user, pass;
             string url = url_main + "/api/graph";
-            // url = url_main+"/Account/Login";
+          //  url = url_main+"/Account/Login";
             if (this.textBoxUser.Text != "" && this.textBoxPassword.Text != "")
             {
                 user = this.textBoxUser.Text;
                 pass = this.textBoxPassword.Text;
-            //    pass = Encrypt(this.textBoxPassword.Text);
+             //   pass = Encrypt(this.textBoxPassword.Text);
 
                 String str = "{ \"username\": \"" + user + "\", \"password\": \"" + pass + "\"  }";
                 var httpContent = new StringContent(str, Encoding.UTF8, "application/json");
                 Send(url, httpContent, user, pass);
-            //    System.Diagnostics.Process.Start(@"http://localhost:62074/Account/Connect?username=" + user + "&password=" + pass);
+            //    System.Diagnostics.Process.Start(@""+url_main+"/Account/Login?username=" + user + "&password=" + pass);
             }
 
         }
@@ -92,15 +124,16 @@ namespace CrystalSiegeEntry
         static async void Send(string url, StringContent cont, string user, string pass)
         {
             string r = await PostResponseString(url,cont);
-            if (r == "\"success\"")
+            if (r != "\"fail\"")
             {
                 pass = Encrypt(pass);
-                System.Diagnostics.Process.Start(url_main+"/Account/Connect?username=" + user + "&password=" + pass);                
+              //  r = Encrypt(r);
+                System.Diagnostics.Process.Start(url_main + "/Account/Connect?username=" + user + "&password=" + pass + "&secure=" + r);// + "&secure=" + r);                
             }
         }
         static async Task<string> PostResponseString(string url, StringContent values)
         {
-            var contents = "";
+            string contents = "";
             using (HttpClient client = new HttpClient())
             {
                 using (var response = await client.PostAsync(url, values))

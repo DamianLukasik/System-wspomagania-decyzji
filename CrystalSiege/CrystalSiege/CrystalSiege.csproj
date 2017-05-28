@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -70,10 +68,6 @@
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights">
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -252,47 +246,52 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CarouselInfo.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Content.Context.cs">
+    <Compile Include="Models\damianlukasik3612_crystalsiegeEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Content.Context.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Content.cs">
+    <Compile Include="Models\damianlukasik3612_crystalsiegeEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Content.Designer.cs">
+    <Compile Include="Models\damianlukasik3612_crystalsiegeEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Content.edmx</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\News.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\News_Tags.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Person.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Sections.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+    <Compile Include="Models\Section.cs">
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Secure.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Subsections.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+    <Compile Include="Models\Subsection.cs">
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Tags.cs">
-      <DependentUpon>Content.tt</DependentUpon>
+    <Compile Include="Models\Tag.cs">
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Resources\CarouselTexts.pl.Designer.cs">
       <DependentUpon>CarouselTexts.pl.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -337,12 +336,16 @@
       <DependentUpon>Contents.mdf</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\blood.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Carousel.css" />
     <Content Include="Content\design.css" />
+    <Content Include="Content\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Kingthings_Petrock-webfont.svg" />
+    <Content Include="Content\Kingthings_Petrock_light-webfont.svg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -386,18 +389,22 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Kingthings_Petrock-webfont.svg" />
+    <Content Include="fonts\Kingthings_Petrock_light-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Content.Context.tt">
+    <Content Include="Models\damianlukasik3612_crystalsiegeEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Content.edmx</DependentUpon>
-      <LastGenOutput>Content.Context.cs</LastGenOutput>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.edmx</DependentUpon>
+      <LastGenOutput>damianlukasik3612_crystalsiegeEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Content.tt">
+    <Content Include="Models\damianlukasik3612_crystalsiegeEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Content.edmx</DependentUpon>
-      <LastGenOutput>Content.cs</LastGenOutput>
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.edmx</DependentUpon>
+      <LastGenOutput>damianlukasik3612_crystalsiegeEntities.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\1494386869_GB.png" />
+    <Content Include="Resources\1494386875_PL.png" />
     <Content Include="Resources\Image\a_soothing_lakefront_by_shamanguli-d9t6rmq.png" />
     <Content Include="Resources\Image\before_the_storm_by_shamanguli-d9uue4b.png" />
     <Content Include="Resources\Image\fall_of_everfree_by_shamanguli-dadutwo.png" />
@@ -411,13 +418,6 @@
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\Content.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Content.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Content.edmx.diagram">
-      <DependentUpon>Content.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -451,8 +451,74 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\Deutsch.ttf" />
+    <Content Include="Content\Deutsch.ttf" />
+    <Content Include="Content\GothStencil.ttf" />
+    <Content Include="Content\KingthingsPetrocklight.ttf" />
+    <Content Include="Content\KleinsBrokenGotik.ttf" />
+    <Content Include="Content\vinque.ttf" />
+    <Content Include="Content\xenippa1.ttf" />
+    <EntityDeploy Include="Models\damianlukasik3612_crystalsiegeEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>damianlukasik3612_crystalsiegeEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\damianlukasik3612_crystalsiegeEntities.edmx.diagram">
+      <DependentUpon>damianlukasik3612_crystalsiegeEntities.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\Kingthings Petrock.ttf" />
+    <Content Include="Content\Koch_Fraktur.ttf" />
+    <Content Include="fonts\GothStencil.ttf" />
+    <Content Include="fonts\Kingthings Petrock.ttf" />
+    <Content Include="fonts\KingthingsPetrocklight.ttf" />
+    <Content Include="fonts\KleinsBrokenGotik.ttf" />
+    <Content Include="fonts\Koch_Fraktur.ttf" />
+    <Content Include="fonts\vinque.ttf" />
+    <Content Include="fonts\xenippa1.ttf" />
+    <Content Include="fonts\Kingthings_Petrock-webfont.eot" />
+    <Content Include="fonts\Kingthings_Petrock-webfont.ttf" />
+    <Content Include="fonts\Kingthings_Petrock-webfont.woff" />
+    <Content Include="fonts\Kingthings_Petrock_light-webfont.eot" />
+    <Content Include="fonts\Kingthings_Petrock_light-webfont.ttf" />
+    <Content Include="fonts\Kingthings_Petrock_light-webfont.woff" />
+    <Content Include="Content\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\Kingthings_Petrock-webfont.eot" />
+    <Content Include="Content\Kingthings_Petrock-webfont.ttf" />
+    <Content Include="Content\Kingthings_Petrock-webfont.woff" />
+    <Content Include="Content\Kingthings_Petrock_light-webfont.eot" />
+    <Content Include="Content\Kingthings_Petrock_light-webfont.ttf" />
+    <Content Include="Content\Kingthings_Petrock_light-webfont.woff" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2810%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2811%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2812%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2813%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2814%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2815%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %2816%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %286%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %287%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %288%29.pubxml" />
+    <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy %289%29.pubxml" />
     <None Include="Properties\PublishProfiles\crystalsiege.eu - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\DamianLukasik.pubxml" />
+    <None Include="Properties\PublishProfiles\DamianLukasikFTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Properties\PublishProfiles\local.pubxml" />
+    <None Include="Properties\PublishProfiles\My Websites.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\cookies.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
@@ -1079,16 +1145,16 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -1211,12 +1277,15 @@
     <Content Include="Views\Manage\ViewTranslate.cshtml" />
     <Content Include="Views\Manage\ChangeAvatar.cshtml" />
     <Content Include="Views\Manage\Module_Profil.cshtml" />
+    <Content Include="Views\Home\SearchResult.cshtml" />
     <None Include="Views\Home\Secure.cshtml" />
     <Content Include="Views\Manage\AddSubSection.cshtml" />
     <Content Include="Views\Manage\EditSection.cshtml" />
     <Content Include="Views\Manage\EditSubSection.cshtml" />
     <None Include="Views\Manage\Module_Delete.cshtml" />
     <Content Include="Views\Manage\Module_ChangeImage.cshtml" />
+    <Content Include="Views\Manage\Module_Change_Language.cshtml" />
+    <Content Include="Views\Shared\Module_Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -1268,6 +1337,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
@@ -1292,13 +1364,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

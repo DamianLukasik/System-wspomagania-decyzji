@@ -120,10 +120,352 @@
   <data name="Autorstwo" xml:space="preserve">
     <value>My Little Pony: Friendship is Magic is © Hasbro, all Creations © to their respective artists</value>
   </data>
+  <data name="eng_lang" xml:space="preserve">
+    <value>English</value>
+  </data>
   <data name="Ilustracje" xml:space="preserve">
     <value>Ilustration © by Ruhisu</value>
   </data>
+  <data name="pl_lang" xml:space="preserve">
+    <value>Polish</value>
+  </data>
   <data name="Website" xml:space="preserve">
     <value>Website © by DayanDey</value>
+  </data>
+  <data name="changeyourpassword" xml:space="preserve">
+    <value>Change your password</value>
+  </data>
+  <data name="logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="manage_content" xml:space="preserve">
+    <value>Manage content</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="search_txt" xml:space="preserve">
+    <value>Search...</value>
+  </data>
+  <data name="settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="view_profile" xml:space="preserve">
+    <value>View profile</value>
+  </data>
+  <data name="AddTheSection" xml:space="preserve">
+    <value>Add section</value>
+  </data>
+  <data name="AddTheSubsection" xml:space="preserve">
+    <value>Add subsection</value>
+  </data>
+  <data name="communicate" xml:space="preserve">
+    <value>Communicate</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteComunicate" xml:space="preserve">
+    <value>The changes made are irreversible</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="NameOfTheSection" xml:space="preserve">
+    <value>Name of the section</value>
+  </data>
+  <data name="NameOfTheSubsection" xml:space="preserve">
+    <value>Name of the subsection</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="SectionOfTheSite" xml:space="preserve">
+    <value>Section of the site</value>
+  </data>
+  <data name="undo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Archive_by_month" xml:space="preserve">
+    <value>Archive by month</value>
+  </data>
+  <data name="Attach_a_picture" xml:space="preserve">
+    <value>Attach a picture</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="ContentSlide" xml:space="preserve">
+    <value>Slide content</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DeleteQuestion" xml:space="preserve">
+    <value>Are you sure you want to delete?</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="lang_set" xml:space="preserve">
+    <value>en</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Load_Image" xml:space="preserve">
+    <value>Load Image</value>
+  </data>
+  <data name="MessageContent" xml:space="preserve">
+    <value>Message content</value>
+  </data>
+  <data name="News" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="NoAccess" xml:space="preserve">
+    <value>No access</value>
+  </data>
+  <data name="PageContent" xml:space="preserve">
+    <value>Page content</value>
+  </data>
+  <data name="PermissionCommunicate" xml:space="preserve">
+    <value>You do not have permission to view this subpage.</value>
+  </data>
+  <data name="published_by" xml:space="preserve">
+    <value>Published by</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Read more...</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="TagsMessage" xml:space="preserve">
+    <value>Message tags</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TitleBook" xml:space="preserve">
+    <value>Crystal Siege</value>
+  </data>
+  <data name="TitleMessage" xml:space="preserve">
+    <value>Title message</value>
+  </data>
+  <data name="TitlePage" xml:space="preserve">
+    <value>Crystal Siege - Jakub Orłowski</value>
+  </data>
+  <data name="TitleSection" xml:space="preserve">
+    <value>Title section</value>
+  </data>
+  <data name="TitleSlide" xml:space="preserve">
+    <value>Title slide</value>
+  </data>
+  <data name="TitleSubSection" xml:space="preserve">
+    <value>Title Subsection</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
+  </data>
+  <data name="WhereWereFound" xml:space="preserve">
+    <value>Where were found</value>
+  </data>
+  <data name="WriteMessage" xml:space="preserve">
+    <value>Write a message</value>
+  </data>
+  <data name="YouSendImage" xml:space="preserve">
+    <value>Send a picture to the page</value>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AddImage" xml:space="preserve">
+    <value>Add image</value>
+  </data>
+  <data name="AddNews" xml:space="preserve">
+    <value>Add news</value>
+  </data>
+  <data name="AddSlide" xml:space="preserve">
+    <value>Add slide</value>
+  </data>
+  <data name="AllImageInService" xml:space="preserve">
+    <value>All graphics in the site</value>
+  </data>
+  <data name="AllNews" xml:space="preserve">
+    <value>All news</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="ChangeAvatar" xml:space="preserve">
+    <value>Change avatar</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email address</value>
+  </data>
+  <data name="ChangeLogin" xml:space="preserve">
+    <value>Change login</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangeYourAvatar" xml:space="preserve">
+    <value>Change your avatar</value>
+  </data>
+  <data name="ChangeYourEmailAdress" xml:space="preserve">
+    <value>Change your email address</value>
+  </data>
+  <data name="ChangeYourLogin" xml:space="preserve">
+    <value>Change your login</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="ContentMessage" xml:space="preserve">
+    <value>Content message</value>
+  </data>
+  <data name="EditContentSlide" xml:space="preserve">
+    <value>Edit the content of the slide</value>
+  </data>
+  <data name="EditMessage" xml:space="preserve">
+    <value>Edit message</value>
+  </data>
+  <data name="EditSection" xml:space="preserve">
+    <value>Edit section</value>
+  </data>
+  <data name="EditSectionSite" xml:space="preserve">
+    <value>Edit page sections</value>
+  </data>
+  <data name="EmailAdress" xml:space="preserve">
+    <value>Email address</value>
+  </data>
+  <data name="FormChangeAvatar" xml:space="preserve">
+    <value>Form change avatar</value>
+  </data>
+  <data name="FormChangeEmailAddress" xml:space="preserve">
+    <value>Form change email address</value>
+  </data>
+  <data name="FormChangeLogin" xml:space="preserve">
+    <value>Form change login</value>
+  </data>
+  <data name="FormChangePassword" xml:space="preserve">
+    <value>Form change password</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="ImageToSlide" xml:space="preserve">
+    <value>Image to slide</value>
+  </data>
+  <data name="InContentNews" xml:space="preserve">
+    <value>In news content</value>
+  </data>
+  <data name="InContentSubsection" xml:space="preserve">
+    <value>In content subsection</value>
+  </data>
+  <data name="InNameAuthor" xml:space="preserve">
+    <value>In name author</value>
+  </data>
+  <data name="InNameSubsection" xml:space="preserve">
+    <value>In name subsection</value>
+  </data>
+  <data name="InTitle" xml:space="preserve">
+    <value>In title</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ManageSections" xml:space="preserve">
+    <value>Manege sections</value>
+  </data>
+  <data name="ManageTranslate" xml:space="preserve">
+    <value>Manage Translates</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NothingFound" xml:space="preserve">
+    <value>Nothing found</value>
+  </data>
+  <data name="OrAttachNewImage" xml:space="preserve">
+    <value>Or load a new one</value>
+  </data>
+  <data name="PublishDate" xml:space="preserve">
+    <value>Date of publication</value>
+  </data>
+  <data name="SearchResults" xml:space="preserve">
+    <value>Search results</value>
+  </data>
+  <data name="SelectGraphic" xml:space="preserve">
+    <value>Select graphic</value>
+  </data>
+  <data name="SelectImage" xml:space="preserve">
+    <value>Select a image</value>
+  </data>
+  <data name="SetPassword" xml:space="preserve">
+    <value>Set password</value>
+  </data>
+  <data name="Slide" xml:space="preserve">
+    <value>Slide</value>
+  </data>
+  <data name="Slides" xml:space="preserve">
+    <value>Slides</value>
+  </data>
+  <data name="ThePasswordRecoverySitelinkDoesNotExist" xml:space="preserve">
+    <value>The password recovery sitelink does not exist</value>
+  </data>
+  <data name="Translate" xml:space="preserve">
+    <value>Translates</value>
+  </data>
+  <data name="ViewAllImages" xml:space="preserve">
+    <value>View all images</value>
+  </data>
+  <data name="ViewNews" xml:space="preserve">
+    <value>View news</value>
+  </data>
+  <data name="ViewSlides" xml:space="preserve">
+    <value>View slides</value>
+  </data>
+  <data name="YourLoginDate" xml:space="preserve">
+    <value>Your login date</value>
+  </data>
+  <data name="NewLogin" xml:space="preserve">
+    <value>New login</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New email address</value>
+  </data>
+  <data name="ActualPassword" xml:space="preserve">
+    <value>Actual password</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="EnglishVersion" xml:space="preserve">
+    <value>English version</value>
+  </data>
+  <data name="PolishVersion" xml:space="preserve">
+    <value>Polish version</value>
   </data>
 </root>

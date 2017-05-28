@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.IndexViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,57 +9,103 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
-        <h4 class="dl-horizontal mt-12">Wszystkie wiadomości</h4>
+        <h4 class="dl-horizontal mt-12">@CrystalSiege.Resources.HomeTexts.AllNews</h4>
         <dl class="dl-horizontal mt-12">            
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Aktualności 
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.News
                 </div>
                 <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Wiadomość</th>
-                                <th>Akcje</th>
-                                <th>Obrazek</th>
-                                <th>Data publikacji</th>
-                                <th>Autor</th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            @{
-                                List<String[]> dane = CrystalSiege.Controllers.ManageController.Get_NewsList();//get all njus
-                                foreach (String[] s in dane)
-                                {
-                                    @Html.Raw("<tr>");
-                                    @Html.Raw("<td>" + s[0] + "</td>");
+                    <!-- Button select language -->
+                    @Html.Partial("Module_Change_Language")
+                    <!-- Carousel  -->
+                    <div class="row">
+                        <div id='myCarousel' class='carousel slide' data-ride='carousel'>
+                            <div class='col-sm-8'>
+                                <div class='carousel-inner' role='listbox'>                                  
 
-                                    @Html.Raw("<td><div class='btn-group'>");
-                                    @Html.Raw("<a href='" + @Url.Content("~/Manage/EditNews/" + s[4]) + "' class='btn btn-default btn-xs' >Edytuj</a>");
-                                    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = s[4], option = "1", obj = "News" }));
-                                    @Html.Raw("</div></td>");
-                                    //do poprawy usuwa się pierwszy njus, nie id njus
-                                    @Html.Raw("<td><img src='" + @Url.Content("~/Resources/Image/" + s[1]) + "' class='img-rounded' width='30' height='30'></td>");
-                                    @Html.Raw("<td>" + s[2] + "</td>");
-                                    @Html.Raw("<td>" + s[3] + "</td>");
-                                    @Html.Raw("</tr>");
-                                }
-                            }
-                            </tbody>
-                            </table>
+                                        @{
+                                            List<List<String[]>> dane_ = CrystalSiege.Controllers.ManageController.Get_NewsList();//get all njus
+                                            string active = "active";
+                                            foreach (List<String[]> dane in dane_)
+                                            {
+                                                @Html.Raw("<div class='item "+active+"'>");
+                                                @Html.Raw("<table class='table'><thead><tr><th>" + CrystalSiege.Resources.HomeTexts.Message + "</th><th>" + CrystalSiege.Resources.HomeTexts.Action + "</th><th>" + CrystalSiege.Resources.HomeTexts.Image + "</th><th>");
+                                                @Html.Raw(CrystalSiege.Resources.HomeTexts.PublishDate + "</th><th>" + CrystalSiege.Resources.HomeTexts.Author + "</th><th></tr></thead><tbody>");
+                                                foreach (String[] s in dane)
+                                                {
+                                                    @Html.Raw("<tr>");
+                                                    @Html.Raw("<td>" + s[0] + "</td>");
+
+                                                    @Html.Raw("<td><div class='btn-group'>");
+                                                    @Html.Raw("<a href='" + @Url.Content("~/Manage/EditNews/" + s[4] +"?lang="+s[5]) + "' class='btn btn-default btn-xs' >" + CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+                                                    //   Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = s[4], option = "1", obj = "News" }));
+                                                    @Html.Raw("<button onclick='deletenews(" + s[4] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
+                                                    @Html.Raw("</div></td>");
+                                                    //do poprawy usuwa się pierwszy njus, nie id njus
+                                                    @Html.Raw("<td><img src='" + @Url.Content("~/Resources/Image/" + s[1]) + "' class='img-rounded' width='30' height='30'></td>");
+                                                    @Html.Raw("<td>" + s[2] + "</td>");
+                                                    @Html.Raw("<td>" + s[3] + "</td>");
+                                                    @Html.Raw("</tr>");
+                                                }
+                                                @Html.Raw("</tbody></table></div>");
+                                                active = "";
+                                            }
+                                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class='thumbnail'>
-                                        @Html.ActionLink("Dodaj Newsa", "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddNews, "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
                                     </div>
                                 </div>
                             </div>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal_center" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">@CrystalSiege.Resources.HomeTexts.communicate</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <center id="btn_center">
+                                        @Html.Raw("<a href='../Manage/DeleteNews?id=' class='btn btn-danger'>" + @CrystalSiege.Resources.HomeTexts.Yes + "</a>")
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">@CrystalSiege.Resources.HomeTexts.No</button>
+                                    </center>
+                                </div>
+                                <div class="modal-footer">
+                                    <h6><small>@CrystalSiege.Resources.HomeTexts.DeleteComunicate</small></h6>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
                         </div>
             </div>
 
         </dl>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function deletenews(x) {
+        var url = '../Manage/DeleteNews?id=' + x;
+        $('#btn_center a:first-child').attr('href', url);
+        $('#myModal_center').modal('toggle');
+    }
+
+</script>

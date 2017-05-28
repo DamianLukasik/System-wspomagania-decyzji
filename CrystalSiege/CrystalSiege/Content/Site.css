@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.lang {
+    margin: 0 0 2px;
+    display: inline-grid;
+    padding-left: 8px;
+}

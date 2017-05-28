@@ -33,8 +33,28 @@ namespace CrystalSiege.Controllers
         {
             Boolean log = Authentication(value["username"], value["password"]);
             if (log)
-            {                
-                return "success";
+            {
+                string str;
+                //
+                using (damianlukasik3612_crystalsiegeEntities contex = new damianlukasik3612_crystalsiegeEntities())
+                {
+                    List<Secure> list_sec = contex.Secures.ToList();
+                    int i = list_sec.Last().Id + 1;
+                    foreach (Secure sc in list_sec)
+                    {
+                        contex.Secures.Remove(sc);
+                    }
+                    contex.SaveChanges();
+                    Secure sec = new Secure();
+                    sec.Id = i;
+                    Random rand = new Random();
+                    str = CoderUTF8.Encode(rand.Next(0, 999).ToString()+ value["password"] + rand.Next(0, 999).ToString());
+                    sec.link = str;
+                    contex.Secures.Add(sec);
+                    contex.SaveChanges();
+                }
+                //
+                return str;
             }
             return "fail";
         }
@@ -51,9 +71,9 @@ namespace CrystalSiege.Controllers
 
         private Boolean Authentication(string username_, string password_)
         {
-            using (ContentsEntities contents = new ContentsEntities())
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
-                Person person = contents.Person
+                Person person = contents.People
                     .Where(u => u.username == username_ && u.password == password_)
                     .FirstOrDefault();
                 if (person != null)
@@ -69,9 +89,9 @@ namespace CrystalSiege.Controllers
             if (a == "Przypomnij mi hasło")
             {
                 string email;
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
-                    email = contents.Person.Where(u => u.access == 1).First().email;
+                    email = contents.People.Where(u => u.access == 1).First().email;
                 }
                 email = "dayandey@gmail.com";
                 MailMessage mail = new MailMessage("dayandey@gmail.com", email);
@@ -84,9 +104,9 @@ namespace CrystalSiege.Controllers
                 //zrobić linka do odzyskiwania hasła
                 //ustawienie w tabeli secury linku
                 string link_;
-                using (ContentsEntities contents = new ContentsEntities())
+                using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
                 {
-                    int idx = contents.Secure.Count() + 1;
+                    int idx = contents.Secures.Count() + 1;
                     var customers = contents.Set<Secure>();
                     Random random = new Random();
                     int randomNumber = random.Next(0, 959458);

@@ -2,7 +2,7 @@
 @model CrystalSiege.Models.BaseModel
 <!-- wybierz obrazek-->
 <div class="col-sm-offset-2 col-sm-10">
-    <h5>Obrazek do slajdu</h5>
+    <h5>@CrystalSiege.Resources.HomeTexts.ImageToSlide</h5>
     <!-- Trigger the modal with a button -->
     <div class="row">
         <div class="col-sm-1">
@@ -20,9 +20,9 @@
                 }
                 if (ViewData["option"].Equals("edit"))
                 {
-                    str_img = "<img id='changeimage' class='media-object img-rounded changeImage' width='45px' src='" + @Url.Content("~/Resources/Image/" + ViewData["img"]) + "'>";
-                    val_ = ViewData["img"].ToString();
-                }
+                    str_img = "<img id='changeimage' class='media-object img-rounded changeImage' width='45px' src='" + @Url.Content("~/Resources/Image/" + ViewData["img"] ) + "'>";
+                val_ = ViewData["img"].ToString();
+            }
                 @Html.Raw(str_img);
                 @Html.Raw("</div><div class='form-group' style='visibility: hidden; height: 0px'><div class='col-md-10'>");                
                 @Html.TextBoxFor(m => m.img, new
@@ -42,10 +42,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Obrazki</h4>
+                    <h4 class="modal-title">@CrystalSiege.Resources.HomeTexts.Images</h4>
                 </div>
                 <div class="modal-body">
-                    <h5>Wybierz obrazek</h5>
+                    <h5>@CrystalSiege.Resources.HomeTexts.SelectImage</h5>
                     <!--Obrazki-->
                     <div class="container-fluid">
 
@@ -82,11 +82,11 @@
                         }
                     </div>
                     <hr>
-                    <h5>Lub załaduj nowy</h5>
+                    <h5>@CrystalSiege.Resources.HomeTexts.OrAttachNewImage</h5>
                     <input type="file" name="file" id="file" accept="image/*" />
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@CrystalSiege.Resources.HomeTexts.Close</button>
                 </div>
             </div>
         </div>

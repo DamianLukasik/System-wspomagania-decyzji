@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -12,10 +10,14 @@ using CrystalSiege.Models;
 using System.Security.Cryptography;
 using System.IO;
 using System.Text;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
+using System.Web.Security;
+using System.Web.Profile;
+using System.Reflection;
 
 namespace CrystalSiege.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -44,44 +46,65 @@ namespace CrystalSiege.Controllers
             return cipherText;
         }
 
-        [AllowAnonymous]        
-        public ActionResult Connect(string username, string password)
+        [AllowAnonymous]
+        public async Task<ActionResult> Connect(string username, string password, string secure)//, string secure)
         {
-            String returnUrl = "~/Home/Index";
-            try
-            {
-                password = Decrypt(password);
-                LoginViewModel user = new LoginViewModel();
-                user.Email = username;
-                user.Password = password;
-                user.RememberMe = false;
-                if (!ModelState.IsValid)
-                {
-                    return View(user);
-                }
-
-
-                var result = SignInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, shouldLockout: false).Result;
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        return RedirectToLocal(returnUrl);
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = user.RememberMe });
-                    case SignInStatus.Failure:
-                        return View("../Home/Index");
-                    default:
-                        ModelState.AddModelError("", "Invalid login attempt.");
+            String returnUrl = "../Home/Index";            
+              //  try
+              //  {           
+              /*      password = Decrypt(password);
+                    LoginViewModel user = new LoginViewModel();
+                    user.Email = username;
+                    user.Password = password;
+                    user.RememberMe = false;
+                    if (!ModelState.IsValid)
+                    {
                         return View(user);
-                }
-            }
-            catch (Exception e)
+                    }*/
+            using (damianlukasik3612_crystalsiegeEntities contents = new damianlukasik3612_crystalsiegeEntities())
             {
-                return View(returnUrl);
+                Secure sec = contents.Secures.ToList().LastOrDefault();
+                if (sec != null)
+                {
+                    password = Decrypt(password);
+                 //   string r = Decrypt(secure);
+                    string o = sec.link;
+
+                    if (secure==o)
+                    {
+                        Person user = contents.People.Where(u => u.password == password && u.username == username).FirstOrDefault();
+                        if (user != null)
+                        {
+                            HttpCookie cookie = new HttpCookie("Session");
+                            cookie.Value = user.Id;
+                            cookie.Expires = DateTime.Now.AddDays(2d);
+                            Response.SetCookie(cookie);
+                        }
+                    }                    
+                }                
+            }          
+            /*               
+            var result = await SignInManager.PasswordSignInAsync(user.Email, user.Password, user.RememberMe, shouldLockout: false);//wykakuje błąd                
+            switch (result)
+            {
+                case SignInStatus.Success:                            
+                    return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = user.RememberMe });
+                case SignInStatus.Failure:
+                    return View("../Account/Register");
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return View(user);
             }
-            return View();      
+        }
+        catch (Exception e)
+        {
+            return View(returnUrl);
+        }    */
+            return View(returnUrl);
         }
 
         public AccountController()
@@ -217,11 +240,12 @@ namespace CrystalSiege.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };                                
+                var result = await UserManager.CreateAsync( user, model.Password );//wyskakuje błąd
+              //  return View("../Home/Index");
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);//wyskakuje błąd
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -231,11 +255,11 @@ namespace CrystalSiege.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                AddErrors(result);
+                  AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(model); 
         }
 
         //
@@ -458,6 +482,11 @@ namespace CrystalSiege.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            HttpCookie currentUserCookie = Request.Cookies["Session"];
+            Response.Cookies.Remove("Session");
+            currentUserCookie.Expires = DateTime.Now.AddDays(-10);
+            currentUserCookie.Value = null;
+            Response.SetCookie(currentUserCookie);
             return RedirectToAction("Index", "Home");
         }
 
@@ -492,6 +521,7 @@ namespace CrystalSiege.Controllers
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
+        private DbContext context;
 
         private IAuthenticationManager AuthenticationManager
         {

@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@CrystalSiege.Resources.HomeTexts.TitlePage</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/design.css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/cookies.js"></script>
 </head>
 <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-inverse blood-backgorund navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
                 <!-- <a class="navbar-brand" href="#">WebSiteName</a>-->
@@ -20,18 +22,46 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Crystal Siege", "Index", "Home", new { area = "" }, new { @class = "navbar-brand font_military" })
+                @Html.ActionLink(CrystalSiege.Resources.HomeTexts.TitleBook, "Index", "Home", new { area = "" }, new { @class = "navbar-brand font_military" })
             </div>
             <ul class="nav navbar-nav navbar-left navbar-collapse collapse font_military">         
 
                 @{
+                    string myCookie = CrystalSiege.Resources.HomeTexts.lang_set;
+                    /*
+                    HttpCookie myCookie = new HttpCookie("Language");
+                    myCookie = Request.Cookies["Language"];
+
+                    if (myCookie == null)
+                    {
+                        HttpCookie cookie = new HttpCookie("Language");
+                        cookie.Expires = DateTime.Now.AddDays(2d);
+                        cookie.Value = CrystalSiege.Resources.HomeTexts.lang_set;
+                        myCookie = cookie;
+                    }
+                    if (myCookie.Value == "")
+                    {
+                        myCookie.Value = CrystalSiege.Resources.HomeTexts.lang_set;
+                    }*/
+                    //   Response.Cookies.Set(myCookie);
+
+
                     List<List<String[]>> sekcje = CrystalSiege.Controllers.ContentsController.Get_Sections();
                     String[] t;
                     foreach (List<String[]> sec in sekcje)
                     {
                         @Html.Raw("<li><div class='dropdown'><div class='dropdown-toggle inscription' data-toggle='dropdown'>");
                         t = sec[0];
-                        @Html.Raw(""+t[1]);
+                        switch (myCookie)
+                        {
+                            case "pl":
+                                @Html.Raw(t[1]);
+                                break;
+                            case "en":
+                                @Html.Raw(t[2]);
+                                break;                         
+                        }
+                        //  @Html.Raw(""+t[1]);
                         if (sec.Count > 1)
                         {
                             @Html.Raw("<span class='caret'></span>");
@@ -43,7 +73,15 @@
                             for (int i = 1; i < sec.Count; i++)
                             {
                                 t = sec[i];
-                                @Html.Raw("<li><a href='" + @Url.Content("~/Contents/Index/" + t[0]) + "' >" + t[1] + "</a></li>");
+                                switch (myCookie)
+                                {
+                                    case "pl":
+                                        @Html.Raw("<li><a href='" + @Url.Content("~/Contents/Index/" + t[0]) + "' >" + t[1] + "</a></li>");
+                                        break;
+                                    case "en":
+                                        @Html.Raw("<li><a href='" + @Url.Content("~/Contents/Index/" + t[0]) + "' >" + t[2] + "</a></li>");
+                                        break;                                    
+                                }
                             }
                             @Html.Raw("</ul>");
                         }
@@ -54,19 +92,22 @@
             </ul>
             @Html.Partial("_LoginPartial")  
         </div>
-    </nav>
-
+    </nav>   
     <!-- Body Site -->
-    @RenderBody()
-    <div class="container body-content">
-        <hr />
-        <footer>
-            <p>@CrystalSiege.Resources.HomeTexts.Autorstwo</p>
-            <p>@CrystalSiege.Resources.HomeTexts.Ilustracje @DateTime.Now.Year</p>
-            <p>@CrystalSiege.Resources.HomeTexts.Website @DateTime.Now.Year</p>
-            <!--   <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>-->
-        </footer>
-    </div>
+    
+        @RenderBody()
+
+   
+        
+        <div class="container bottom">
+            <hr />
+            <footer class="footer">
+                <p>@CrystalSiege.Resources.HomeTexts.Autorstwo</p>
+                <p>@CrystalSiege.Resources.HomeTexts.Ilustracje @DateTime.Now.Year</p>
+                <p>@CrystalSiege.Resources.HomeTexts.Website @DateTime.Now.Year</p>
+            </footer>
+        </div>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

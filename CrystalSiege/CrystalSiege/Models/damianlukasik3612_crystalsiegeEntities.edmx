@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="damianlukasik3612_crystalsiegeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CarouselInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Link" Type="varchar(max)" Nullable="false" />
+          <Property Name="Title_ang" Type="varchar(max)" />
+          <Property Name="Description_ang" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="author" Type="varchar" MaxLength="50" />
+          <Property Name="image" Type="varchar(max)" />
+          <Property Name="title_eng" Type="varchar(max)" />
+          <Property Name="description_eng" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="News_Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NewsID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TagsID" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="50" />
+          <Property Name="access" Type="int" />
+          <Property Name="awatar" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" />
+          <Property Name="title_ang" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Secure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="link" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Subsections">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SectionsId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="varchar(max)" />
+          <Property Name="content" Type="varchar(max)" />
+          <Property Name="title_ang" Type="varchar(max)" />
+          <Property Name="content_ang" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tags" Type="varchar" MaxLength="50" />
+          <Property Name="tags_pl" Type="varchar" MaxLength="50" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__News_Tags__NewsI__29572725">
+          <End Role="News" Type="Self.News" Multiplicity="0..1" />
+          <End Role="News_Tags" Type="Self.News_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News_Tags">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News_Tags__TagsI__286302EC">
+          <End Role="Tags" Type="Self.Tags" Multiplicity="0..1" />
+          <End Role="News_Tags" Type="Self.News_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News_Tags">
+              <PropertyRef Name="TagsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subsectio__Secti__2C3393D0">
+          <End Role="Sections" Type="Self.Sections" Multiplicity="1" />
+          <End Role="Subsections" Type="Self.Subsections" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subsections">
+              <PropertyRef Name="SectionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="damianlukasik3612_crystalsiegeModelStoreContainer">
+          <EntitySet Name="CarouselInfo" EntityType="Self.CarouselInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News_Tags" EntityType="Self.News_Tags" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sections" EntityType="Self.Sections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Secure" EntityType="Self.Secure" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subsections" EntityType="Self.Subsections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tags" EntityType="Self.Tags" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__News_Tags__NewsI__29572725" Association="Self.FK__News_Tags__NewsI__29572725">
+            <End Role="News" EntitySet="News" />
+            <End Role="News_Tags" EntitySet="News_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News_Tags__TagsI__286302EC" Association="Self.FK__News_Tags__TagsI__286302EC">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="News_Tags" EntitySet="News_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subsectio__Secti__2C3393D0" Association="Self.FK__Subsectio__Secti__2C3393D0">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Subsections" EntitySet="Subsections" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="damianlukasik3612_crystalsiegeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CarouselInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title_ang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Description_ang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="title_eng" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="description_eng" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="News_Tags" Relationship="Self.FK__News_Tags__NewsI__29572725" FromRole="News" ToRole="News_Tags" />
+        </EntityType>
+        <EntityType Name="News_Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="NewsID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TagsID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="News" Relationship="Self.FK__News_Tags__NewsI__29572725" FromRole="News_Tags" ToRole="News" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK__News_Tags__TagsI__286302EC" FromRole="News_Tags" ToRole="Tags" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="access" Type="Int32" />
+          <Property Name="awatar" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="title_ang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Subsections" Relationship="Self.FK__Subsectio__Secti__2C3393D0" FromRole="Sections" ToRole="Subsections" />
+        </EntityType>
+        <EntityType Name="Secure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="link" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Subsection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="SectionsId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="title_ang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="content_ang" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__Subsectio__Secti__2C3393D0" FromRole="Subsections" ToRole="Sections" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tags" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tags_pl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="News_Tags" Relationship="Self.FK__News_Tags__TagsI__286302EC" FromRole="Tags" ToRole="News_Tags" />
+        </EntityType>
+        <Association Name="FK__News_Tags__NewsI__29572725">
+          <End Role="News" Type="Self.News" Multiplicity="0..1" />
+          <End Role="News_Tags" Type="Self.News_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="News">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News_Tags">
+              <PropertyRef Name="NewsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__News_Tags__TagsI__286302EC">
+          <End Role="Tags" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="News_Tags" Type="Self.News_Tags" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News_Tags">
+              <PropertyRef Name="TagsID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Subsectio__Secti__2C3393D0">
+          <End Role="Sections" Type="Self.Section" Multiplicity="1" />
+          <End Role="Subsections" Type="Self.Subsection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sections">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Subsections">
+              <PropertyRef Name="SectionsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="damianlukasik3612_crystalsiegeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CarouselInfoes" EntityType="Self.CarouselInfo" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="News_Tags" EntityType="Self.News_Tags" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="Secures" EntityType="Self.Secure" />
+          <EntitySet Name="Subsections" EntityType="Self.Subsection" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <AssociationSet Name="FK__News_Tags__NewsI__29572725" Association="Self.FK__News_Tags__NewsI__29572725">
+            <End Role="News" EntitySet="News" />
+            <End Role="News_Tags" EntitySet="News_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__News_Tags__TagsI__286302EC" Association="Self.FK__News_Tags__TagsI__286302EC">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="News_Tags" EntitySet="News_Tags" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Subsectio__Secti__2C3393D0" Association="Self.FK__Subsectio__Secti__2C3393D0">
+            <End Role="Sections" EntitySet="Sections" />
+            <End Role="Subsections" EntitySet="Subsections" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="damianlukasik3612_crystalsiegeModelStoreContainer" CdmEntityContainer="damianlukasik3612_crystalsiegeEntities">
+          <EntitySetMapping Name="CarouselInfoes">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.CarouselInfo">
+              <MappingFragment StoreEntitySet="CarouselInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Title_ang" ColumnName="Title_ang" />
+                <ScalarProperty Name="Description_ang" ColumnName="Description_ang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="title_eng" ColumnName="title_eng" />
+                <ScalarProperty Name="description_eng" ColumnName="description_eng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News_Tags">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.News_Tags">
+              <MappingFragment StoreEntitySet="News_Tags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+                <ScalarProperty Name="TagsID" ColumnName="TagsID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="access" ColumnName="access" />
+                <ScalarProperty Name="awatar" ColumnName="awatar" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.Section">
+              <MappingFragment StoreEntitySet="Sections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="title_ang" ColumnName="title_ang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Secures">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.Secure">
+              <MappingFragment StoreEntitySet="Secure">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="link" ColumnName="link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subsections">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.Subsection">
+              <MappingFragment StoreEntitySet="Subsections">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SectionsId" ColumnName="SectionsId" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title_ang" ColumnName="title_ang" />
+                <ScalarProperty Name="content_ang" ColumnName="content_ang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="damianlukasik3612_crystalsiegeModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="tags" ColumnName="tags" />
+                <ScalarProperty Name="tags_pl" ColumnName="tags_pl" />
+                <ScalarProperty Name="color" ColumnName="color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

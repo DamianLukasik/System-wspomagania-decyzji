@@ -1,12 +1,24 @@
 ﻿@model CrystalSiege.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.NoAccess;
 }
 
-<h2>@ViewBag.Title.</h2>
+
+<div class="container body-content">
+    <br>
+    <h2>@ViewBag.Title.</h2>
+    <h4>@CrystalSiege.Resources.HomeTexts.PermissionCommunicate</h4>
+    <br>
+    <img class='media-object img-rounded' src='@Url.Content("~/Resources/Image/haha_zecora.png")' width='210px' height='210px'>
+    <br>
+
+  <a href='///Url.Action("Register", "Account")?id=123'></a>
+</div>
+<!--
+<h2>@//ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
+{/*
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
@@ -33,9 +45,9 @@
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
-    </div>
+    </div>*/
 }
-
+    -->
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

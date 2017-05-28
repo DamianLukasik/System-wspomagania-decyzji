@@ -1,0 +1,96 @@
+﻿
+<div class="container body-content">
+    <br>
+    <h3>@ViewBag.Title</h3>
+    <hr>
+    <div>
+    @{
+
+        List<string[]> Message_news = new List<string[]>();
+        List<string[]> List_news = new List<string[]>();
+        List<string[]> Message_cont = new List<string[]>();
+        List<string[]> List_cont = new List<string[]>();
+
+        if(ViewBag.Message != null)
+        {
+            if (ViewBag.Count == 2)
+            {
+                List_news = ViewBag.Message[0];
+                Message_news = ViewBag.Message[1];
+
+                if (List_news[0].Length >= 3)
+                {
+                    List_cont = List_news;
+                    Message_cont = Message_news;
+                }
+            }
+            else
+            {
+                List_news = ViewBag.Message[0];
+                Message_news = ViewBag.Message[1];
+
+                if (ViewBag.Message[2].Count != 0)
+                {
+                    List_cont = ViewBag.Message[2];
+                    Message_cont = ViewBag.Message[3];
+                }
+            }        
+
+            if (Message_news != null)
+            {
+                @Html.Raw("<dl class='dl-horizontal mt-12'>");
+                @Html.Raw("<div class='panel panel-default'>");
+                @Html.Raw("<div class='panel-heading'>");
+                List<string[]> tab0 = Message_news;
+                string[] tab0_ = tab0[0];
+                @Html.Raw("<span class='fa fa-newspaper-o' style='font-size:24px'></span> " + tab0_[0] + "</div>");
+                @Html.Raw("<div class='panel-body'><table class='table'><thead><tr><th>" + CrystalSiege.Resources.HomeTexts.Title + "</th><th>" + CrystalSiege.Resources.HomeTexts.WhereWereFound+ "</th><th>" + CrystalSiege.Resources.HomeTexts.Date + "</th><th>" + CrystalSiege.Resources.HomeTexts.Author+"</th></tr></thead><tbody>");
+
+                List<string[]> tab1 = List_news;
+
+                foreach (string[] searched in tab1)
+                {
+                    @Html.Raw("<tr>");
+                    @Html.Raw("<td><a href='" + @Url.Content("~/Contents/News?news=" + searched[0]) + "'>" + searched[1] + "</a></td>");
+
+                    if (searched[2].Contains("tag"))
+                    {
+                        @Html.Raw("<td>tag <span class='label label-success' style='background-color: " + searched[2].Substring(4,7) + "'>" + searched[2].Substring(12) + "</span></td>");//[2]
+                    }
+                    else
+                    {
+                        @Html.Raw("<td>" + searched[2] + "</td>");
+                    }
+                    @Html.Raw("<td>" + searched[3] + "</td>");
+                    @Html.Raw("<td>" + searched[4] + "</td>");
+                    @Html.Raw("</tr>");
+                }
+                @Html.Raw("</tbody></table></div></div></dl>");
+            }
+
+            @Html.Raw("</br>");
+            if (Message_cont != null && Message_cont.Count != 0)
+            {
+                @Html.Raw("<dl class='dl-horizontal mt-12'>");
+                @Html.Raw("<div class='panel panel-info'>");
+                @Html.Raw("<div class='panel-heading'>");
+                List<string[]> tab3 = Message_cont;
+                string[] tab3_ = tab3[0];
+                @Html.Raw("<span class='fa fa-desktop' style='font-size:24px'></span> " + tab3_[0] + "</div>");
+                @Html.Raw("<div class='panel-body'><table class='table'><thead><tr><th>" + CrystalSiege.Resources.HomeTexts.Title + "</th><th>" + CrystalSiege.Resources.HomeTexts.WhereWereFound + "</th></tr></thead><tbody>");
+
+                List<string[]> tab2 = List_cont;
+
+                foreach (string[] searched in tab2)
+                {
+                    @Html.Raw("<tr>");
+                    @Html.Raw("<td><a href='" + @Url.Content("~/Contents/Index/" + searched[0]) + "'>" + searched[1] + "</a></td>");
+                    @Html.Raw("<td>" + searched[2] + "</td>");
+                    @Html.Raw("</tr>");//nie przesyła całej tablicy stringów
+                }
+                @Html.Raw("</tbody></table></div></div></dl>");
+            }
+        }
+    }
+    </div>
+</div>

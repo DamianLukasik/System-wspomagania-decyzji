@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.IndexViewModel
 @{    
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,72 +9,68 @@
     @Html.Partial("Module_Profil")  
     <hr>
     <div>
-        <h4 class="dl-horizontal mt-12">Zawartość strony</h4>
+        <h4 class="dl-horizontal mt-12">@CrystalSiege.Resources.HomeTexts.PageContent</h4>
         <dl class="dl-horizontal mt-12">
 
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-blackboard" style="font-size:24px"></span> Karuzela 
+                    <span class="glyphicon glyphicon-blackboard" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Slides 
                 </div>
                 <div class="panel-body">
                     <div class="container">               
-                        @Html.ActionLink("Dodaj slajd", "AddSlide", "Manage", new { area = "" }, new { @class = "btn btn-success" })                        
-                        @Html.ActionLink("Wyświetl slajdy", "ViewSlide", "Manage", new { area = "" }, new { @class = "btn btn-default" })     
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddSlide, "AddSlide", "Manage", new { area = "" }, new { @class = "btn btn-success" })                        
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.ViewSlides, "ViewSlide", "Manage", new { area = "" }, new { @class = "btn btn-default" })     
                     </div>
                 </div>
             </div>
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> Aktualności 
+                    <span class="fa fa-newspaper-o" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.News
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        @Html.ActionLink("Dodaj wiadomość", "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Wyświetl wiadomości", "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddNews, "AddNews", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink(@CrystalSiege.Resources.HomeTexts.ViewNews, "ViewNews", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>
 
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <span class="fa fa-desktop" style="font-size:24px"></span> Sekcje strony 
+                    <span class="fa fa-desktop" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.SectionOfTheSite
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        @Html.ActionLink("Dodaj sekcje", "AddSection", "Manage", new { area = "" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Zarządzaj sekcjami", "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddTheSection, "AddSection", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.ManageSections, "ViewSection", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>
 
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <span class="fa fa-picture-o" style="font-size:24px"></span> Obrazki
+                    <span class="fa fa-picture-o" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Images
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        @Html.ActionLink("Dodaj obrazek", "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Wyświetl wszystkie obrazki", "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddImage, "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.ViewAllImages, "ViewImage", "Manage", new { area = "" }, new { @class = "btn btn-default" })
                     </div>
                 </div>
             </div>
-
+            <!--
             <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <span class="fa fa-language" style="font-size:24px"></span> Tłumaczenia
+                    <span class="fa fa-language" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Translate
                 </div>
                 <div class="panel-body">
-                    <div class="container">
-                     <!--
-                         @Html.ActionLink("Zarządzaj tłumaczeniami", "ViewTranslate", "Manage", new { area = "" }, new { @class = "btn btn-default" })    
-                     
-                         -->      
-                        W planach            
+                    <div class="container">                    
+                         @Html.ActionLink(CrystalSiege.Resources.HomeTexts.ManageTranslate, "ViewTranslate", "Manage", new { area = "" }, new { @class = "btn btn-default" })            
                     </div>
                 </div>
             </div>
-
+            -->
         </dl>
     </div>
 </div>

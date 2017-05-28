@@ -26,6 +26,8 @@ namespace CrystalSiege.Models
         public Nullable<System.DateTime> date { get; set; }
         public string author { get; set; }
         public string image { get; set; }
+        public string title_eng { get; set; }
+        public string description_eng { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<News_Tags> News_Tags { get; set; }

@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.IndexViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,58 +9,88 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
-        <h4 class="dl-horizontal mt-12">Slajdy</h4>
+        <h4 class="dl-horizontal mt-12">@CrystalSiege.Resources.HomeTexts.Slides</h4>
         <dl class="dl-horizontal mt-12">            
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-blackboard" style="font-size:24px"></span> Slajdy karuzeli
+                    <span class="glyphicon glyphicon-blackboard" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Slide
                 </div>
                 <div class="panel-body">
+                    <!-- Button select language -->
+                    @Html.Partial("Module_Change_Language")
+                    <!-- Carousel  -->
+                    <div class="row">
+                        <div id='myCarousel' class='carousel slide' data-ride='carousel'>
+                            <div class='col-sm-12'>
+                                <div class='carousel-inner' role='listbox'>
+                                    @{
+                                            String clas = "active";
+                                            string[] lang_tab = { "pl", "eng" };
+                                            foreach (string lang in lang_tab)
+                                            {
+                                                @Html.Raw("<div class='item " + clas + "'><table class='table'><tbody><tr><td>");
+                                            clas = "";
+                                            List<List<String[]>> dane_ = ViewBag.Message;
+                                            List<String[]> dane = new List<String[]>();
+                                            int i = 0;
+                                            int index = 0;
+                                            switch (lang)
+                                            {
+                                                case "pl":
+                                                    dane = dane_[0];
+                                                    break;
+                                                case "eng":
+                                                    dane = dane_[1];
+                                                    break;
+                                            }
+                                                @Html.Raw("<div class='row'>");
+                                                foreach (String[] str in dane)
+                                                {
+                                                    if (i == 4)
+                                                    {
+                                                        @Html.Raw("</div><div class='row'>");
+                                                        i = 0;
+                                                    }
+                                                    @Html.Raw("<div class='col-md-3'>");
+                                                    @Html.Raw("<div class='thumbnail'>");//"../Contents/News?news="+idek;
+                                                    @Html.Raw("<img class='media-object img-rounded' src='" + @Url.Content("~/Resources/Image/" + str[0]) + "' style='width:100%'>");
 
-                    @{
-                        List<String[]> dane = ViewBag.Message;
-                        int i = 0;
-                        @Html.Raw("<div class='row'>");
-                        foreach (String[] str in dane)
-                        {
-                            if (i == 4)
-                            {
-                                @Html.Raw("</div><div class='row'>");
-                                i = 0;
-                            }
-                            @Html.Raw("<div class='col-md-3'>");
-                            @Html.Raw("<div class='thumbnail'>");//"../Contents/News?news="+idek;
-                            @Html.Raw("<img class='media-object img-rounded' src='" + @Url.Content("~/Resources/Image/" + str[0]) + "' style='width:100%'>");
+                                                    @Html.Raw("<div class='caption'>");
+                                                    @Html.Raw("<p>" + str[1] + "</p>");
+                                                    @Html.Raw("</div>");
 
-                            @Html.Raw("<div class='caption'>");
-                            @Html.Raw("<p>" + str[1] + "</p>");
-                            @Html.Raw("</div>");
+                                                    @Html.Raw("<div class='btn-group btn-group-justified'>");
+                                                    @Html.Raw("<div class='btn-group'>");
+                                                    @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSlide/" + str[2]+"?lang="+lang) + "' class='btn btn-default btn-xs' >"+CrystalSiege.Resources.HomeTexts.Edit+"</a>");
+                                                    @Html.Raw("</div>");
+                                                    // @Html.Raw("<a href='../Manage/DeleteSlide?id=" + str[2] + "' class='btn btn-danger btn-xs'>Usuń</a>");
+                                                    @Html.Raw("<div class='btn-group'>");
+                                                //  Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str[2], option = "1", obj = "Slide" }));
+                                                    @Html.Raw("<button onclick='DeleteSlide(" + str[2] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
+                                                    @Html.Raw("</div>");
+                                                    @Html.Raw("</div>");
 
-                            @Html.Raw("<div class='btn-group btn-group-justified'>");
-                            @Html.Raw("<div class='btn-group'>");
-                            @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSlide/" + str[2]) + "' class='btn btn-default btn-xs' >Edytuj</a>");
-                            @Html.Raw("</div>");
-                            // @Html.Raw("<a href='../Manage/DeleteSlide?id=" + str[2] + "' class='btn btn-danger btn-xs'>Usuń</a>");
-                            @Html.Raw("<div class='btn-group'>");
-                            Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str[2], option = "1", obj = "Slide" }));
-                            @Html.Raw("</div>");
-                            @Html.Raw("</div>");
-
-                            @Html.Raw("</div></div>");
-                            i++;
-                        }
-                        if (i <= 4)
-                        {
-                            @Html.Raw("</div>");
-                            i = 0;
-                        }
-                    }
+                                                    @Html.Raw("</div></div>");
+                                                    i++;
+                                                }
+                                                if (i <= 4)
+                                                {
+                                                    @Html.Raw("</div>");
+                                                    i = 0;
+                                                }
+                                                @Html.Raw("</td></tr></tbody></table></div>");                                           
+                                        }
+                                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class='thumbnail'>
-                            @Html.ActionLink("Dodaj slajd", "AddSlide", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                            @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddSlide, "AddSlide", "Manage", new { area = "" }, new { @class = "btn btn-success" })
                         </div>
                     </div>
                 </div>
@@ -70,3 +100,36 @@
     </dl>
 </div>
 </div>
+
+   <!-- Modal -->
+<div class="modal fade" id="myModal_center" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">@CrystalSiege.Resources.HomeTexts.communicate</h4>
+            </div>
+            <div class="modal-body">
+                <center id="btn_center">
+                    @Html.Raw("<a href='../Manage/DeleteSlide?id=' class='btn btn-danger'>" + @CrystalSiege.Resources.HomeTexts.Yes + "</a>")
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@CrystalSiege.Resources.HomeTexts.No</button>
+                </center>
+            </div>
+            <div class="modal-footer">
+                <h6><small>@CrystalSiege.Resources.HomeTexts.DeleteComunicate</small></h6>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+
+    function DeleteSlide(x) {
+        var url = '../Manage/DeleteSlide?id=' + x;
+        $('#btn_center a:first-child').attr('href', url);
+        $('#myModal_center').modal('toggle');
+    }
+
+</script>

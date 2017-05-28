@@ -1,26 +1,28 @@
 ﻿@using CrystalSiege.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Brak dostępu";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.NoAccess;
 }
 
 <div class="container body-content">
     <br>
     <h2>@ViewBag.Title.</h2>
-    <h4>Nie masz uprawnień do zawartości tej podstrony.</h4>
+    <h4>@CrystalSiege.Resources.HomeTexts.PermissionCommunicate</h4>
     <br>
     <img class='media-object img-rounded' src='@Url.Content("~/Resources/Image/haha_zecora.png")' width='210px' height='210px'>
     <br>
 </div>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 <!--
-<h2>@ViewBag.Title.</h2>
+<h2>@//ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+            {/*
                 @Html.AntiForgeryToken()
                 <h4>Use a local account to log in.</h4>
                 <hr />
@@ -58,7 +60,7 @@
                 @* Enable this once you have account confirmation enabled for password reset functionality
                     <p>
                         @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
+                    </p>*@*/
             }
         </section>
     </div>
@@ -69,6 +71,3 @@
     </div>
 </div>
 -->
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

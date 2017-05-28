@@ -1,83 +1,181 @@
-﻿@using Microsoft.AspNet.Identity
-
-
-@if (Request.IsAuthenticated)
+﻿@if (Request.Cookies["Session"] != null)
 {
+    string UserGuid = Request.Cookies["Session"].Value;
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-    @Html.AntiForgeryToken()
-
-    <ul class="nav navbar-nav navbar-right navbar-collapse collapse">        
-       
-        <li>
-            @Html.Raw("<div class='pull-left'><img class='media-object img-circle' src='" + @Url.Content("~/Resources/Image/" + CrystalSiege.Controllers.ManageController.Get_Awatar(User.Identity.GetUserId())) + "' width='40px' height='40px'></div>")
-        </li>        
-        
-        <li class="dropdown">
-            <a class="dropdown-toggle font_military" data-toggle="dropdown" href="#">
-                @CrystalSiege.Controllers.ManageController.Get_Username(User.Identity.GetUserId())
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                    @Html.ActionLink(" Wyświetl profil", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-                </li>
-                <li>
-                    @Html.ActionLink(" Zarządzaj treścią", "Content", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })                    
-                </li>
-                <li>
-                    <a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a>
-                </li>
-            </ul>
-        </li>
-
-
+        @Html.AntiForgeryToken()
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <!-- Search Text -->
+            <li id="searchText" style="visibility:hidden">
+                <input class="font_military form-control" type="text" placeholder='@CrystalSiege.Resources.HomeTexts.search_txt'>
+                <!--   <form class="navbar-form" role="search">
+                       <input type="text" class="form-control" placeholder="Search...">
+                    </form>-->
+            </li>
+            <!-- Profil -->
+            <li>               
+                @Html.Raw("<div class='pull-left'><img class='media-object img-circle' src='" + @Url.Content("~/Resources/Image/" + CrystalSiege.Controllers.ManageController.Get_Awatar(UserGuid)) + "' width='40px' height='40px'></div>")               
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle font_military" data-toggle="dropdown" href="#">
+                    @CrystalSiege.Controllers.ManageController.Get_Username(UserGuid)
+                </a>
+                <ul class="font_military dropdown-menu">
+                    <li>
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.view_profile, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li>
+                        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.manage_content, "Content", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                    </li>
+                    <li>
+                        <a href="javascript:document.getElementById('logoutForm').submit()">@CrystalSiege.Resources.HomeTexts.logout</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- Search Icon -->
             <li>
                 <a id="searchInput"><span class="glyphicon glyphicon-search"></span></a>
             </li>
+            <!-- Language Change -->
             <li class="dropdown">
                 <a id="searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-flag"></span></a>
                 <ul class="dropdown-menu">
-                    <li>@Html.ActionLink("English", "Change", "Language", new { LanguageAbbrevation = "en" }, null)</li>
-                    <li>@Html.ActionLink("Polish", "Change", "Language", new { LanguageAbbrevation = "pl" }, null)</li>
+                    <li>
+                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl'>
+                            <img src='@Url.Content("~/Resources/1494386875_PL.png")' />
+                            @CrystalSiege.Resources.HomeTexts.pl_lang
+                        </a>
+                    </li>
+                    <li>
+                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en'>
+                            <img src='@Url.Content("~/Resources/1494386869_GB.png")' />
+                            @CrystalSiege.Resources.HomeTexts.eng_lang
+                        </a>
+                    </li>
                 </ul>
             </li>
-            <li>
+        </ul> 
+            }
+        }
+        else
+        {
+        <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
+            <!-- Search Text -->
+            <li id = "searchText" style="visibility:hidden">
+                
+                <input class="font_military form-control" type="text" placeholder="@CrystalSiege.Resources.HomeTexts.search_txt">
 
+                <!--    <form class="navbar-form" role="search">
+                        <input type = "text" class="form-control" placeholder="Search...">
+                    </form>-->
             </li>
-        </ul>
+            <!-- Search Icon -->
+            <li>
+                <a id = "searchInput" ><span class="glyphicon glyphicon-search"></span></a>
+            </li>
+            <!-- Language Change -->
+            <li class="dropdown">
+                <a id = "searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-flag"></span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl' >
+                            <img src='@Url.Content("~/Resources/1494386875_PL.png")' />
+                            @CrystalSiege.Resources.HomeTexts.pl_lang
+                        </a>
+                    </li>
+                    <li>
+                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en' >
+                            <img src='@Url.Content("~/Resources/1494386869_GB.png")' />
+                            @CrystalSiege.Resources.HomeTexts.eng_lang
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>   
     }
 }
-else
-{
-    <ul class="nav navbar-nav navbar-right navbar-collapse collapse">
-        <li>
-            <a  id="searchInput"><span class="glyphicon glyphicon-search"></span></a>
-        </li>
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-flag"></span></a>
-            <ul class="dropdown-menu">
-                <li>@Html.ActionLink("English", "Change", "Language", new { LanguageAbbrevation = "en" }, null)</li>
-                <li>@Html.ActionLink("Polish", "Change", "Language", new { LanguageAbbrevation = "pl" }, null)</li>
-            </ul>
-        </li>
-        <li>
+        <script type="text/javascript">
 
-        </li>
-    </ul>
-}
-    
+            //Search//
 
-<script>
+            search_on = false;
+            $("#searchText").animate({ width: 'toggle' }, "slow");
 
-    function searchOn()
-    {
-        alert("Click");
+            $(document).ready(function () {
+                $.fn.switch_visible_searchtext = function () {
+        if (search_on) {
+            // $("#searchText").css("visibility", "hidden");
+        }
+        else {
+                        $("#searchText").css("visibility", "visible");
+        }
+                    $("#searchText").animate({ width: 'toggle' }, "slow");
+        search_on = !search_on;
     }
+})
 
-    //$('#searchInput').click(function () { alert("klik"); });
+            $('#searchInput').click(function () {
+                //  alert("klik");
+                $.fn.switch_visible_searchtext();
+});
+
+            $('html').bind('keypress', function (e) {
+    //    alert('You pressed enter!');
+    if (e.keyCode == 13) {
+        if (search_on) {
+            //   alert('You pressed enter!');
+            //zapytanie do bazy i odbiór wyników
+            var str = $('#searchText').children('input:first').val();
+            //    alert(str);
+            //  $.url("~/Home/SearchResult").param(str);
+
+            window.location.href = "/Home/SearchResult?search=" + str;
+
+            // $.url("http://localhost:62074/Home/SearchResult").param($('#searchInput').val());
+
+        }
+        return false;
+    }
+});
+
+            //Language change//
+            /*
+            function select_language_with_cookie() {
+                var str = readCookie("lang");
+                switch (str)
+                {
+                    case "en":
+                        @{
+                 //   CrystalSiege.Controllers.LanguageController.Set_Change_Language("en");
+                };
+            /*    break;
+            case "pl":*/
+            @{
+                 //   CrystalSiege.Controllers.LanguageController.Set_Change_Language("pl");
+                };
+            /*     break;
+         }
+     }
+     /*
+     $('#polish_lang').click(function () {
+         // alert("klik pl");
+         createCookie("lang", "pl", 7);
+         select_language_with_cookie();
+     });
+
+     $('#english_lang').click(function () {
+         //   alert("klik eng");
+         createCookie("lang", "en", 7);
+         select_language_with_cookie();
+     });*/
 
 
-</script>
+            //  <li>@Html.ActionLink("English", "Change", "Language", new { LanguageAbbrevation = "en" }, null)</li>
+            //  <li>@Html.ActionLink("Polish", "Change", "Language", new { LanguageAbbrevation = "pl" }, null)</li>
 
 
 
+            //jquery zmieniam ciastka
+
+        </script>

@@ -1,6 +1,6 @@
 ﻿@model CrystalSiege.Models.IndexViewModel
 @{
-    ViewBag.Title = "Zarządzaj treścią ";
+    ViewBag.Title = CrystalSiege.Resources.HomeTexts.manage_content;
 }
 @using Microsoft.AspNet.Identity
 <div class="container body-content">
@@ -9,13 +9,13 @@
     @Html.Partial("Module_Profil")    
     <hr>
     <div>
-        @Html.ActionLink("Cofnij", "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
+        @Html.ActionLink(CrystalSiege.Resources.HomeTexts.undo, "Content", "Manage", new { area = "" }, new { @class = "btn btn-default" })
         <br />
-        <h4 class="dl-horizontal mt-12">Wszystkie grafiki w serwisie</h4>
+        <h4 class="dl-horizontal mt-12">@CrystalSiege.Resources.HomeTexts.AllImageInService</h4>
         <dl class="dl-horizontal mt-12">            
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <span class="fa fa-picture-o" style="font-size:24px"></span> Obrazki
+                    <span class="fa fa-picture-o" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Images
                 </div>
                 <div class="panel-body">
 
@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class='thumbnail'>
-                                @Html.ActionLink("Dodaj obrazek", "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
+                                @Html.ActionLink(CrystalSiege.Resources.HomeTexts.AddImage, "AddImage", "Manage", new { area = "" }, new { @class = "btn btn-success" })
                             </div>
                         </div>
                     </div>
