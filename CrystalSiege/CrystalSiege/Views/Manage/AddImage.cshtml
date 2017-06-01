@@ -21,39 +21,88 @@
                     <span class="fa fa-home" style="font-size:24px"></span> @CrystalSiege.Resources.HomeTexts.Images
                 </div>
                 <div class="panel-body container">
-                    <h2>@CrystalSiege.Resources.HomeTexts.Attach_a_picture</h2>                                  
-                    @using (Html.BeginForm("AddImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        /*
-                        <div class="form-group">
-                            <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
-                            @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
-                                @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
-                                <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
-                            </div>
-                        </div>*/
-                        @Html.AntiForgeryToken()
+                    <h2>@CrystalSiege.Resources.HomeTexts.Attach_a_picture</h2>    
+                    
+                     
+                    @{ /*                           
+  @using (Html.BeginForm("AddImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+  {
+      /*
+      <div class="form-group">
+          <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
+          @Html.LabelFor(model => model.file, htmlAttributes: new { @class = "control-label col-md-2" })
+          <div class="col-md-10">
+              @Html.EditorFor(model => model.file, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+              @Html.ValidationMessageFor(model => model.file, "", new { @class = "text-danger" })
+              <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
+          </div>
+      </div>*/
+//   @Html.AntiForgeryToken()
+                        <!--
                         <h2>Upload file</h2>                      
-                        {
+                        
+                        
                             <div class="form-group">
                                 <input type="file" name="file" id="file" /><br><br>
                                 <input type="submit" value="Upload file" />
                                 <br><br>
-                                @ViewBag.Message
+                                
                             </div>
+                            <br />
+                            <br />
+                            <b>test</b>
+
+                            <input type="file" name="file" id="file" style="width: 100%;" /> <br />
+                            <input type="submit" value="Upload" class="submit" />
+
+
+                            
+                            <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
+                            <input type="file" name="file" id="file" /><br><br>
+                            <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
+                            <br><br>-->
+
+
                         }
-                                                
-                        /*
-                        <label for="file">@CrystalSiege.Resources.HomeTexts.Load_Image</label>
-                        <input type="file" name="file" id="file" /><br><br>
-                        <input type="submit" value="@CrystalSiege.Resources.HomeTexts.Load" />
-                        <br><br>
-                        @ViewBag.Message
-                    */
-                    }
-              
+
+                                
+                                <hr />
+                                <p>@ViewBag.Message</p>
+                                <br />
+                                @using (Html.BeginForm("AddImage", "Manage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div>
+                                                        <img id="user_img" class="img-rounded" alt="@CrystalSiege.Resources.HomeTexts.Load_Image" 
+                                                             width="152" height="118" />
+                                                    </div>
+                                                    <br />
+                                                    <input name="file" type="file" class="filestyle" data-input="false" id="filestyle-0" 
+                                                           tabindex="-1" style="position: absolute;clip: rect(0px 0px 0px 0px);" 
+                                                           onchange="show(this)">
+                                                    <div class="bootstrap-filestyle input-group">
+                                                        <span class="group-span-filestyle " tabindex="0">
+                                                            <label for="filestyle-0" class="btn btn-default ">
+                                                                <span class="icon-span-filestyle glyphicon glyphicon-folder-open"></span>
+                                                                <span class="buttonText">@CrystalSiege.Resources.HomeTexts.Load_Image</span>
+                                                            </label>
+                                                        </span>
+                                                    </div>
+                                                    <br />
+                                                    <div>
+                                                        <input id="Load_" type="submit" class="btn btn-success btn-sm" 
+                                                               value="@CrystalSiege.Resources.HomeTexts.Load" />
+                                                    </div> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                }
+                     
                 </div>
             </div>
 
@@ -62,3 +111,16 @@
 </div>
 
 @Scripts.Render("~/Scripts/block.js")
+
+<script type="text/javascript">
+
+   function show(input) {
+      if (input.files && input.files[0]) {
+      var filerdr = new FileReader();
+      filerdr.onload = function (e) {
+         $('#user_img').attr('src', e.target.result);
+      }
+      filerdr.readAsDataURL(input.files[0]);
+   }
+}
+</script> 

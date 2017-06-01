@@ -19,6 +19,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Web.Hosting;
 
 namespace CrystalSiege.Controllers
 {
@@ -556,32 +558,59 @@ namespace CrystalSiege.Controllers
         [HttpPost]
         public ActionResult AddImage(HttpPostedFileBase file)
         {
-            if (Request.Cookies["Session"] != null)
+          //  tbl_details tbl = new tbl_details();
+           // var allowedExtensions = new[] {
+          //      ".Jpg", ".png", ".jpg", "jpeg"
+          //  };
+
+            if (Request.Cookies["Session"] != null && file != null && file.ContentLength > 0)
             {
-                // Verify that the user selected a file
-                if (file != null && file.ContentLength > 0)
+                try
                 {
-                    try
+                    string path = "";
+                    if (Path.GetExtension(file.FileName).ToLower() == ".jpg" ||
+                    Path.GetExtension(file.FileName).ToLower() == ".gif" ||
+                    Path.GetExtension(file.FileName).ToLower() == ".png" ||
+                    Path.GetExtension(file.FileName).ToLower() == ".jpeg")
                     {
+                        var fileName = Path.GetFileName(file.FileName);
+                        path = Path.Combine(HostingEnvironment.MapPath("~/Resources/Image/"), fileName);
+                        file.SaveAs(path);
+                        ViewBag.Message = "Załadowano zdjęcie";
+                        /*
+                        string ImageName = Path.GetFileName(file.FileName);
+                        string physicalPath = Server.MapPath("~/Resources/Image/" + ImageName);
+                        file.SaveAs(physicalPath);*/
+                        /*
+                        //   System.IO.File.WriteAllText(path, "Hello World");
+
                         // extract only the filename
                         var fileName = Path.GetFileName(file.FileName);
                         // store the file inside ~/App_Data/uploads folder
                         var path = Path.Combine(Server.MapPath("~/Resources/Image"), fileName);
-                        file.SaveAs(path);
+                        //  var path = Server.MapPath("~/Resources/Image" + fileName);
+                        file.SaveAs(path);//?
+                        string fullSavePath = HttpContext.Current.Server.MapPath(string.Format("~/App_Data/Platypus{0}.csv", dbContextAsInt));
+                        */
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        ViewBag.Message = "Błąd: " + ex.Message.ToString();
+                        ViewBag.Message = "nieprawidłowe rozszerzenie";
                     }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Błąd:  Data:" + ex.Data.ToString() + "   HelpLink:" + ex.HResult.ToString() + "   Message:" + ex.Message.ToString() + "  Source" + ex.Source.ToString() + "   StackTrace:" + ex.StackTrace.ToString() + "  TargetSite:" + ex.TargetSite.ToString() + " ";
+                }
+                   
                 }
                 else
                 {
                     ViewBag.Message = "Nie wybrano pliku.";
                 }
-                // redirect back to the index action to show the form once again
-                return View();
-            }
-            return View("../Home/Index");
+                // redirect back to the index action to show the form once again             
+            // return View("../Home/Index");
+            return View();
         }
         public ActionResult AddImage()
         {

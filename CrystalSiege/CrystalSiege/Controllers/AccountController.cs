@@ -79,6 +79,9 @@ namespace CrystalSiege.Controllers
                             cookie.Value = user.Id;
                             cookie.Expires = DateTime.Now.AddDays(2d);
                             Response.SetCookie(cookie);
+                            //
+                            contents.Secures.Remove(sec);
+                            contents.SaveChanges();
                         }
                     }                    
                 }                

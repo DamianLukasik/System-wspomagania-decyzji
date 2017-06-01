@@ -38,15 +38,19 @@ namespace CrystalSiege.Controllers
                 //
                 using (damianlukasik3612_crystalsiegeEntities contex = new damianlukasik3612_crystalsiegeEntities())
                 {
-                    List<Secure> list_sec = contex.Secures.ToList();
-                    int i = list_sec.Last().Id + 1;
-                    foreach (Secure sc in list_sec)
+                    int i = 0;
+                    if(contex.Secures.FirstOrDefault() != null)
                     {
-                        contex.Secures.Remove(sc);
+                        List<Secure> list_sec = contex.Secures.ToList();
+                        i = list_sec.Last().Id;
+                        foreach (Secure sc in list_sec)
+                        {
+                            contex.Secures.Remove(sc);
+                        }
+                        contex.SaveChanges();                       
                     }
-                    contex.SaveChanges();
-                    Secure sec = new Secure();
-                    sec.Id = i;
+                    Secure sec = new Secure();              
+                    sec.Id = i + 1;
                     Random rand = new Random();
                     str = CoderUTF8.Encode(rand.Next(0, 999).ToString()+ value["password"] + rand.Next(0, 999).ToString());
                     sec.link = str;

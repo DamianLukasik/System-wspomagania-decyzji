@@ -468,4 +468,10 @@
   <data name="PolishVersion" xml:space="preserve">
     <value>Polish version</value>
   </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
 </root>
