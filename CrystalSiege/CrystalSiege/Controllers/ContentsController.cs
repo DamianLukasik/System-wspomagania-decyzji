@@ -193,6 +193,14 @@ namespace CrystalSiege.Controllers
 
                 foreach (CarouselInfo wart in tab)
                 {
+                    if (wart.Link == "")
+                    {
+                        wart.Link = "http://crystalsiege.eu/";
+                    }
+                    else
+                    {
+                        wart.Link = CoderUTF8.Decode(wart.Link);
+                    }
                     switch (myCookie)
                     {                       
                         case "en":
@@ -201,7 +209,7 @@ namespace CrystalSiege.Controllers
                                 CoderUTF8.Decode(wart.Description_ang),
                                 wart.image,
                                 wart.Link
-                            };
+                            };                                                     
                             dane.Add(str2);
                             break;                        
                         case "pl":
@@ -210,7 +218,7 @@ namespace CrystalSiege.Controllers
                                 CoderUTF8.Decode(wart.Description),
                                 wart.image,
                                 wart.Link
-                            };
+                            };                        
                             dane.Add(str1);
                             break;
                     }

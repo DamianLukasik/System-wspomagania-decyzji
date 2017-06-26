@@ -474,4 +474,7 @@
   <data name="Remove" xml:space="preserve">
     <value>Usuń</value>
   </data>
+  <data name="ContentLink" xml:space="preserve">
+    <value>Link slajdu</value>
+  </data>
 </root>

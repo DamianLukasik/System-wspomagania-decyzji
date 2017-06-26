@@ -39,17 +39,22 @@
             </li>
             <!-- Language Change -->
             <li class="dropdown">
-                <a id="searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-flag"></span></a>
+                <a id="searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src='@Url.Content("~/Resources/"+CrystalSiege.Resources.HomeTexts.lang_set+".png")' />
+                    <!--
+    <span class="glyphicon glyphicon-flag"></span>
+            -->
+                </a>
                 <ul class="dropdown-menu">
                     <li>
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl'>
-                            <img src='@Url.Content("~/Resources/1494386875_PL.png")' />
+                            <img src='@Url.Content("~/Resources/pl.png")' />
                             @CrystalSiege.Resources.HomeTexts.pl_lang
                         </a>
                     </li>
                     <li>
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en'>
-                            <img src='@Url.Content("~/Resources/1494386869_GB.png")' />
+                            <img src='@Url.Content("~/Resources/en.png")' />
                             @CrystalSiege.Resources.HomeTexts.eng_lang
                         </a>
                     </li>
@@ -76,17 +81,22 @@
             </li>
             <!-- Language Change -->
             <li class="dropdown">
-                <a id = "searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-flag"></span></a>
+                <a id = "searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <img src='@Url.Content("~/Resources/"+CrystalSiege.Resources.HomeTexts.lang_set+".png")' />
+                    <!--
+                <span class="glyphicon glyphicon-flag"></span>
+                        -->
+                </a>
                 <ul class="dropdown-menu">
                     <li>
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl' >
-                            <img src='@Url.Content("~/Resources/1494386875_PL.png")' />
+                            <img src='@Url.Content("~/Resources/pl.png")' />
                             @CrystalSiege.Resources.HomeTexts.pl_lang
                         </a>
                     </li>
                     <li>
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en' >
-                            <img src='@Url.Content("~/Resources/1494386869_GB.png")' />
+                            <img src='@Url.Content("~/Resources/en.png")' />
                             @CrystalSiege.Resources.HomeTexts.eng_lang
                         </a>
                     </li>

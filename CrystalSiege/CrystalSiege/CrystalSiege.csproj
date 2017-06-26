@@ -408,8 +408,8 @@
       <DependentUpon>damianlukasik3612_crystalsiegeEntities.edmx</DependentUpon>
       <LastGenOutput>damianlukasik3612_crystalsiegeEntities.cs</LastGenOutput>
     </Content>
-    <Content Include="Resources\1494386869_GB.png" />
-    <Content Include="Resources\1494386875_PL.png" />
+    <Content Include="Resources\en.png" />
+    <Content Include="Resources\pl.png" />
     <Content Include="Resources\Image\a_soothing_lakefront_by_shamanguli-d9t6rmq.png" />
     <Content Include="Resources\Image\before_the_storm_by_shamanguli-d9uue4b.png" />
     <Content Include="Resources\Image\fall_of_everfree_by_shamanguli-dadutwo.png" />

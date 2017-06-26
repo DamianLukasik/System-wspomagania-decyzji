@@ -272,26 +272,31 @@ namespace CrystalSiege.Controllers
                 List<News_Tags> news_tags = new List<News_Tags>();
 
                 int idx = viewModel.Id;//Convert.ToInt32(ctx.News.ToList().LastOrDefault().Id);                
-                
-                string[] tab_tags = viewModel.Tags.Split('|');
-                int i_ = 1;
-                foreach (string tab_tag in tab_tags)
-                {
-                    if (tab_tag == "") { break; }
-                    int idxt = 1;
-                    if (ctx.News_Tags.ToList().Count != 0)
-                    {
-                        idxt = Convert.ToInt32(ctx.News_Tags.ToList().LastOrDefault().Id + i_);
-                    }
 
-                    News_Tags t = new News_Tags();
-                    t.Id = idxt;
-                    t.NewsID = idx;
-                    var id_tag = ctx.Tags.Where(u => u.tags_pl == tab_tag).FirstOrDefault();
-                    t.TagsID = id_tag.Id.ToString();
-                    news_tags.Add(t);
-                    i_++;
-                }
+                string[] tab_tags;
+                if (viewModel.Tags != null)
+                { 
+                    tab_tags = viewModel.Tags.Split('|');                
+                    int i_ = 1;
+                    foreach (string tab_tag in tab_tags)
+                    {
+                        if (tab_tag == "") { break; }
+                        int idxt = 1;
+                        if (ctx.News_Tags.ToList().Count != 0)
+                        {
+                            idxt = Convert.ToInt32(ctx.News_Tags.ToList().LastOrDefault().Id + i_);
+                        }
+
+                        News_Tags t = new News_Tags();
+                        t.Id = idxt;
+                        t.NewsID = idx;
+                        var id_tag = ctx.Tags.Where(u => u.tags_pl == tab_tag).FirstOrDefault();
+                        t.TagsID = id_tag.Id.ToString();
+                        news_tags.Add(t);
+                        i_++;
+                    }
+                    news.News_Tags = news_tags;
+                }           
                 //
                 switch (lang)
                 {
@@ -301,7 +306,7 @@ namespace CrystalSiege.Controllers
                             news.title = CoderUTF8.Encode(viewModel.Title);
                             news.description = CoderUTF8.Encode(viewModel.Description);
                             news.image = FileIsExists(viewModel.img);
-                            news.News_Tags = news_tags;
+                         //   news.News_Tags = news_tags;
                         }
                         break;
                     case "en":
@@ -310,7 +315,7 @@ namespace CrystalSiege.Controllers
                             news.title_eng = CoderUTF8.Encode(viewModel.Title);
                             news.description_eng = CoderUTF8.Encode(viewModel.Description);
                             news.image = FileIsExists(viewModel.img);
-                            news.News_Tags = news_tags;
+                        //    news.News_Tags = news_tags;
                         }
                         break;
                 }                
@@ -696,13 +701,18 @@ namespace CrystalSiege.Controllers
                     {
                         idx = Convert.ToInt32(contents.CarouselInfoes.ToList().LastOrDefault().Id + 1);
                     }
+                    string link_ = model.Link;
+                    if (link_ != "")
+                    {
+                        link_ = CoderUTF8.Encode(model.Link);
+                    }
                     var customers = contents.Set<CarouselInfo>();
                     customers.Add(new CarouselInfo {
                         Id = idx,
                         Title = CoderUTF8.Encode(model.Title),
                         Description = CoderUTF8.Encode(model.Description),
                         image = filename,//zrobić wybór, albo upload obrazka
-                        Link = ""
+                        Link = link_
                     });
                     contents.SaveChanges();
                     ViewSlide();
@@ -743,10 +753,12 @@ namespace CrystalSiege.Controllers
                     case "pl":
                         slide.Title = CoderUTF8.Encode(viewModel.Title);
                         slide.Description = CoderUTF8.Encode(viewModel.Description);
+                        slide.Link = CoderUTF8.Encode(viewModel.Link);
                         break;
                     case "eng":
                         slide.Title_ang = CoderUTF8.Encode(viewModel.Title);
                         slide.Description_ang = CoderUTF8.Encode(viewModel.Description);
+                        slide.Link = CoderUTF8.Encode(viewModel.Link);
                         break;
                 }
                 slide.image = filename;
@@ -777,7 +789,7 @@ namespace CrystalSiege.Controllers
                         String[] dane1 = {
                             CoderUTF8.Decode(slide.Title),
                             CoderUTF8.Decode(slide.Description),
-                            slide.Link,//[2]
+                            CoderUTF8.Decode(slide.Link),//[2]
                             slide.image,//[3]
                             slide.Id.ToString(),//[4]
                             lang,//[5]
@@ -788,7 +800,7 @@ namespace CrystalSiege.Controllers
                         String[] dane2 = {
                             CoderUTF8.Decode(slide.Title_ang),
                             CoderUTF8.Decode(slide.Description_ang),
-                            slide.Link,//[2]
+                            CoderUTF8.Decode(slide.Link),//[2]
                             slide.image,//[3]
                             slide.Id.ToString(),//[4]
                             lang,//[5]

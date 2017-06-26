@@ -48,7 +48,7 @@
                     {
                         @Html.Raw("<div class='item' >");
                     }
-                    @Html.Raw("<img src='" + @Url.Content("~/Resources/Image/" + str[2]) + "' data-color='firebrick'>");
+                    @Html.Raw("<a href='"+str[3]+"'><img src='" + @Url.Content("~/Resources/Image/" + str[2]) + "' data-color='firebrick'></a>");
                     @Html.Raw("<div class='carousel-caption'>");
                     @Html.Raw("<h3>" + str[0] + "</h3>");
                     @Html.Raw("<span>" + str[1] + "</span>");

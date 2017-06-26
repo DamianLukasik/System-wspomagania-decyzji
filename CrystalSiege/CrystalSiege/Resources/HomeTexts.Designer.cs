@@ -322,6 +322,15 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Slide link.
+        /// </summary>
+        public static string ContentLink {
+            get {
+                return ResourceManager.GetString("ContentLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Content message.
         /// </summary>
         public static string ContentMessage {

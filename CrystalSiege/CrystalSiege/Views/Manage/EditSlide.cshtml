@@ -55,6 +55,17 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="control-label col-md-2" for="comment">@CrystalSiege.Resources.HomeTexts.ContentLink:</label>
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(m => m.Link, new
+                                   {
+                                       @class = "form-control",
+                                       @placeholder = CrystalSiege.Resources.HomeTexts.ContentLink,
+                                       @Value = "" + ViewBag.Message[2]
+                                   })
+                                </div>
+                            </div>                          
+                            <div class="form-group">
                                 <!-- moduł zmiany/dodawania obrazka -->
                                 @{
                                     Html.RenderPartial("Module_ChangeImage", Model, new ViewDataDictionary { { "option", "edit" }, { "img", ViewBag.Message[3] } });

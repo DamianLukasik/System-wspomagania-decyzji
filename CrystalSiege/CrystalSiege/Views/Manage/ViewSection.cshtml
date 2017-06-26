@@ -48,7 +48,7 @@
                                                 @Html.Raw("<td><a href='#demo" + gd1 + "' data-toggle='collapse'>" + str_sect[0] + "</a>");
                                                 @Html.Raw("<div id='demo" + gd1 + "'' class='collapse'><br>");
                                                 //   @Html.Raw("<button onclick='editsection(" + str_sect[1] + "," + idx + ")' class='btn btn-default btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Edit + "</button>");
-                                                @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSection/" + str_sect[1] + "?lang=" + lang_) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+                                                @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSection/" + str_sect[1] + "?lang=" + lang_) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");                                                
                                                 @Html.Raw("<button onclick='deletesection(" + str_sect[1]+")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
 
                                                 //
@@ -87,7 +87,15 @@
                                                             var gd2 = Guid.NewGuid();
                                                             @Html.Raw("<td><a href='#demo" + gd2 + "' data-toggle='collapse'>" + str_sect_[1] + "</a>");
                                                             @Html.Raw("<div id='demo" + gd2 + "'' class='collapse'><br>");
-                                                            @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3] + "?lang=" + lang_) + "' class='btn btn-default btn-xs' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+
+                                                            @Html.ActionLink(@CrystalSiege.Resources.HomeTexts.Edit,
+                                                                "EditSubSection",
+                                                                "Manage",
+                                                                new { id = str_sect_[3], lang = lang_ },
+                                                                new { @class = "btn btn-default btn-xs" }
+                                                            );
+                                                         //   @Html.Raw("<a href='" + @Url.Content("~/Manage/EditSubSection/" + str_sect_[3] + "?lang=" + lang_) + "' class='' >" + @CrystalSiege.Resources.HomeTexts.Edit + "</a>");
+
                                                             @Html.Raw("<button onclick='deletesubsection(" + str_sect_[3] + ")' class='btn btn-danger btn-xs'>" + @CrystalSiege.Resources.HomeTexts.Delete + "</button>");
                                                             @Html.Raw("</div>");
                                                             //    Html.RenderPartial("Module_Delete", new ViewDataDictionary(new { id = str_sect_[3], option = "1", obj = "Section" }));
@@ -105,23 +113,34 @@
                                                     @Html.Raw("<tr><td>");
                                               //  List<String[]> _s = list_sect_[idx];
                                                     String[] s = str_sect;// _s[j];
-                                                    @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSubsection + "</a>");
-                                                    @Html.Raw("</td></tr>");
-                                                    @Html.Raw("</tbody></table></div>");
-                                                    j++;
-                                                    //   }
+                                                   // @Html.Raw("<a href='../Manage/AddSubSection?id=" + s[1] + "' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSubsection + "</a>");
+                                                @Html.ActionLink(@CrystalSiege.Resources.HomeTexts.AddTheSubsection,
+                                                    "AddSubSection", 
+                                                    "Manage",
+                                                    new { id = s[1] },
+                                                    new { @class = "btn btn-success btn-xs" }
+                                                );
+                                                @Html.Raw("</td></tr>");
+                                                @Html.Raw("</tbody></table></div>");
+                                                j++;
+                                                //   }
                                                 @Html.Raw("</div>");
                                                 @Html.Raw("</td>");
-                                                    //  @Html.Raw("</td>");
-                                                    //
+                                                //  @Html.Raw("</td>");
+                                                //
                                                 @Html.Raw("</tr>");
-                                                    i++;
-                                                    //   }
-                                                                          
+                                                i++;
+                                                //   }
+
                                             }
                                             idx++;
                                             @Html.Raw("<tr><td>");
-                                            @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSection + "</a>");
+                                        //    @Html.Raw("<a href='../Manage/AddSection' class='btn btn-success btn-xs'>" + @CrystalSiege.Resources.HomeTexts.AddTheSection + "</a>");
+                                            @Html.ActionLink(@CrystalSiege.Resources.HomeTexts.AddTheSection,
+                                                   "AddSection",
+                                                   "Manage",
+                                                    new { @class = "btn btn-success btn-xs" }
+                                                );
                                             @Html.Raw("</td></tr>");
                                             @Html.Raw("</tbody></table></div>");                                           
                                             @Html.Raw("</div>");
@@ -241,7 +260,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-
+            
         $("tr").click(function () {
             $("tbody").find("tr").removeClass("active");
             $(this).addClass("active");//nie może być karuzela w karuzeli
@@ -258,17 +277,35 @@
     function editsection(x, l) {
         lang = "pl";
         if (l == 1) { lang = "en"; }
-        location.replace('../Manage/EditSection?id=' + x+"?lang="+lang);
+        if (window.location.pathname.split("/")[2] == "ViewSection" || window.location.pathname.split("/").length == 3) {
+            location.replace('../Manage/EditSection?id=' + x + "?lang=" + lang);
+        }
+        else
+        {
+            location.replace('../EditSection?id=' + x + "?lang=" + lang);
+        }           
     }
 
     function deletesection(x) {
-        var url = '../Manage/DeleteSection?id='+x;
+        var url;
+        if (window.location.pathname.split("/")[2] == "ViewSection" || window.location.pathname.split("/").length == 3) {
+            url = '../Manage/DeleteSection?id=' + x;
+        }
+        else {
+            url = '../DeleteSection?id=' + x;
+        }
         $('#btn_center a:first-child').attr('href', url);
         $('#myModal_center').modal('toggle');
     }
 
     function deletesubsection(x) {
-        var url = '../Manage/DeleteSubSection?id='+x;
+        var url;
+        if (window.location.pathname.split("/")[2] == "ViewSection" || window.location.pathname.split("/").length == 3) {
+            url = '../Manage/DeleteSubSection?id=' + x;
+        }
+        else {
+            url = '../DeleteSubSection?id=' + x;
+        }
         $('#btn_center a:first-child').attr('href', url);
         $('#myModal_center').modal('toggle');
     }

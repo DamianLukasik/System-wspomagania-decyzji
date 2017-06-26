@@ -19,8 +19,9 @@ namespace CrystalSiegeEntry
 {
     public partial class Form1 : Form
     {
-      //   private static String url_main = "http://localhost:62074";
-        private static String url_main = "http://crystalsiege.eu";
+        //przełańczanie między localhostem, a stroną internetową
+         private static String url_main = "http://localhost:62074";
+      //  private static String url_main = "http://crystalsiege.eu";
         public Form1()
         {
             
