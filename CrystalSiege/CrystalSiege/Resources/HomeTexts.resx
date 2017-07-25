@@ -118,363 +118,363 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Autorstwo" xml:space="preserve">
-    <value>My Little Pony: Friendship is Magic is © Hasbro, all Creations © to their respective artists</value>
+    <value>Prawa autorskie do marki My Little Pony: Przyjaźń to Magia należą do © Hasbro, wszystkie inne dzieła są własnością twórców</value>
   </data>
   <data name="eng_lang" xml:space="preserve">
-    <value>English</value>
+    <value>Angielski</value>
   </data>
   <data name="Ilustracje" xml:space="preserve">
-    <value>Ilustration © by Ruhisu</value>
+    <value>Autor ilustracji © Ruhisu</value>
   </data>
   <data name="pl_lang" xml:space="preserve">
-    <value>Polish</value>
+    <value>Polski</value>
   </data>
   <data name="Website" xml:space="preserve">
-    <value>Website © by DayanDey</value>
+    <value>Twórca serwisu © DayanDey</value>
   </data>
   <data name="changeyourpassword" xml:space="preserve">
-    <value>Change your password</value>
+    <value>Zmień swoje hasło</value>
   </data>
   <data name="logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>Wyloguj</value>
   </data>
   <data name="manage_content" xml:space="preserve">
-    <value>Manage content</value>
+    <value>Zarządzaj treścią</value>
   </data>
   <data name="password" xml:space="preserve">
-    <value>Password</value>
+    <value>Hasło</value>
   </data>
   <data name="search_txt" xml:space="preserve">
-    <value>Search...</value>
+    <value>Szukaj...</value>
   </data>
   <data name="settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Ustawienia</value>
   </data>
   <data name="view_profile" xml:space="preserve">
-    <value>View profile</value>
+    <value>Wyświetl profil</value>
   </data>
   <data name="AddTheSection" xml:space="preserve">
-    <value>Add section</value>
+    <value>Dodaj sekcje</value>
   </data>
   <data name="AddTheSubsection" xml:space="preserve">
-    <value>Add subsection</value>
+    <value>Dodaj podsekcje</value>
   </data>
   <data name="communicate" xml:space="preserve">
-    <value>Communicate</value>
+    <value>Komunikat</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+    <value>Usuń</value>
   </data>
   <data name="DeleteComunicate" xml:space="preserve">
-    <value>The changes made are irreversible</value>
+    <value>Dokonanych zmian nie będzie można przywrócić</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+    <value>Edytuj</value>
   </data>
   <data name="NameOfTheSection" xml:space="preserve">
-    <value>Name of the section</value>
+    <value>Nazwa sekcji</value>
   </data>
   <data name="NameOfTheSubsection" xml:space="preserve">
-    <value>Name of the subsection</value>
+    <value>Nazwa podsekcji</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Nie</value>
   </data>
   <data name="SectionOfTheSite" xml:space="preserve">
-    <value>Section of the site</value>
+    <value>Sekcje strony</value>
   </data>
   <data name="undo" xml:space="preserve">
-    <value>Undo</value>
+    <value>Cofnij</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Tak</value>
   </data>
   <data name="Archive_by_month" xml:space="preserve">
-    <value>Archive by month</value>
+    <value>Archiwum według miesięcy</value>
   </data>
   <data name="Attach_a_picture" xml:space="preserve">
-    <value>Attach a picture</value>
+    <value>Załącz obrazek</value>
   </data>
   <data name="Author" xml:space="preserve">
-    <value>Author</value>
+    <value>Autor</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Anuluj</value>
   </data>
   <data name="Content" xml:space="preserve">
-    <value>Content</value>
+    <value>Treść</value>
   </data>
   <data name="ContentSlide" xml:space="preserve">
-    <value>Slide content</value>
+    <value>Treść slajdu</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Data</value>
   </data>
   <data name="DeleteQuestion" xml:space="preserve">
-    <value>Are you sure you want to delete?</value>
+    <value>Czy na pewno chcesz usunąć?</value>
   </data>
   <data name="Images" xml:space="preserve">
-    <value>Images</value>
+    <value>Obrazki</value>
   </data>
   <data name="lang_set" xml:space="preserve">
-    <value>en</value>
+    <value>pl</value>
   </data>
   <data name="Load" xml:space="preserve">
-    <value>Load</value>
+    <value>Załaduj</value>
   </data>
   <data name="Load_Image" xml:space="preserve">
-    <value>Load Image</value>
+    <value>Załaduj obrazek:</value>
   </data>
   <data name="MessageContent" xml:space="preserve">
-    <value>Message content</value>
+    <value>Treść wiadomości</value>
   </data>
   <data name="News" xml:space="preserve">
-    <value>News</value>
+    <value>Aktualności</value>
   </data>
   <data name="NoAccess" xml:space="preserve">
-    <value>No access</value>
+    <value>Brak dostępu</value>
   </data>
   <data name="PageContent" xml:space="preserve">
-    <value>Page content</value>
+    <value>Zawartość strony</value>
   </data>
   <data name="PermissionCommunicate" xml:space="preserve">
-    <value>You do not have permission to view this subpage.</value>
+    <value>Nie masz uprawnień do zawartości tej podstrony.</value>
   </data>
   <data name="published_by" xml:space="preserve">
-    <value>Published by</value>
+    <value>Opublikowany przez</value>
   </data>
   <data name="Read" xml:space="preserve">
-    <value>Read more...</value>
+    <value>Czytaj więcej...</value>
   </data>
   <data name="SaveChanges" xml:space="preserve">
-    <value>Save changes</value>
+    <value>Zapisz zmiany</value>
   </data>
   <data name="tags" xml:space="preserve">
-    <value>Tags</value>
+    <value>Tagi</value>
   </data>
   <data name="TagsMessage" xml:space="preserve">
-    <value>Message tags</value>
+    <value>Tagi wiadomości</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Title</value>
+    <value>Tytuł</value>
   </data>
   <data name="TitleBook" xml:space="preserve">
-    <value>Crystal Siege</value>
+    <value>Kryształowe Oblężenie</value>
   </data>
   <data name="TitleMessage" xml:space="preserve">
-    <value>Title message</value>
+    <value>Tytuł wiadomości</value>
   </data>
   <data name="TitlePage" xml:space="preserve">
-    <value>Crystal Siege - Jakub Orłowski</value>
+    <value>Kryształowe Oblężenie - Jakub Orłowski</value>
   </data>
   <data name="TitleSection" xml:space="preserve">
-    <value>Title section</value>
+    <value>Tytuł sekcji</value>
   </data>
   <data name="TitleSlide" xml:space="preserve">
-    <value>Title slide</value>
+    <value>Tytuł slajdu</value>
   </data>
   <data name="TitleSubSection" xml:space="preserve">
-    <value>Title Subsection</value>
+    <value>Tytuł podsekcji</value>
   </data>
   <data name="Verify" xml:space="preserve">
-    <value>Verify</value>
+    <value>Weryfikacja</value>
   </data>
   <data name="WhereWereFound" xml:space="preserve">
-    <value>Where were found</value>
+    <value>Gdzie znaleziono</value>
   </data>
   <data name="WriteMessage" xml:space="preserve">
-    <value>Write a message</value>
+    <value>Napisz wiadomość</value>
   </data>
   <data name="YouSendImage" xml:space="preserve">
-    <value>Send a picture to the page</value>
+    <value>Wyślij obrazek na stronę</value>
   </data>
   <data name="Action" xml:space="preserve">
-    <value>Action</value>
+    <value>Akcje</value>
   </data>
   <data name="AddImage" xml:space="preserve">
-    <value>Add image</value>
+    <value>Dodaj obrazek</value>
   </data>
   <data name="AddNews" xml:space="preserve">
-    <value>Add news</value>
+    <value>Dodaj newsa</value>
   </data>
   <data name="AddSlide" xml:space="preserve">
-    <value>Add slide</value>
+    <value>Dodaj slajd</value>
   </data>
   <data name="AllImageInService" xml:space="preserve">
-    <value>All graphics in the site</value>
+    <value>Wszystkie grafiki w serwisie</value>
   </data>
   <data name="AllNews" xml:space="preserve">
-    <value>All news</value>
+    <value>Wszystkie wiadomości</value>
   </data>
   <data name="Avatar" xml:space="preserve">
-    <value>Avatar</value>
+    <value>Awatar</value>
   </data>
   <data name="ChangeAvatar" xml:space="preserve">
-    <value>Change avatar</value>
+    <value>Zmiana Awatara</value>
   </data>
   <data name="ChangeEmail" xml:space="preserve">
-    <value>Change email address</value>
+    <value>Zmiana adresu e-mail</value>
   </data>
   <data name="ChangeLogin" xml:space="preserve">
-    <value>Change login</value>
+    <value>Zmiana loginu</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
-    <value>Change password</value>
+    <value>Zmiana hasła</value>
   </data>
   <data name="ChangeYourAvatar" xml:space="preserve">
-    <value>Change your avatar</value>
+    <value>Zmień swój awatar</value>
   </data>
   <data name="ChangeYourEmailAdress" xml:space="preserve">
-    <value>Change your email address</value>
+    <value>Zmień swój adres e-mail</value>
   </data>
   <data name="ChangeYourLogin" xml:space="preserve">
-    <value>Change your login</value>
+    <value>Zmień swój login</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="ConfirmNewPassword" xml:space="preserve">
-    <value>Confirm new password</value>
+    <value>Zamknij</value>
   </data>
   <data name="ContentMessage" xml:space="preserve">
-    <value>Content message</value>
+    <value>Treść wiadomości</value>
   </data>
   <data name="EditContentSlide" xml:space="preserve">
-    <value>Edit the content of the slide</value>
+    <value>Edytuj zawartość slajdu</value>
   </data>
   <data name="EditMessage" xml:space="preserve">
-    <value>Edit message</value>
+    <value>Edytuj wiadomość</value>
   </data>
   <data name="EditSection" xml:space="preserve">
-    <value>Edit section</value>
+    <value>Edytuj sekcje</value>
   </data>
   <data name="EditSectionSite" xml:space="preserve">
-    <value>Edit page sections</value>
+    <value>Edytuj sekcje strony</value>
   </data>
   <data name="EmailAdress" xml:space="preserve">
-    <value>Email address</value>
+    <value>Adres e-mail</value>
   </data>
   <data name="FormChangeAvatar" xml:space="preserve">
-    <value>Form change avatar</value>
+    <value>Formularz zmiany awatara</value>
   </data>
   <data name="FormChangeEmailAddress" xml:space="preserve">
-    <value>Form change email address</value>
+    <value>Formularz zmiany adresu e-mail</value>
   </data>
   <data name="FormChangeLogin" xml:space="preserve">
-    <value>Form change login</value>
+    <value>Formularz zmiany loginu</value>
   </data>
   <data name="FormChangePassword" xml:space="preserve">
-    <value>Form change password</value>
+    <value>Formularz zmainy hasła</value>
   </data>
   <data name="Image" xml:space="preserve">
-    <value>Image</value>
+    <value>Obrazek</value>
   </data>
   <data name="ImageToSlide" xml:space="preserve">
-    <value>Image to slide</value>
+    <value>Obrazek do slajdu</value>
   </data>
   <data name="InContentNews" xml:space="preserve">
-    <value>In news content</value>
+    <value>W zawartości newsa</value>
   </data>
   <data name="InContentSubsection" xml:space="preserve">
-    <value>In content subsection</value>
+    <value>W zawartości podsekcji</value>
   </data>
   <data name="InNameAuthor" xml:space="preserve">
-    <value>In name author</value>
+    <value>W nazwie autora</value>
   </data>
   <data name="InNameSubsection" xml:space="preserve">
-    <value>In name subsection</value>
+    <value>W nazwie podsekcji</value>
   </data>
   <data name="InTitle" xml:space="preserve">
-    <value>In title</value>
+    <value>W tytule</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
   </data>
   <data name="ManageSections" xml:space="preserve">
-    <value>Manege sections</value>
+    <value>Zarządzaj sekcjami</value>
   </data>
   <data name="ManageTranslate" xml:space="preserve">
-    <value>Manage Translates</value>
+    <value>Zarządzaj tłumaczeniami</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="NewPassword" xml:space="preserve">
-    <value>New password</value>
+    <value>Wiadomość</value>
   </data>
   <data name="NothingFound" xml:space="preserve">
-    <value>Nothing found</value>
+    <value>Nic nie znaleziono</value>
   </data>
   <data name="OrAttachNewImage" xml:space="preserve">
-    <value>Or load a new one</value>
+    <value>Lub załaduj nowy</value>
   </data>
   <data name="PublishDate" xml:space="preserve">
-    <value>Date of publication</value>
+    <value>Data publikacji</value>
   </data>
   <data name="SearchResults" xml:space="preserve">
-    <value>Search results</value>
+    <value>Wyniki wyszukiwań</value>
   </data>
   <data name="SelectGraphic" xml:space="preserve">
-    <value>Select graphic</value>
+    <value>Wybierz grafikę</value>
   </data>
   <data name="SelectImage" xml:space="preserve">
-    <value>Select a image</value>
+    <value>Wybierz obrazek</value>
   </data>
   <data name="SetPassword" xml:space="preserve">
-    <value>Set password</value>
+    <value>Ustaw hasło</value>
   </data>
   <data name="Slide" xml:space="preserve">
-    <value>Slide</value>
+    <value>Slajd</value>
   </data>
   <data name="Slides" xml:space="preserve">
-    <value>Slides</value>
+    <value>Slajdy</value>
   </data>
   <data name="ThePasswordRecoverySitelinkDoesNotExist" xml:space="preserve">
-    <value>The password recovery sitelink does not exist</value>
+    <value>Link do podstrony odzyskiwania hasła nieistnieje</value>
   </data>
   <data name="Translate" xml:space="preserve">
-    <value>Translates</value>
+    <value>Tłumaczenia</value>
   </data>
   <data name="ViewAllImages" xml:space="preserve">
-    <value>View all images</value>
+    <value>Wyświetl wszystkie obrazki</value>
   </data>
   <data name="ViewNews" xml:space="preserve">
-    <value>View news</value>
+    <value>Wyświetl newsy</value>
   </data>
   <data name="ViewSlides" xml:space="preserve">
-    <value>View slides</value>
+    <value>Wyświetl slajdy</value>
   </data>
   <data name="YourLoginDate" xml:space="preserve">
-    <value>Your login date</value>
+    <value>Twoje dane logowania</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nowe hasło</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Potwierdź nowe hasło</value>
   </data>
   <data name="NewLogin" xml:space="preserve">
-    <value>New login</value>
+    <value>Nowy Login</value>
   </data>
   <data name="NewEmail" xml:space="preserve">
-    <value>New email address</value>
+    <value>Nowy adres e-mail</value>
   </data>
   <data name="ActualPassword" xml:space="preserve">
-    <value>Actual password</value>
+    <value>Aktualne hasło</value>
   </data>
   <data name="Code" xml:space="preserve">
-    <value>Code</value>
+    <value>Kod</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone number</value>
+    <value>Numer telefonu</value>
   </data>
   <data name="EnglishVersion" xml:space="preserve">
-    <value>English version</value>
+    <value>Wersja angielska</value>
   </data>
   <data name="PolishVersion" xml:space="preserve">
-    <value>Polish version</value>
+    <value>Wersja polska</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>Change</value>
+    <value>Zmień</value>
   </data>
   <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+    <value>Usuń</value>
   </data>
   <data name="ContentLink" xml:space="preserve">
-    <value>Slide link</value>
+    <value>Link slajdu</value>
   </data>
 </root>

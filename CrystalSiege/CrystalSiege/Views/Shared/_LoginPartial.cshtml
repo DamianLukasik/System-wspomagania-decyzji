@@ -48,14 +48,14 @@
                 <ul class="dropdown-menu">
                     <li>
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl'>
-                            <img src='@Url.Content("~/Resources/pl.png")' />
-                            @CrystalSiege.Resources.HomeTexts.pl_lang
+                            <img src='@Url.Content("~/Resources/en.png")' />
+                            @CrystalSiege.Resources.HomeTexts.eng_lang;
                         </a>
                     </li>
-                    <li>
+                    <li><!-- pliki z zasobami są zamienione miejscami -->
                         <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en'>
-                            <img src='@Url.Content("~/Resources/en.png")' />
-                            @CrystalSiege.Resources.HomeTexts.eng_lang
+                            <img src='@Url.Content("~/Resources/pl.png")' />
+                            @CrystalSiege.Resources.HomeTexts.pl_lang
                         </a>
                     </li>
                 </ul>
@@ -79,29 +79,31 @@
             <li>
                 <a id = "searchInput" ><span class="glyphicon glyphicon-search"></span></a>
             </li>
-            <!-- Language Change -->
+            <!-- Language Change --><!--
             <li class="dropdown">
                 <a id = "searchInput" class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <img src='@Url.Content("~/Resources/"+CrystalSiege.Resources.HomeTexts.lang_set+".png")' />
-                    <!--
+                    <img src='Url.Content("~/Resources/"+CrystalSiege.Resources.HomeTexts.lang_set+".png")' />-->
+                    <!--tego nie
                 <span class="glyphicon glyphicon-flag"></span>
-                        -->
+                        --><!--
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=pl' >
-                            <img src='@Url.Content("~/Resources/pl.png")' />
-                            @CrystalSiege.Resources.HomeTexts.pl_lang
+                        <a class="font_military" href='Url.Action("Change", "Language")?LanguageAbbrevation=pl' >
+                            <img src='Url.Content("~/Resources/pl.png")' />
+                            CrystalSiege.Resources.HomeTexts.pl_lang
                         </a>
-                    </li>
+                    </li> --><!-- 
                     <li>
-                        <a class="font_military" href='@Url.Action("Change", "Language")?LanguageAbbrevation=en' >
-                            <img src='@Url.Content("~/Resources/en.png")' />
-                            @CrystalSiege.Resources.HomeTexts.eng_lang
+                      <a class="font_military" href='Url.Action("Change", "Language")?LanguageAbbrevation=en' >
+                            <img src='Url.Content("~/Resources/en.png")' />
+                            CrystalSiege.Resources.HomeTexts.eng_lang 
+                         Odkomentować później 
+                        
                         </a>
-                    </li>
+                    </li> 
                 </ul>
-            </li>
+            </li>-->
         </ul>   
     }
 }

@@ -322,15 +322,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContentTexts.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\HomeTexts.pl.Designer.cs">
-      <DependentUpon>HomeTexts.pl.resx</DependentUpon>
+    <Compile Include="Resources\HomeTexts.Designer.cs">
+      <DependentUpon>HomeTexts.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\HomeTexts.Designer.cs">
+    <Compile Include="Resources\HomeTexts.pl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>HomeTexts.resx</DependentUpon>
+      <DependentUpon>HomeTexts.pl.esx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -1326,14 +1326,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ContentTexts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\HomeTexts.pl.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>HomeTexts.pl.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\HomeTexts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeTexts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Resources\HomeTexts.pl.esx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HomeTexts.pl.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

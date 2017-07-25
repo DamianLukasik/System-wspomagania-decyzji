@@ -61,7 +61,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Action.
+        ///   Looks up a localized string similar to Akcje.
         /// </summary>
         public static string Action {
             get {
@@ -70,7 +70,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual password.
+        ///   Looks up a localized string similar to Aktualne hasło.
         /// </summary>
         public static string ActualPassword {
             get {
@@ -79,7 +79,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add image.
+        ///   Looks up a localized string similar to Dodaj obrazek.
         /// </summary>
         public static string AddImage {
             get {
@@ -88,7 +88,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add news.
+        ///   Looks up a localized string similar to Dodaj newsa.
         /// </summary>
         public static string AddNews {
             get {
@@ -97,7 +97,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add slide.
+        ///   Looks up a localized string similar to Dodaj slajd.
         /// </summary>
         public static string AddSlide {
             get {
@@ -106,7 +106,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add section.
+        ///   Looks up a localized string similar to Dodaj sekcje.
         /// </summary>
         public static string AddTheSection {
             get {
@@ -115,7 +115,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add subsection.
+        ///   Looks up a localized string similar to Dodaj podsekcje.
         /// </summary>
         public static string AddTheSubsection {
             get {
@@ -124,7 +124,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All graphics in the site.
+        ///   Looks up a localized string similar to Wszystkie grafiki w serwisie.
         /// </summary>
         public static string AllImageInService {
             get {
@@ -133,7 +133,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All news.
+        ///   Looks up a localized string similar to Wszystkie wiadomości.
         /// </summary>
         public static string AllNews {
             get {
@@ -142,7 +142,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Archive by month.
+        ///   Looks up a localized string similar to Archiwum według miesięcy.
         /// </summary>
         public static string Archive_by_month {
             get {
@@ -151,7 +151,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attach a picture.
+        ///   Looks up a localized string similar to Załącz obrazek.
         /// </summary>
         public static string Attach_a_picture {
             get {
@@ -160,7 +160,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Author.
+        ///   Looks up a localized string similar to Autor.
         /// </summary>
         public static string Author {
             get {
@@ -169,7 +169,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My Little Pony: Friendship is Magic is © Hasbro, all Creations © to their respective artists.
+        ///   Looks up a localized string similar to Prawa autorskie do marki My Little Pony: Przyjaźń to Magia należą do © Hasbro, wszystkie inne dzieła są własnością twórców.
         /// </summary>
         public static string Autorstwo {
             get {
@@ -178,7 +178,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Avatar.
+        ///   Looks up a localized string similar to Awatar.
         /// </summary>
         public static string Avatar {
             get {
@@ -187,7 +187,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Anuluj.
         /// </summary>
         public static string Cancel {
             get {
@@ -196,7 +196,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change.
+        ///   Looks up a localized string similar to Zmień.
         /// </summary>
         public static string Change {
             get {
@@ -205,7 +205,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change avatar.
+        ///   Looks up a localized string similar to Zmiana Awatara.
         /// </summary>
         public static string ChangeAvatar {
             get {
@@ -214,7 +214,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change email address.
+        ///   Looks up a localized string similar to Zmiana adresu e-mail.
         /// </summary>
         public static string ChangeEmail {
             get {
@@ -223,7 +223,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change login.
+        ///   Looks up a localized string similar to Zmiana loginu.
         /// </summary>
         public static string ChangeLogin {
             get {
@@ -232,7 +232,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change password.
+        ///   Looks up a localized string similar to Zmiana hasła.
         /// </summary>
         public static string ChangePassword {
             get {
@@ -241,7 +241,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change your avatar.
+        ///   Looks up a localized string similar to Zmień swój awatar.
         /// </summary>
         public static string ChangeYourAvatar {
             get {
@@ -250,7 +250,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change your email address.
+        ///   Looks up a localized string similar to Zmień swój adres e-mail.
         /// </summary>
         public static string ChangeYourEmailAdress {
             get {
@@ -259,7 +259,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change your login.
+        ///   Looks up a localized string similar to Zmień swój login.
         /// </summary>
         public static string ChangeYourLogin {
             get {
@@ -268,7 +268,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change your password.
+        ///   Looks up a localized string similar to Zmień swoje hasło.
         /// </summary>
         public static string changeyourpassword {
             get {
@@ -277,7 +277,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close.
+        ///   Looks up a localized string similar to Zamknij.
         /// </summary>
         public static string Close {
             get {
@@ -286,7 +286,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Code.
+        ///   Looks up a localized string similar to Kod.
         /// </summary>
         public static string Code {
             get {
@@ -295,7 +295,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Communicate.
+        ///   Looks up a localized string similar to Komunikat.
         /// </summary>
         public static string communicate {
             get {
@@ -304,7 +304,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm new password.
+        ///   Looks up a localized string similar to Potwierdź nowe hasło.
         /// </summary>
         public static string ConfirmNewPassword {
             get {
@@ -313,7 +313,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Content.
+        ///   Looks up a localized string similar to Treść.
         /// </summary>
         public static string Content {
             get {
@@ -322,7 +322,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slide link.
+        ///   Looks up a localized string similar to Link slajdu.
         /// </summary>
         public static string ContentLink {
             get {
@@ -331,7 +331,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Content message.
+        ///   Looks up a localized string similar to Treść wiadomości.
         /// </summary>
         public static string ContentMessage {
             get {
@@ -340,7 +340,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slide content.
+        ///   Looks up a localized string similar to Treść slajdu.
         /// </summary>
         public static string ContentSlide {
             get {
@@ -349,7 +349,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Data.
         /// </summary>
         public static string Date {
             get {
@@ -358,7 +358,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized string similar to Usuń.
         /// </summary>
         public static string Delete {
             get {
@@ -367,7 +367,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The changes made are irreversible.
+        ///   Looks up a localized string similar to Dokonanych zmian nie będzie można przywrócić.
         /// </summary>
         public static string DeleteComunicate {
             get {
@@ -376,7 +376,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to delete?.
+        ///   Looks up a localized string similar to Czy na pewno chcesz usunąć?.
         /// </summary>
         public static string DeleteQuestion {
             get {
@@ -385,7 +385,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit.
+        ///   Looks up a localized string similar to Edytuj.
         /// </summary>
         public static string Edit {
             get {
@@ -394,7 +394,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit the content of the slide.
+        ///   Looks up a localized string similar to Edytuj zawartość slajdu.
         /// </summary>
         public static string EditContentSlide {
             get {
@@ -403,7 +403,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit message.
+        ///   Looks up a localized string similar to Edytuj wiadomość.
         /// </summary>
         public static string EditMessage {
             get {
@@ -412,7 +412,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit section.
+        ///   Looks up a localized string similar to Edytuj sekcje.
         /// </summary>
         public static string EditSection {
             get {
@@ -421,7 +421,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit page sections.
+        ///   Looks up a localized string similar to Edytuj sekcje strony.
         /// </summary>
         public static string EditSectionSite {
             get {
@@ -430,7 +430,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address.
+        ///   Looks up a localized string similar to Adres e-mail.
         /// </summary>
         public static string EmailAdress {
             get {
@@ -439,7 +439,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English.
+        ///   Looks up a localized string similar to Angielski.
         /// </summary>
         public static string eng_lang {
             get {
@@ -448,7 +448,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English version.
+        ///   Looks up a localized string similar to Wersja angielska.
         /// </summary>
         public static string EnglishVersion {
             get {
@@ -457,7 +457,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Form change avatar.
+        ///   Looks up a localized string similar to Formularz zmiany awatara.
         /// </summary>
         public static string FormChangeAvatar {
             get {
@@ -466,7 +466,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Form change email address.
+        ///   Looks up a localized string similar to Formularz zmiany adresu e-mail.
         /// </summary>
         public static string FormChangeEmailAddress {
             get {
@@ -475,7 +475,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Form change login.
+        ///   Looks up a localized string similar to Formularz zmiany loginu.
         /// </summary>
         public static string FormChangeLogin {
             get {
@@ -484,7 +484,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Form change password.
+        ///   Looks up a localized string similar to Formularz zmainy hasła.
         /// </summary>
         public static string FormChangePassword {
             get {
@@ -493,7 +493,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ilustration © by Ruhisu.
+        ///   Looks up a localized string similar to Autor ilustracji © Ruhisu.
         /// </summary>
         public static string Ilustracje {
             get {
@@ -502,7 +502,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image.
+        ///   Looks up a localized string similar to Obrazek.
         /// </summary>
         public static string Image {
             get {
@@ -511,7 +511,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Images.
+        ///   Looks up a localized string similar to Obrazki.
         /// </summary>
         public static string Images {
             get {
@@ -520,7 +520,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Image to slide.
+        ///   Looks up a localized string similar to Obrazek do slajdu.
         /// </summary>
         public static string ImageToSlide {
             get {
@@ -529,7 +529,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In news content.
+        ///   Looks up a localized string similar to W zawartości newsa.
         /// </summary>
         public static string InContentNews {
             get {
@@ -538,7 +538,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In content subsection.
+        ///   Looks up a localized string similar to W zawartości podsekcji.
         /// </summary>
         public static string InContentSubsection {
             get {
@@ -547,7 +547,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In name author.
+        ///   Looks up a localized string similar to W nazwie autora.
         /// </summary>
         public static string InNameAuthor {
             get {
@@ -556,7 +556,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In name subsection.
+        ///   Looks up a localized string similar to W nazwie podsekcji.
         /// </summary>
         public static string InNameSubsection {
             get {
@@ -565,7 +565,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to In title.
+        ///   Looks up a localized string similar to W tytule.
         /// </summary>
         public static string InTitle {
             get {
@@ -574,7 +574,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to en.
+        ///   Looks up a localized string similar to pl.
         /// </summary>
         public static string lang_set {
             get {
@@ -583,7 +583,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load.
+        ///   Looks up a localized string similar to Załaduj.
         /// </summary>
         public static string Load {
             get {
@@ -592,7 +592,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load Image.
+        ///   Looks up a localized string similar to Załaduj obrazek:.
         /// </summary>
         public static string Load_Image {
             get {
@@ -610,7 +610,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Logout.
+        ///   Looks up a localized string similar to Wyloguj.
         /// </summary>
         public static string logout {
             get {
@@ -619,7 +619,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage content.
+        ///   Looks up a localized string similar to Zarządzaj treścią.
         /// </summary>
         public static string manage_content {
             get {
@@ -628,7 +628,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manege sections.
+        ///   Looks up a localized string similar to Zarządzaj sekcjami.
         /// </summary>
         public static string ManageSections {
             get {
@@ -637,7 +637,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Manage Translates.
+        ///   Looks up a localized string similar to Zarządzaj tłumaczeniami.
         /// </summary>
         public static string ManageTranslate {
             get {
@@ -646,7 +646,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message.
+        ///   Looks up a localized string similar to Wiadomość.
         /// </summary>
         public static string Message {
             get {
@@ -655,7 +655,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message content.
+        ///   Looks up a localized string similar to Treść wiadomości.
         /// </summary>
         public static string MessageContent {
             get {
@@ -664,7 +664,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name of the section.
+        ///   Looks up a localized string similar to Nazwa sekcji.
         /// </summary>
         public static string NameOfTheSection {
             get {
@@ -673,7 +673,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name of the subsection.
+        ///   Looks up a localized string similar to Nazwa podsekcji.
         /// </summary>
         public static string NameOfTheSubsection {
             get {
@@ -682,7 +682,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New email address.
+        ///   Looks up a localized string similar to Nowy adres e-mail.
         /// </summary>
         public static string NewEmail {
             get {
@@ -691,7 +691,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New login.
+        ///   Looks up a localized string similar to Nowy Login.
         /// </summary>
         public static string NewLogin {
             get {
@@ -700,7 +700,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New password.
+        ///   Looks up a localized string similar to Nowe hasło.
         /// </summary>
         public static string NewPassword {
             get {
@@ -709,7 +709,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to News.
+        ///   Looks up a localized string similar to Aktualności.
         /// </summary>
         public static string News {
             get {
@@ -718,7 +718,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Nie.
         /// </summary>
         public static string No {
             get {
@@ -727,7 +727,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No access.
+        ///   Looks up a localized string similar to Brak dostępu.
         /// </summary>
         public static string NoAccess {
             get {
@@ -736,7 +736,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nothing found.
+        ///   Looks up a localized string similar to Nic nie znaleziono.
         /// </summary>
         public static string NothingFound {
             get {
@@ -745,7 +745,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Or load a new one.
+        ///   Looks up a localized string similar to Lub załaduj nowy.
         /// </summary>
         public static string OrAttachNewImage {
             get {
@@ -754,7 +754,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Page content.
+        ///   Looks up a localized string similar to Zawartość strony.
         /// </summary>
         public static string PageContent {
             get {
@@ -763,7 +763,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password.
+        ///   Looks up a localized string similar to Hasło.
         /// </summary>
         public static string password {
             get {
@@ -772,7 +772,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have permission to view this subpage..
+        ///   Looks up a localized string similar to Nie masz uprawnień do zawartości tej podstrony..
         /// </summary>
         public static string PermissionCommunicate {
             get {
@@ -781,7 +781,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phone number.
+        ///   Looks up a localized string similar to Numer telefonu.
         /// </summary>
         public static string PhoneNumber {
             get {
@@ -790,7 +790,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Polish.
+        ///   Looks up a localized string similar to Polski.
         /// </summary>
         public static string pl_lang {
             get {
@@ -799,7 +799,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Polish version.
+        ///   Looks up a localized string similar to Wersja polska.
         /// </summary>
         public static string PolishVersion {
             get {
@@ -808,7 +808,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date of publication.
+        ///   Looks up a localized string similar to Data publikacji.
         /// </summary>
         public static string PublishDate {
             get {
@@ -817,7 +817,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Published by.
+        ///   Looks up a localized string similar to Opublikowany przez.
         /// </summary>
         public static string published_by {
             get {
@@ -826,7 +826,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read more....
+        ///   Looks up a localized string similar to Czytaj więcej....
         /// </summary>
         public static string Read {
             get {
@@ -835,7 +835,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to Usuń.
         /// </summary>
         public static string Remove {
             get {
@@ -844,7 +844,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save changes.
+        ///   Looks up a localized string similar to Zapisz zmiany.
         /// </summary>
         public static string SaveChanges {
             get {
@@ -853,7 +853,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search....
+        ///   Looks up a localized string similar to Szukaj....
         /// </summary>
         public static string search_txt {
             get {
@@ -862,7 +862,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search results.
+        ///   Looks up a localized string similar to Wyniki wyszukiwań.
         /// </summary>
         public static string SearchResults {
             get {
@@ -871,7 +871,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Section of the site.
+        ///   Looks up a localized string similar to Sekcje strony.
         /// </summary>
         public static string SectionOfTheSite {
             get {
@@ -880,7 +880,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select graphic.
+        ///   Looks up a localized string similar to Wybierz grafikę.
         /// </summary>
         public static string SelectGraphic {
             get {
@@ -889,7 +889,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a image.
+        ///   Looks up a localized string similar to Wybierz obrazek.
         /// </summary>
         public static string SelectImage {
             get {
@@ -898,7 +898,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set password.
+        ///   Looks up a localized string similar to Ustaw hasło.
         /// </summary>
         public static string SetPassword {
             get {
@@ -907,7 +907,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Settings.
+        ///   Looks up a localized string similar to Ustawienia.
         /// </summary>
         public static string settings {
             get {
@@ -916,7 +916,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slide.
+        ///   Looks up a localized string similar to Slajd.
         /// </summary>
         public static string Slide {
             get {
@@ -925,7 +925,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slides.
+        ///   Looks up a localized string similar to Slajdy.
         /// </summary>
         public static string Slides {
             get {
@@ -934,7 +934,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tags.
+        ///   Looks up a localized string similar to Tagi.
         /// </summary>
         public static string tags {
             get {
@@ -943,7 +943,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Message tags.
+        ///   Looks up a localized string similar to Tagi wiadomości.
         /// </summary>
         public static string TagsMessage {
             get {
@@ -952,7 +952,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The password recovery sitelink does not exist.
+        ///   Looks up a localized string similar to Link do podstrony odzyskiwania hasła nieistnieje.
         /// </summary>
         public static string ThePasswordRecoverySitelinkDoesNotExist {
             get {
@@ -961,7 +961,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title.
+        ///   Looks up a localized string similar to Tytuł.
         /// </summary>
         public static string Title {
             get {
@@ -970,7 +970,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crystal Siege.
+        ///   Looks up a localized string similar to Kryształowe Oblężenie.
         /// </summary>
         public static string TitleBook {
             get {
@@ -979,7 +979,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title message.
+        ///   Looks up a localized string similar to Tytuł wiadomości.
         /// </summary>
         public static string TitleMessage {
             get {
@@ -988,7 +988,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Crystal Siege - Jakub Orłowski.
+        ///   Looks up a localized string similar to Kryształowe Oblężenie - Jakub Orłowski.
         /// </summary>
         public static string TitlePage {
             get {
@@ -997,7 +997,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title section.
+        ///   Looks up a localized string similar to Tytuł sekcji.
         /// </summary>
         public static string TitleSection {
             get {
@@ -1006,7 +1006,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title slide.
+        ///   Looks up a localized string similar to Tytuł slajdu.
         /// </summary>
         public static string TitleSlide {
             get {
@@ -1015,7 +1015,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Title Subsection.
+        ///   Looks up a localized string similar to Tytuł podsekcji.
         /// </summary>
         public static string TitleSubSection {
             get {
@@ -1024,7 +1024,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Translates.
+        ///   Looks up a localized string similar to Tłumaczenia.
         /// </summary>
         public static string Translate {
             get {
@@ -1033,7 +1033,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Undo.
+        ///   Looks up a localized string similar to Cofnij.
         /// </summary>
         public static string undo {
             get {
@@ -1042,7 +1042,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Verify.
+        ///   Looks up a localized string similar to Weryfikacja.
         /// </summary>
         public static string Verify {
             get {
@@ -1051,7 +1051,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View profile.
+        ///   Looks up a localized string similar to Wyświetl profil.
         /// </summary>
         public static string view_profile {
             get {
@@ -1060,7 +1060,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View all images.
+        ///   Looks up a localized string similar to Wyświetl wszystkie obrazki.
         /// </summary>
         public static string ViewAllImages {
             get {
@@ -1069,7 +1069,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View news.
+        ///   Looks up a localized string similar to Wyświetl newsy.
         /// </summary>
         public static string ViewNews {
             get {
@@ -1078,7 +1078,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to View slides.
+        ///   Looks up a localized string similar to Wyświetl slajdy.
         /// </summary>
         public static string ViewSlides {
             get {
@@ -1087,7 +1087,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Website © by DayanDey.
+        ///   Looks up a localized string similar to Twórca serwisu © DayanDey.
         /// </summary>
         public static string Website {
             get {
@@ -1096,7 +1096,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Where were found.
+        ///   Looks up a localized string similar to Gdzie znaleziono.
         /// </summary>
         public static string WhereWereFound {
             get {
@@ -1105,7 +1105,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write a message.
+        ///   Looks up a localized string similar to Napisz wiadomość.
         /// </summary>
         public static string WriteMessage {
             get {
@@ -1114,7 +1114,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Tak.
         /// </summary>
         public static string Yes {
             get {
@@ -1123,7 +1123,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your login date.
+        ///   Looks up a localized string similar to Twoje dane logowania.
         /// </summary>
         public static string YourLoginDate {
             get {
@@ -1132,7 +1132,7 @@ namespace CrystalSiege.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send a picture to the page.
+        ///   Looks up a localized string similar to Wyślij obrazek na stronę.
         /// </summary>
         public static string YouSendImage {
             get {

@@ -5,7 +5,6 @@
     <hr>
     <div>
     @{
-
         List<string[]> Message_news = new List<string[]>();
         List<string[]> List_news = new List<string[]>();
         List<string[]> Message_cont = new List<string[]>();
@@ -13,28 +12,23 @@
 
         if(ViewBag.Message != null)
         {
-            if (ViewBag.Count == 2)
-            {
-                List_news = ViewBag.Message[0];
-                Message_news = ViewBag.Message[1];
+            List<List<string[]>> result = ViewBag.Message;
 
-                if (List_news[0].Length >= 3)
-                {
-                    List_cont = List_news;
-                    Message_cont = Message_news;
-                }
+            Message_news = result[0];
+            List_news = result[1];
+            Message_cont = result[2];
+            List_cont = result[3];
+
+            string[] e_ = Message_news[0];
+            if (e_[0] == "nic" && e_[1] == "news")
+            {
+                Message_news = null;
             }
-            else
+            e_ = Message_cont[0];
+            if (e_[0] == "nic" && e_[1] == "content")
             {
-                List_news = ViewBag.Message[0];
-                Message_news = ViewBag.Message[1];
-
-                if (ViewBag.Message[2].Count != 0)
-                {
-                    List_cont = ViewBag.Message[2];
-                    Message_cont = ViewBag.Message[3];
-                }
-            }        
+                Message_cont = null;
+            }
 
             if (Message_news != null)
             {
